@@ -1,0 +1,2700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../searching-sorting-js/">
+      
+      
+        <link rel="next" href="../sorting%20and%20searching/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>CHAPTER 7 - Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-7" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Notes" class="md-header__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CHAPTER 7
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Notes" class="md-nav__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        learn-in-public
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-Learning%20wishlist/" class="md-nav__link">
+        00 Learning wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-book-wishlist/" class="md-nav__link">
+        00 book wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          00 daily notes 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="00 daily notes 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          00 daily notes 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--fleeting-note.md/" class="md-nav__link">
+        00  template  fleeting note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--literature-note.md/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/2023-01-08%20act%20-%20finding%20my%20values/" class="md-nav__link">
+        2023 01 08 act   finding my values
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          01 inbox 📥
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="01 inbox 📥" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          01 inbox 📥
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/00-readme/" class="md-nav__link">
+        00 readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/GOALS%20THEORY/" class="md-nav__link">
+        GOALS THEORY
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Quarterly%20Self%20Review%20-%20Professional/" class="md-nav__link">
+        Quarterly Self Review - Professional Self-Insight
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Self%20analysis/" class="md-nav__link">
+        Self analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Structure%20design--Coupling/" class="md-nav__link">
+        Structure design  Coupling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feedback/" class="md-nav__link">
+        Feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feminism/" class="md-nav__link">
+        Feminism
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/ideas-of-errol-gerson/" class="md-nav__link">
+        Errol Gerson ideas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/notes-on-Programming-as-Theory-Building/" class="md-nav__link">
+        notes on Programming as Theory Building
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/onLabels/" class="md-nav__link">
+        onLabels
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          02 ideas 🗃️
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="02 ideas 🗃️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          02 ideas 🗃️
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/00-%20template--permantent-note.md/" class="md-nav__link">
+        00  template  permantent note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2022-10-20%20-%20moving%20on%20limiting%20beliefs%20for%20diversity%20in%20tech/" class="md-nav__link">
+        2022 10 20   moving on limiting beliefs for diversity in tech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/202208171521%20-%20Italo%20Calvino%20on%20how%20he%20reads/" class="md-nav__link">
+        202208171521   Italo Calvino on how he reads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2023-01-07%20Living%20a%20happier%20life%20-%20Tool%20--%20ACT%20-%20Values%20%26%20goals/" class="md-nav__link">
+        2023 01 07 Living a happier life   Tool    ACT   Values & goals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/after-sentiers-229%20-%20designing%20without%20depletion/" class="md-nav__link">
+        After sentiers 229   designing without depletion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          03 areas 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 areas 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          03 areas 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/lessons-Ive-learned-as-EM/" class="md-nav__link">
+        lessons Ive learned as EM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3" tabindex="0" aria-expanded="false">
+          Microfrontends
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Microfrontends" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Microfrontends
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Chapter%204.%20Discovering%20Micro-Frontend%20Architectures/" class="md-nav__link">
+        Chapter 4. Discovering Micro-Frontend Architectures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%200%20-%20Initial%20ways%20of%20working/" class="md-nav__link">
+        Step 0   Initial ways of working
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%201%20-%20UI%20Concistency/" class="md-nav__link">
+        Step 1   UI Concistency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%202%20-%20Coordination%20among%20teams/" class="md-nav__link">
+        Step 2   Coordination among teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%203%20-%20Strategic%20and%20tatics%20thinking%20-%20Guided%20continous%20improvement/" class="md-nav__link">
+        Step 3   Strategic and tatics thinking   Guided continous improvement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/communication/" class="md-nav__link">
+        Communication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3_7" type="checkbox" id="__nav_7_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3_7" tabindex="0" aria-expanded="false">
+          Quotes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quotes" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Quotes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Quotes/Delivery%20Models/" class="md-nav__link">
+        Delivery Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4" tabindex="0" aria-expanded="false">
+          Burnout
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Burnout" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Burnout
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/burnout-theory-and-notes/" class="md-nav__link">
+        Burnout theory and notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/high%20pressure%20project%20and%20metal%20health/" class="md-nav__link">
+        High pressure project and metal health
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p2%20-%20what%20to%20do%20-%20individual/" class="md-nav__link">
+        P2   what to do   individual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p3%20-%20what%20to%20do%20-%20workplace/" class="md-nav__link">
+        P3   what to do   workplace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5" tabindex="0" aria-expanded="false">
+          Functional programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Functional programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Functional programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20Category%20theory/" class="md-nav__link">
+        2023 01 06 Category theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20FP%20Patterns/" class="md-nav__link">
+        2023 01 06 FP Patterns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Curry%20%26%20Partial%20Application/" class="md-nav__link">
+        Curry & Partial Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Monad/" class="md-nav__link">
+        Monad
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6" type="checkbox" id="__nav_7_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6" tabindex="0" aria-expanded="false">
+          My career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="My career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_6">
+          <span class="md-nav__icon md-icon"></span>
+          My career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1" type="checkbox" id="__nav_7_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1" tabindex="0" aria-expanded="false">
+          Achievements record
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Achievements record" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Achievements record
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1_1" type="checkbox" id="__nav_7_6_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1_1" tabindex="0" aria-expanded="false">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="4">
+        <label class="md-nav__title" for="__nav_7_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/my-career/achievements-record/2021/11/" class="md-nav__link">
+        11
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7" tabindex="0" aria-expanded="false">
+          Research cloud architectures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research cloud architectures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Research cloud architectures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_2" type="checkbox" id="__nav_7_7_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_2" tabindex="0" aria-expanded="false">
+          Cloud storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud storage" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud storage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud%20storage/Data%20management%20and%20Databases/" class="md-nav__link">
+        Data management and Databases
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_3" type="checkbox" id="__nav_7_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_3" tabindex="0" aria-expanded="false">
+          Cloud native
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud native" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud native
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Microservices/" class="md-nav__link">
+        Microservices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Serverless/" class="md-nav__link">
+        Serverless
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_4" type="checkbox" id="__nav_7_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_4" tabindex="0" aria-expanded="false">
+          Communication among microservices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Communication among microservices" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Communication among microservices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Data%20Streaming%20in%20Cloud%20Computing/" class="md-nav__link">
+        Data Streaming in Cloud Computing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Event%20driven%20architecture/" class="md-nav__link">
+        Event driven architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Message%20Brokers/" class="md-nav__link">
+        Message Brokers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_5" type="checkbox" id="__nav_7_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_5" tabindex="0" aria-expanded="false">
+          devOps  Infra
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="devOps  Infra" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          devOps  Infra
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Containerization/" class="md-nav__link">
+        Containerization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Databases/" class="md-nav__link">
+        Databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Infrastructure%20provisioning/" class="md-nav__link">
+        Infrastructure provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8" type="checkbox" id="__nav_7_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8" tabindex="0" aria-expanded="false">
+          Research programming and languages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research programming and languages" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          Research programming and languages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/Trendy%20Languages/" class="md-nav__link">
+        Trendy Languages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8_3" type="checkbox" id="__nav_7_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8_3" tabindex="0" aria-expanded="false">
+          Paradigms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Paradigms" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Paradigms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Functional%20programming/" class="md-nav__link">
+        Functional programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Reactive%20Programming/" class="md-nav__link">
+        Reactive Programming
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_9" type="checkbox" id="__nav_7_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_9" tabindex="0" aria-expanded="false">
+          What's that for
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="What's that for" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_9">
+          <span class="md-nav__icon md-icon"></span>
+          What's that for
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/real-time-app--tech-stack/" class="md-nav__link">
+        Real time app  tech stack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" tabindex="0" aria-expanded="false">
+          03 projects 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 projects 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          03 projects 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" tabindex="0" aria-expanded="false">
+          App in my music
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App in my music" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          App in my music
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-in-my-music/draft-ideas.md/" class="md-nav__link">
+        Draft ideas.md
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3" tabindex="0" aria-expanded="false">
+          App personal finances
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App personal finances" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          App personal finances
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-personal-finances/Draft/" class="md-nav__link">
+        Draft
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4" tabindex="0" aria-expanded="false">
+          Post making sense of the software career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post making sense of the software career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Post making sense of the software career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-making-sense-of-the-software-career/what-is-a-software-engineer/" class="md-nav__link">
+        What is a software engineer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_5" type="checkbox" id="__nav_8_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_5" tabindex="0" aria-expanded="false">
+          Post technical assessments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post technical assessments" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_5">
+          <span class="md-nav__icon md-icon"></span>
+          Post technical assessments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20Take%20home%20challenge/" class="md-nav__link">
+        Tech-Assessments: Take home interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20question%20only%20interview/" class="md-nav__link">
+        Tech-Assessments: Questions-only interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20Live%20coding%20interview/" class="md-nav__link">
+        Tech-Assessments: Live coding interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-12-13%20-%20Tech%20assessments/" class="md-nav__link">
+        2022 12 13   Tech assessments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/interview-questions/" class="md-nav__link">
+        Interview questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/my-guide-to-interviewing/" class="md-nav__link">
+        My guide to interviewing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="true">
+          05 reference system 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="05 reference system 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          05 reference system 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2023-01-04%20-%20Technical%20books%20I%20like/" class="md-nav__link">
+        2023 01 04   Technical books I like
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../peter-natur-programming-as-theory/" class="md-nav__link">
+        Peter natur programming as theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phillip-armour-5-orders-of-ignorance/" class="md-nav__link">
+        Phillip armour 5 orders of ignorance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../readme.md/" class="md-nav__link">
+        Readme.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_5" tabindex="0" aria-expanded="false">
+          06 ebooks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="06 ebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          06 ebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-ebooks/readme/" class="md-nav__link">
+        Playing to win: How strategy really works
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_6" tabindex="0" aria-expanded="true">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Algorithms" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../String%20Algorithms/" class="md-nav__link">
+        CHAPTER 15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hash-tables/" class="md-nav__link">
+        CHAPTER 8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searching-sorting-js/" class="md-nav__link">
+        10. Searching and Sorting in JS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          CHAPTER 7
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        CHAPTER 7
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-search" class="md-nav__link">
+    Linear Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binary-search" class="md-nav__link">
+    Binary Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpolation-search" class="md-nav__link">
+    Interpolation Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#majority-voting" class="md-nav__link">
+    Majority Voting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting%20and%20searching/" class="md-nav__link">
+        4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting-algorithms/" class="md-nav__link">
+        Chapter 5. Sorting Without a Hat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/" class="md-nav__link">
+        CHAPTER 6
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_7" tabindex="0" aria-expanded="false">
+          Software architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Software architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_7">
+          <span class="md-nav__icon md-icon"></span>
+          Software architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software%20architecture/2023-01-04%20-%20Archictecture%20trade-off%20analysis/" class="md-nav__link">
+        2023 01 04   Archictecture trade off analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_8" type="checkbox" id="__nav_9_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_8" tabindex="0" aria-expanded="false">
+          tools Difficult situations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="tools Difficult situations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_8">
+          <span class="md-nav__icon md-icon"></span>
+          tools Difficult situations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Difficult%20Conversations/" class="md-nav__link">
+        Difficult Conversations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Questions%20for%20new%20teams/" class="md-nav__link">
+        Questions for new teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Receiving%20challenging%20feedback/" class="md-nav__link">
+        Receiving challenging feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/dealing%20with%20a%20coleric%20person/" class="md-nav__link">
+        Dealing with a coleric person
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/solving%20tech%20conflict/" class="md-nav__link">
+        Solving tech conflict
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-search" class="md-nav__link">
+    Linear Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binary-search" class="md-nav__link">
+    Binary Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpolation-search" class="md-nav__link">
+    Interpolation Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#majority-voting" class="md-nav__link">
+    Majority Voting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+
+<h1 id="chapter-7">CHAPTER 7</h1>
+<p>Searching</p>
+<p>The preceding chapter explained how you can sort data. Algorithms such as quicksort and heapsort let you sort large amounts of data quickly. Algorithms such as countingsort and bucketsort let you sort data almost as quickly as a program can examine it, but only under certain special circumstances.</p>
+<p>One of the advantages of sorted data is that it lets you find specific items relatively quickly. For example, you can locate a particular word in a dictionary containing tens of thousands of words in just a minute or two because all the words are arranged in sorted order. (Imagine trying to find a word if the dictionary wasn't sorted!)</p>
+<p>This chapter explains algorithms that you can use to find a particular piece of data in a sorted array.</p>
+<h3 id="note">NOTE</h3>
+<p>The algorithms described in this chapter work with simple arrays, not more specialized data structures. Specialized data structures such as trees also let you quickly find an item with a specific value. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c10.xhtml">Chapter 10</a>, “Trees,” discusses algorithms for working with trees.</p>
+<p>Some programming libraries include searching tools that locate items in a sorted array. For example, the .NET Framework's <code>Array</code> class provides a <code>BinarySearch</code> method. These methods generally are fast, so in practice you may want to use those tools to save time writing and debugging the searching code.</p>
+<p>It's still important to understand how searching algorithms work, however, because sometimes you can do even better than the tools. For example, interpolation search is much faster than binary search when it is applicable.</p>
+<h2 id="linear-search">Linear Search</h2>
+<p>As you may be able to guess from its name, a <em>linear search</em> or <em>exhaustive search</em> simply loops through the items in the array, looking for the target item. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#c07-fig-0001">Figure 7.1</a> shows a linear search for the value 77.</p>
+<p><img alt="Illustration of a linear search examines every item in the array until it finds the target item." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c07f001.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#R_c07-fig-0001"><strong>Figure 7.1</strong></a><strong>:</strong> A linear search examines every item in the array until it finds the target item.</p>
+<p>Unlike binary search and interpolation search, linear search works on linked lists, where you cannot easily jump from one part of the list to another, as you can in an array.</p>
+<p>Linear search also works on unsorted lists. If the items are sorted, however, the algorithm can stop if it ever comes to an item with a value greater than the target value. That lets the algorithm stop early and save a little time if the target value isn't in the list.</p>
+<p>The following pseudocode shows the linear search algorithm for an array:</p>
+<pre><code>// Find the target item's index in the sorted array.
+</code></pre>
+<p>This algorithm may need to loop through the entire array to conclude that an item isn't there, so its worst-case behavior is O(N).</p>
+<p>Even in the average case, the algorithm's run time is O(N). If you add up the number of steps required to search for every item in the array, you get <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c07-i0004.png" /> . If you divide that total by N to get the average search time for all the N items, you get <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c07-i0005.png" /> , which is still O(N).</p>
+<p>This algorithm is much slower than binary search or interpolation search, but it has the advantage that it works on linked lists and unsorted lists.</p>
+<h2 id="binary-search">Binary Search</h2>
+<p>A <em>binary search algorithm</em> uses a divide-and-conquer strategy to narrow down quickly the part of the array that might contain the target value. The algorithm keeps track of the largest and smallest indices that the target item might have in the array. Initially, those bounds (call them <code>min</code> and <code>max</code>) are set to 0 and the largest index in the array.</p>
+<p>The algorithm then calculates the index halfway between <code>min</code> and <code>max</code> (call it <code>mid</code>). If the target is less than the array's value at <code>mid</code>, the algorithm resets <code>max</code> to search the left half of the array and starts over. If the target is greater than the array's value at <code>mid</code>, the algorithm resets <code>min</code> to search the right half of the array and starts over. If the target equals the array's value at <code>mid</code>, the algorithm returns the index <code>mid</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#c07-fig-0002">Figure 7.2</a> shows a binary search for the value 77.</p>
+<p><img alt="Illustration of binary search for the value 77" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c07f002.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#R_c07-fig-0002"><strong>Figure 7.2</strong></a><strong>:</strong> A binary search repeatedly divides the part of the array that might contain the target item into two halves and then searches the appropriate half.</p>
+<p>The following pseudocode shows the algorithm:</p>
+<pre><code>// Find the target item's index in the sorted array.
+</code></pre>
+<p>At each step, this algorithm halves the number of items that might contain the target. If the array contains N items, then after O(log N) steps, the section of the array that might hold the target contains only one item, so the algorithm either finds the item or concludes that it isn't in the array. This means that the algorithm has O(log N) run time.</p>
+<h2 id="interpolation-search">Interpolation Search</h2>
+<p>At every step, binary search examines the item in the middle of the section of the array that it is considering. In contrast, <em>interpolation search</em> uses the value of the target item to guess where in the array it might lie and achieve much faster search times.</p>
+<p>For example, suppose that the array contains 1,000 items with values between 1 and 100. If the target value is 30, then it should lie about 30 percent of the way from the smallest to the largest value, so you can guess that the item may be somewhere near index 300. Depending on the distribution of the numbers in the array, this may not be exactly correct, but it should get you fairly close to the target item's position.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#c07-fig-0003">Figure 7.3</a> shows an interpolation search for the value 77.</p>
+<p><img alt="Illustration of interpolation search for the value 77." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c07f003.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#R_c07-fig-0003"><strong>Figure 7.3</strong></a><strong>:</strong> Interpolation search uses the target item's value to calculate where it should be in the remaining part of the array.</p>
+<p>The following pseudocode shows the algorithm at a high level:</p>
+<pre><code>Integer: InterpolationSearch(Data values[], Data target)
+</code></pre>
+<p>This high-level description leaves a couple of problems unsolved. The <code>mid</code> calculation can result in an overflow or a value of <code>mid</code> that is not between <code>min</code> and <code>max</code>. Solving those problems is left as part of Exercise 6 in this chapter.</p>
+<p>The trickiest part of this algorithm is the statement that calculates <code>mid</code>. The value is set to the current value of <code>min</code> plus the distance between <code>min</code> and <code>max</code> when scaled by the expected fraction of the distance between <code>values[min]</code> and <code>values[max]</code> where <code>target</code> should lie.</p>
+<p>For example, if <code>values[min]</code> is 100, <code>values[max]</code> is 200, and <code>target</code> is 125, then you would use the following calculation to decide where to look for the target value:</p>
+<pre><code>(target - values[min]) / (values[max] - values[min]) =
+</code></pre>
+<p>That puts the new value for <code>mid</code> one-quarter of the way from <code>min</code> to <code>max</code>.</p>
+<p>In the worst case, if the data is extremely unevenly distributed and you're looking for the worst possible target value, this algorithm has O(N) performance. If the distribution is reasonably uniform, the expected performance is O(log(log N)). (Proving that, however, is outside the scope of this book.)</p>
+<h2 id="majority-voting">Majority Voting</h2>
+<p>Voting is basically a specialized kind of searching. The goal in the <em>majority voting problem</em> is to determine a sequence's majority item—the item that appears more than half of the time. For example, suppose you poll 30 students and ask them whether they prefer chocolate, strawberry, or vanilla ice cream. The majority voting problem asks you to determine the majority opinion.</p>
+<p>Note that there may not be a majority item. For example, suppose 14 students pick chocolate, 6 pick strawberry, and 10 pick vanilla. In that case, none of the choices receives more than half of the votes, so there is no majority.</p>
+<p>One obvious majority voting algorithm is to loop through the list of items and keep a counter indicating the number of times each was chosen. If there are M possible values (chocolate, strawberry, and vanilla) and the list contains N items (30 students give 30 results in this example), then this algorithm takes O(N) time to scan the results and O(M) space to hold the counters.</p>
+<p>Each of the O(N) steps will also require some time to find the appropriate counter. For example, if you use a hash table to store the counters, then finding them will be relatively quick. If you store the counters in an array or linked list, then finding the appropriate counter to increment will be slower.</p>
+<p>This algorithm has the advantage of being very simple and intuitive. It can also find the mode of the votes, in case no item occurs more than half of the time. (The <em>mode</em> is the outcome that occurred most often.) For example, if 14 students pick chocolate, 6 pick strawberry, and 10 pick vanilla, then this algorithm can fairly easily determine that chocolate was the mode even though it didn't receive a majority of the votes.</p>
+<p>The Boyer-Moore majority vote algorithm is an interesting algorithm that can find the majority item in O(N) time using only O(1) space. To find the majority, the algorithm uses two variables: <code>Majority</code> to hold an outcome and <code>Count</code> to hold a counter. The following pseudocode shows how the algorithm works:</p>
+<pre><code>Outcome: BoyerMooreVote(List&lt;Outcome&gt; outcomes)
+</code></pre>
+<p>The algorithm initializes variable <code>counter</code> to 0 and then loops through the list of items. When it examines an item, if <code>counter</code> is currently 0, then the algorithm saves the current item in variable <code>majority</code> and sets <code>counter</code> to 1.</p>
+<p>If <code>counter</code> is not 0 when it examines an item, the algorithm compares the new item to the one stored in <code>majority</code>. If the new item matches <code>majority</code>, then the algorithm increments <code>counter</code>, essentially casting another vote for this item.</p>
+<p>If <code>counter</code> is not 0 and the new item is different from <code>majority</code>, then the algorithm decrements <code>count</code>, essentially removing a vote for <code>majority</code>.</p>
+<p>After the algorithm finishes, the variable <code>majority</code> holds the result. If there is a majority item, then the result is correct. If there is no majority item, then the algorithm returns something, but the result is not guaranteed to be the mode.</p>
+<p>To understand why the algorithm works, suppose that the majority item is m. During any step of the algorithm, define the value C to be the value in <code>counter</code> if <code>majority</code> currently holds m, and let C be the negative of the value in <code>counter</code> otherwise. Whenever the algorithm sees m, it increases C. When the algorithm sees some other item, it either increases or decreases C, depending on whether the new outcome matches the value currently stored in <code>majority</code>.</p>
+<p>Because m is the majority item, the algorithm must increase C more than it decreases C, so when the algorithm finishes, C will be positive. That happens only when <code>majority</code> holds m, so m must hold that value when the algorithm finishes.</p>
+<h2 id="summary">Summary</h2>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#c07-tbl-0001">Table 7.1</a> shows the values of N, log N, and log(log N) for different values of N so that you can compare the speeds of linear search, binary search, and interpolation search.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#R_c07-tbl-0001"><strong>Table 7.1</strong></a><strong>:</strong> Algorithm Characteristics</p>
+<p>N</p>
+<p>log2 N</p>
+<p>log2(log2 N)</p>
+<p>1,000</p>
+<p>10.0</p>
+<p>3.3</p>
+<p>1,000,000</p>
+<p>19.9</p>
+<p>4.3</p>
+<p>1,000,000,000</p>
+<p>29.9</p>
+<p>4.9</p>
+<p>1,000,000,000,000</p>
+<p>39.9</p>
+<p>5.3</p>
+<p>Linear search is useful only for relatively small arrays. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c07.xhtml#c07-tbl-0001">Table 7.1</a> shows that binary search works well even for very large arrays. It can search an array containing 1 trillion items in only about 40 steps.</p>
+<p>Interpolation search works well for arrays of any size that you can reasonably fit on a computer. It can search an array containing 1 trillion items in only about five steps. In fact, an array would need to hold more than <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c07-i0006.png" /> items before interpolation search would require an expected number of steps greater than nine.</p>
+<p>However, the exact number of steps for interpolation search depends on the distribution of the values. Sometimes the algorithm gets lucky and finds the target in one or two steps. At other times, it might need four or five steps. On average, however, it is extremely fast.</p>
+<p>The Boyer-Moore majority voting algorithm is a particularly odd algorithm because it produces the correct result only sometimes, and it doesn't tell you whether the result is correct.</p>
+<h2 id="exercises">Exercises</h2>
+<p>You can find the answers to these exercises in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/b02.xhtml">Appendix B</a>. Asterisks indicate particularly difficult problems.</p>
+<p>If you're not familiar with recursion, skip Exercises 2, 5, and 7 and come back to them after you read <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c15.xhtml">Chapter 15</a>.</p>
+<ol>
+<li>Write a program that implements linear search.</li>
+<li>Write a program that implements linear search recursively. Does this version have any advantages or disadvantages compared to the nonrecursive version?</li>
+<li>Write a program that implements linear search with sorted linked lists.</li>
+<li>Write a program that implements binary search.</li>
+<li>Write a program that implements binary search recursively. Does this version have any advantages or disadvantages compared to the nonrecursive version?</li>
+<li>Write a program that implements interpolation search.</li>
+<li>Write a program that implements interpolation search recursively. Does this version have any advantages or disadvantages compared to the nonrecursive version?</li>
+<li>Which sorting algorithm described in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml">Chapter 6</a>, “Sorting,” uses a technique reminiscent of the technique used by interpolation search?</li>
+<li>If an array contains duplicates, the binary search and interpolation search algorithms described in this chapter don't guarantee that they return the first instance of the target item. How could you modify them to return the first occurrence of the target item? What is the run time for the modified version?</li>
+<li>In the Boyer-Moore majority voting algorithm, what happens if outcome M occurs exactly half of the time in the list of outcomes? Can you make two example lists, one that causes the algorithm to return M and one that returns some other value?</li>
+<li>
+<p>The Boyer-Moore majority voting algorithm always returns an outcome, but if there is no majority, the result is not guaranteed to be the most common outcome in the list. How could you modify that algorithm to indicate whether the result is really a majority without changing the O(N) run time and O(1) memory characteristics?</p>
+</li>
+<li>
+<p><a href="https://www.oreilly.com/online-learning/support/">Support</a></p>
+</li>
+<li><a href="https://learning.oreilly.com/accounts/logout/">Sign Out</a></li>
+</ol>
+<p>©2022 O'Reilly Media, Inc. </p>
+<ul>
+<li><a href="https://www.oreilly.com/terms/">Terms of Service</a></li>
+<li><a href="https://learning.oreilly.com/privacy">Privacy Policy</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+    
+  </body>
+</html>

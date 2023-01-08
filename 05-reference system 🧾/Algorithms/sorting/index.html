@@ -1,0 +1,3166 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sorting-algorithms/">
+      
+      
+        <link rel="next" href="../../software%20architecture/2023-01-04%20-%20Archictecture%20trade-off%20analysis/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>CHAPTER 6 - Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-6" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Notes" class="md-header__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CHAPTER 6
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Notes" class="md-nav__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        learn-in-public
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-Learning%20wishlist/" class="md-nav__link">
+        00 Learning wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-book-wishlist/" class="md-nav__link">
+        00 book wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          00 daily notes 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="00 daily notes 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          00 daily notes 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--fleeting-note.md/" class="md-nav__link">
+        00  template  fleeting note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--literature-note.md/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/2023-01-08%20act%20-%20finding%20my%20values/" class="md-nav__link">
+        2023 01 08 act   finding my values
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          01 inbox 📥
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="01 inbox 📥" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          01 inbox 📥
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/00-readme/" class="md-nav__link">
+        00 readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/GOALS%20THEORY/" class="md-nav__link">
+        GOALS THEORY
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Quarterly%20Self%20Review%20-%20Professional/" class="md-nav__link">
+        Quarterly Self Review - Professional Self-Insight
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Self%20analysis/" class="md-nav__link">
+        Self analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Structure%20design--Coupling/" class="md-nav__link">
+        Structure design  Coupling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feedback/" class="md-nav__link">
+        Feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feminism/" class="md-nav__link">
+        Feminism
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/ideas-of-errol-gerson/" class="md-nav__link">
+        Errol Gerson ideas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/notes-on-Programming-as-Theory-Building/" class="md-nav__link">
+        notes on Programming as Theory Building
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/onLabels/" class="md-nav__link">
+        onLabels
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          02 ideas 🗃️
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="02 ideas 🗃️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          02 ideas 🗃️
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/00-%20template--permantent-note.md/" class="md-nav__link">
+        00  template  permantent note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2022-10-20%20-%20moving%20on%20limiting%20beliefs%20for%20diversity%20in%20tech/" class="md-nav__link">
+        2022 10 20   moving on limiting beliefs for diversity in tech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/202208171521%20-%20Italo%20Calvino%20on%20how%20he%20reads/" class="md-nav__link">
+        202208171521   Italo Calvino on how he reads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2023-01-07%20Living%20a%20happier%20life%20-%20Tool%20--%20ACT%20-%20Values%20%26%20goals/" class="md-nav__link">
+        2023 01 07 Living a happier life   Tool    ACT   Values & goals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/after-sentiers-229%20-%20designing%20without%20depletion/" class="md-nav__link">
+        After sentiers 229   designing without depletion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          03 areas 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 areas 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          03 areas 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/lessons-Ive-learned-as-EM/" class="md-nav__link">
+        lessons Ive learned as EM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3" tabindex="0" aria-expanded="false">
+          Microfrontends
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Microfrontends" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Microfrontends
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Chapter%204.%20Discovering%20Micro-Frontend%20Architectures/" class="md-nav__link">
+        Chapter 4. Discovering Micro-Frontend Architectures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%200%20-%20Initial%20ways%20of%20working/" class="md-nav__link">
+        Step 0   Initial ways of working
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%201%20-%20UI%20Concistency/" class="md-nav__link">
+        Step 1   UI Concistency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%202%20-%20Coordination%20among%20teams/" class="md-nav__link">
+        Step 2   Coordination among teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%203%20-%20Strategic%20and%20tatics%20thinking%20-%20Guided%20continous%20improvement/" class="md-nav__link">
+        Step 3   Strategic and tatics thinking   Guided continous improvement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/communication/" class="md-nav__link">
+        Communication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3_7" type="checkbox" id="__nav_7_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3_7" tabindex="0" aria-expanded="false">
+          Quotes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quotes" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Quotes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Quotes/Delivery%20Models/" class="md-nav__link">
+        Delivery Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4" tabindex="0" aria-expanded="false">
+          Burnout
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Burnout" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Burnout
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/burnout-theory-and-notes/" class="md-nav__link">
+        Burnout theory and notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/high%20pressure%20project%20and%20metal%20health/" class="md-nav__link">
+        High pressure project and metal health
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p2%20-%20what%20to%20do%20-%20individual/" class="md-nav__link">
+        P2   what to do   individual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p3%20-%20what%20to%20do%20-%20workplace/" class="md-nav__link">
+        P3   what to do   workplace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5" tabindex="0" aria-expanded="false">
+          Functional programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Functional programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Functional programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20Category%20theory/" class="md-nav__link">
+        2023 01 06 Category theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20FP%20Patterns/" class="md-nav__link">
+        2023 01 06 FP Patterns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Curry%20%26%20Partial%20Application/" class="md-nav__link">
+        Curry & Partial Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Monad/" class="md-nav__link">
+        Monad
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6" type="checkbox" id="__nav_7_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6" tabindex="0" aria-expanded="false">
+          My career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="My career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_6">
+          <span class="md-nav__icon md-icon"></span>
+          My career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1" type="checkbox" id="__nav_7_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1" tabindex="0" aria-expanded="false">
+          Achievements record
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Achievements record" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Achievements record
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1_1" type="checkbox" id="__nav_7_6_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1_1" tabindex="0" aria-expanded="false">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="4">
+        <label class="md-nav__title" for="__nav_7_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/my-career/achievements-record/2021/11/" class="md-nav__link">
+        11
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7" tabindex="0" aria-expanded="false">
+          Research cloud architectures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research cloud architectures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Research cloud architectures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_2" type="checkbox" id="__nav_7_7_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_2" tabindex="0" aria-expanded="false">
+          Cloud storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud storage" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud storage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud%20storage/Data%20management%20and%20Databases/" class="md-nav__link">
+        Data management and Databases
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_3" type="checkbox" id="__nav_7_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_3" tabindex="0" aria-expanded="false">
+          Cloud native
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud native" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud native
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Microservices/" class="md-nav__link">
+        Microservices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Serverless/" class="md-nav__link">
+        Serverless
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_4" type="checkbox" id="__nav_7_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_4" tabindex="0" aria-expanded="false">
+          Communication among microservices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Communication among microservices" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Communication among microservices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Data%20Streaming%20in%20Cloud%20Computing/" class="md-nav__link">
+        Data Streaming in Cloud Computing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Event%20driven%20architecture/" class="md-nav__link">
+        Event driven architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Message%20Brokers/" class="md-nav__link">
+        Message Brokers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_5" type="checkbox" id="__nav_7_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_5" tabindex="0" aria-expanded="false">
+          devOps  Infra
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="devOps  Infra" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          devOps  Infra
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Containerization/" class="md-nav__link">
+        Containerization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Databases/" class="md-nav__link">
+        Databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Infrastructure%20provisioning/" class="md-nav__link">
+        Infrastructure provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8" type="checkbox" id="__nav_7_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8" tabindex="0" aria-expanded="false">
+          Research programming and languages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research programming and languages" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          Research programming and languages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/Trendy%20Languages/" class="md-nav__link">
+        Trendy Languages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8_3" type="checkbox" id="__nav_7_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8_3" tabindex="0" aria-expanded="false">
+          Paradigms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Paradigms" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Paradigms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Functional%20programming/" class="md-nav__link">
+        Functional programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Reactive%20Programming/" class="md-nav__link">
+        Reactive Programming
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_9" type="checkbox" id="__nav_7_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_9" tabindex="0" aria-expanded="false">
+          What's that for
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="What's that for" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_9">
+          <span class="md-nav__icon md-icon"></span>
+          What's that for
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/real-time-app--tech-stack/" class="md-nav__link">
+        Real time app  tech stack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" tabindex="0" aria-expanded="false">
+          03 projects 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 projects 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          03 projects 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" tabindex="0" aria-expanded="false">
+          App in my music
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App in my music" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          App in my music
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-in-my-music/draft-ideas.md/" class="md-nav__link">
+        Draft ideas.md
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3" tabindex="0" aria-expanded="false">
+          App personal finances
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App personal finances" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          App personal finances
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-personal-finances/Draft/" class="md-nav__link">
+        Draft
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4" tabindex="0" aria-expanded="false">
+          Post making sense of the software career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post making sense of the software career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Post making sense of the software career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-making-sense-of-the-software-career/what-is-a-software-engineer/" class="md-nav__link">
+        What is a software engineer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_5" type="checkbox" id="__nav_8_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_5" tabindex="0" aria-expanded="false">
+          Post technical assessments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post technical assessments" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_5">
+          <span class="md-nav__icon md-icon"></span>
+          Post technical assessments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20Take%20home%20challenge/" class="md-nav__link">
+        Tech-Assessments: Take home interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20question%20only%20interview/" class="md-nav__link">
+        Tech-Assessments: Questions-only interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20Live%20coding%20interview/" class="md-nav__link">
+        Tech-Assessments: Live coding interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-12-13%20-%20Tech%20assessments/" class="md-nav__link">
+        2022 12 13   Tech assessments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/interview-questions/" class="md-nav__link">
+        Interview questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/my-guide-to-interviewing/" class="md-nav__link">
+        My guide to interviewing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="true">
+          05 reference system 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="05 reference system 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          05 reference system 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2023-01-04%20-%20Technical%20books%20I%20like/" class="md-nav__link">
+        2023 01 04   Technical books I like
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../peter-natur-programming-as-theory/" class="md-nav__link">
+        Peter natur programming as theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phillip-armour-5-orders-of-ignorance/" class="md-nav__link">
+        Phillip armour 5 orders of ignorance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../readme.md/" class="md-nav__link">
+        Readme.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_5" tabindex="0" aria-expanded="false">
+          06 ebooks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="06 ebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          06 ebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-ebooks/readme/" class="md-nav__link">
+        Playing to win: How strategy really works
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_6" tabindex="0" aria-expanded="true">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Algorithms" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../String%20Algorithms/" class="md-nav__link">
+        CHAPTER 15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hash-tables/" class="md-nav__link">
+        CHAPTER 8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searching-sorting-js/" class="md-nav__link">
+        10. Searching and Sorting in JS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searching/" class="md-nav__link">
+        CHAPTER 7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting%20and%20searching/" class="md-nav__link">
+        4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting-algorithms/" class="md-nav__link">
+        Chapter 5. Sorting Without a Hat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          CHAPTER 6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        CHAPTER 6
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insertionsort-in-arrays" class="md-nav__link">
+    Insertionsort in Arrays
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectionsort-in-arrays" class="md-nav__link">
+    Selectionsort in Arrays
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bubblesort" class="md-nav__link">
+    Bubblesort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms_1" class="md-nav__link">
+    Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heapsort" class="md-nav__link">
+    Heapsort
+  </a>
+  
+    <nav class="md-nav" aria-label="Heapsort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storing-complete-binary-trees" class="md-nav__link">
+    Storing Complete Binary Trees
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-heaps" class="md-nav__link">
+    Defining Heaps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-heapsort" class="md-nav__link">
+    Implementing Heapsort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quicksort" class="md-nav__link">
+    Quicksort
+  </a>
+  
+    <nav class="md-nav" aria-label="Quicksort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyzing-quicksorts-run-time" class="md-nav__link">
+    Analyzing Quicksort's Run Time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#picking-a-dividing-item" class="md-nav__link">
+    Picking a Dividing Item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-quicksort-with-stacks" class="md-nav__link">
+    Implementing Quicksort with Stacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-quicksort-in-place" class="md-nav__link">
+    Implementing Quicksort in Place
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-quicksort" class="md-nav__link">
+    Using Quicksort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mergesort" class="md-nav__link">
+    Mergesort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note_1" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note_2" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_7" tabindex="0" aria-expanded="false">
+          Software architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Software architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_7">
+          <span class="md-nav__icon md-icon"></span>
+          Software architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software%20architecture/2023-01-04%20-%20Archictecture%20trade-off%20analysis/" class="md-nav__link">
+        2023 01 04   Archictecture trade off analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_8" type="checkbox" id="__nav_9_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_8" tabindex="0" aria-expanded="false">
+          tools Difficult situations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="tools Difficult situations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_8">
+          <span class="md-nav__icon md-icon"></span>
+          tools Difficult situations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Difficult%20Conversations/" class="md-nav__link">
+        Difficult Conversations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Questions%20for%20new%20teams/" class="md-nav__link">
+        Questions for new teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Receiving%20challenging%20feedback/" class="md-nav__link">
+        Receiving challenging feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/dealing%20with%20a%20coleric%20person/" class="md-nav__link">
+        Dealing with a coleric person
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/solving%20tech%20conflict/" class="md-nav__link">
+        Solving tech conflict
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insertionsort-in-arrays" class="md-nav__link">
+    Insertionsort in Arrays
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectionsort-in-arrays" class="md-nav__link">
+    Selectionsort in Arrays
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bubblesort" class="md-nav__link">
+    Bubblesort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms_1" class="md-nav__link">
+    Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heapsort" class="md-nav__link">
+    Heapsort
+  </a>
+  
+    <nav class="md-nav" aria-label="Heapsort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storing-complete-binary-trees" class="md-nav__link">
+    Storing Complete Binary Trees
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defining-heaps" class="md-nav__link">
+    Defining Heaps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-heapsort" class="md-nav__link">
+    Implementing Heapsort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quicksort" class="md-nav__link">
+    Quicksort
+  </a>
+  
+    <nav class="md-nav" aria-label="Quicksort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analyzing-quicksorts-run-time" class="md-nav__link">
+    Analyzing Quicksort's Run Time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#picking-a-dividing-item" class="md-nav__link">
+    Picking a Dividing Item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-quicksort-with-stacks" class="md-nav__link">
+    Implementing Quicksort with Stacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementing-quicksort-in-place" class="md-nav__link">
+    Implementing Quicksort in Place
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-quicksort" class="md-nav__link">
+    Using Quicksort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mergesort" class="md-nav__link">
+    Mergesort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note_1" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note_2" class="md-nav__link">
+    NOTE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+
+<h1 id="chapter-6">CHAPTER 6</h1>
+<p>Sorting</p>
+<p>Sorting algorithms are usually covered in great detail in algorithms books for several reasons.</p>
+<ul>
+<li>They are interesting and demonstrate several useful techniques, such as recursion, divide and conquer, heaps, and trees.</li>
+<li>Sorting algorithms are well-studied and are some of the few algorithms for which exact run times are known. It can be shown that the fastest possible algorithm that uses comparisons to sort N items must use O(N log N) time. Several sorting algorithms actually achieve that performance, so in some sense they are optimal.</li>
+<li>Sorting algorithms are useful. Almost any data is more useful when it is sorted in various ways, so sorting algorithms play an important role in many applications.</li>
+</ul>
+<p>This chapter describes several different sorting algorithms. Some, such as insertionsort, selectionsort, and bubblesort, are relatively simple but slow. Others, such as heapsort, quicksort, and mergesort, are more complicated but much faster. Still others, such as countingsort and pigeonhole sort, don't use comparisons to sort items, so they can break the O(N log N) barrier and perform amazingly fast under the right circumstances.</p>
+<p>The following sections categorize the algorithms by their run-time performance.</p>
+<h3 id="note">NOTE</h3>
+<p>Many programming libraries, such as C# and Python, include sorting tools, and they usually are quite fast. In practice, you may want to use those tools to save time writing and debugging the sorting code. It's still important to understand how sorting algorithms work, however, because sometimes you can do even better than the built-in tools. For example, a simple bubblesort algorithm may beat a more complicated library routine for very small lists, and countingsort often beats the tools if the data being sorted has the right characteristics.</p>
+<h2 id="algorithms"><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0012.png" /> Algorithms</h2>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0013.png" /> algorithms are relatively slow but fairly simple. In fact, their simplicity sometimes lets them outperform faster but more complicated algorithms for very small arrays.</p>
+<h3 id="insertionsort-in-arrays">Insertionsort in Arrays</h3>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c03.xhtml">Chapter 3</a> described an insertionsort algorithm that sorts items in linked lists. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c05.xhtml">Chapter 5</a> described insertionsort algorithms that use stacks and queues. The basic idea is to take an item from the input list and insert it into the proper position in a sorted output list (which initially starts empty).</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c03.xhtml">Chapter 3</a> explained how to do this in linked lists, but you can use the same steps to sort an array. The following pseudocode shows the algorithm for use with arrays:</p>
+<pre><code>Insertionsort(Data: values[])
+</code></pre>
+<p>As the code loops through the items in the array, the index <code>i</code> separates the items that have been sorted from those that have not. The items with an index less than <code>i</code> have already been sorted, and those with an index greater than or equal to <code>i</code> have not yet been sorted.</p>
+<p>As <code>i</code> goes from 0 to the last index in the array, the code moves the item at index <code>i</code> into the proper position in the sorted part of the array.</p>
+<p>To find the item's position, the code looks through the already sorted items and finds the first item that is greater than the new value <code>values[i]</code>.</p>
+<p>The code then moves <code>values[i]</code> into its new position. Unfortunately, this can be a time-consuming step. Suppose that the item's new index should be <code>j</code>. In that case, the code must move the items between indices <code>j</code> and <code>i</code>, one position to the right to make room for the item at position <code>j</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0001">Figure 6.1</a> shows the algorithm's key steps. The image at the top shows the original unsorted array. In the middle image, the first four items (outlined in bold) have been sorted, and the algorithm is preparing to insert the next item (which has value 3) into the sorted part of the array. The algorithm searches through the sorted items until it determines that the value 3 should be inserted before the value 5. At the bottom of the figure, the algorithm has moved the values 5, 6, and 7 to the right to make room for value 3. The algorithm inserts value 3 and continues the <code>For</code> loop to insert the next item (which has value 2) into its correct position.</p>
+<p><img alt="Illustration of Insertionsort inserts items into the sorted part of the array." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f001.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0001"><strong>Figure 6.1</strong></a><strong>:</strong> Insertionsort inserts items into the sorted part of the array.</p>
+<p>This algorithm sorts the items in the original array, so it doesn't need any additional storage (aside from a few variables to control loops and move items).</p>
+<p>If the array contains N items, the algorithm considers each of the N positions in the array. For each position <code>i</code>, it must search the previously sorted items in the array to find the <code>i</code>th item's new position. It must then move the items between that location and index <code>i</code> one position to the right. If the item <code>i</code> should be moved to position <code>j</code>, it takes <code>j</code> steps to find the new location <code>j</code> and then <code>i</code> – <code>j</code> more steps to move items over, resulting in a total of <code>i</code> steps. That means in total it takes <code>i</code> steps to move item <code>i</code> into its new position.</p>
+<p>Adding up all the steps required to position the items, the total run time is as follows:</p>
+<p><img alt="equation" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-disp-0001.png" /></p>
+<p>This means that the algorithm has run time <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0001.png" /> . This isn't a very fast run time, but it's fast enough for reasonably small arrays (fewer than 10,000 or so items). It's also a relatively simple algorithm, so it may sometimes be faster than more complicated algorithms for very small arrays. How small an array must be for this algorithm to outperform more complicated algorithms depends on your system. Typically, this algorithm is only faster for arrays holding fewer than 5 or 10 items.</p>
+<h3 id="selectionsort-in-arrays">Selectionsort in Arrays</h3>
+<p>In addition to describing insertionsort for linked lists, <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c03.xhtml">Chapter 3</a> also described selectionsort for linked lists. Similarly, <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c05.xhtml">Chapter 5</a> described selectionsort algorithms that use stacks and queues.</p>
+<p>The basic idea is to search the input list for the largest item it contains and then add it to the end of a growing sorted list. The following pseudocode shows the algorithm for use with arrays:</p>
+<pre><code>Selectionsort(Data: values[])
+</code></pre>
+<p>The code loops through the array to find the smallest item that has not yet been added to the sorted part of the array. It then swaps that smallest item with the item in position <code>i</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0002">Figure 6.2</a> shows the algorithm's key steps. The image at the top shows the original unsorted array. In the middle image, the first three items (outlined in bold) have been sorted, and the algorithm is preparing to swap the next item into position. The algorithm searches the unsorted items to find the one with the smallest value (3 in this case). The algorithm then swaps the item that has the smallest value into the next unsorted position. The image at the bottom of the figure shows the array after the new item has been moved to the sorted part of the array. The algorithm now continues the <code>For</code> loop to add the next item (which has value 5) to the growing sorted portion of the array.</p>
+<p><img alt="Illustration of key steps of the algorithm." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f002.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0002"><strong>Figure 6.2</strong></a><strong>:</strong> Selectionsort moves the smallest unsorted item to the end of the sorted part of the array.</p>
+<p>Like insertionsort, this algorithm sorts the items in the original array, so it doesn't need any additional storage (aside from a few variables to control loops and move items).</p>
+<p>If the array contains N items, the algorithm considers each of the N positions in the array. For each position <code>i</code>, it must search the N – <code>i</code> items that have not yet been sorted to find the item that belongs in position <code>i</code>. It then swaps the item into its final position in a small constant number of steps. Adding up the steps to move all of the items gives the following run time:</p>
+<p><img alt="equation" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-disp-0002.png" /></p>
+<p>This means that the algorithm has run time <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0015.png" /> —the same run time as insertionsort.</p>
+<p>Like insertionsort, selectionsort is fast enough for reasonably small arrays (fewer than 10,000 or so items). It's also a fairly simple algorithm, so it may sometimes be faster than more complicated algorithms for very small arrays (typically 5 to 10 items).</p>
+<h3 id="bubblesort">Bubblesort</h3>
+<p><em>Bubblesort</em> uses the fairly obvious fact that if an array is not sorted, then it must contain two adjacent elements that are out of order. The algorithm repeatedly passes through the array, swapping items that are out of order, until it can't find any more swaps.</p>
+<p>The following pseudocode shows the bubblesort algorithm:</p>
+<pre><code>Bubblesort(Data: values[])
+</code></pre>
+<p>The code uses a Boolean variable named <code>not_sorted</code> to keep track of whether it has found a swap in its most recent pass through the array. As long as <code>not_sorted</code> is true, the algorithm loops through the array, looking for adjacent pairs of items that are out of order and swaps them.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0003">Figure 6.3</a> shows an example. The array on the far left is mostly sorted. During the first pass through the array, the algorithm finds that the 6/3 pair is out of order (6 should come after 3), so it swaps 6 and 3 to get the second arrangement of values. During the second pass through the array, the algorithm finds that the 5/3 pair is out of order, so it swaps 5 and 3 to get the third arrangement of values. During the third pass through the array, the algorithm finds that the 4/3 pair is out of order, so it swaps 4 and 3, giving the arrangement on the far right in the figure. The algorithm performs one final pass, finds no pairs that are out of order, and ends.</p>
+<p><img alt="Illustration of bubblesort, items that are farther down than they should be slowly “bubble up” to their correct positions." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f003.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0003"><strong>Figure 6.3</strong></a><strong>:</strong> In bubblesort, items that are farther down than they should be slowly “bubble up” to their correct positions.</p>
+<p>The fact that item 3 seems to bubble up slowly to its correct position gives the bubblesort algorithm its name.</p>
+<p>During each pass through the array, at least one item reaches its final position. In <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0003">Figure 6.3</a>, item 6 reaches its final destination during the first pass, item 5 reaches its final destination during the second pass, and items 3 and 4 reach their final destinations during the third pass.</p>
+<p>If the array holds N items and at least one item reaches its final position during each pass through the array, then the algorithm can perform, at most, N passes. (If the array is initially sorted in reverse order, the algorithm needs all N passes.) Each pass takes N steps, so the total run time is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0014.png" />.</p>
+<p>Like insertionsort and selectionsort, bubblesort is fairly slow but may provide acceptable performance for small lists (fewer than 1,000 or so items). It is also sometimes faster than more complicated algorithms for very small lists (five or so items).</p>
+<p>You can make several improvements to bubblesort. First, in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0003">Figure 6.3</a>, the item with value 3 started out below its final correct position. However, consider what happens if an item starts above its final position. In that case, the algorithm finds that the item is out of position and swaps it with the following item. It then considers the next position in the array and considers the item again. If the item is still out of position, the algorithm swaps it again. The algorithm continues swapping that item down through the list until it reaches its final position in a single pass through the array. You can use this fact to speed up the algorithm by alternating downward and upward passes through the array. Downward passes quickly move items that are too high in the array, and upward passes quickly move items that are too low in the array.</p>
+<p>This upward and downward version of bubblesort is sometimes called <em>cocktail shaker sort</em>.</p>
+<p>To make a second improvement, notice that some items may move through several swaps at once. For example, during a downward pass, a large item (call it K) may be swapped several times before it reaches a larger item, and it stops for that pass. You can save a little time if you don't put item K back in the array for every swap. Instead, you can store K in a temporary variable and move other items up in the array until you find the spot where K stops. You then put K in that position and continue the pass through the array.</p>
+<p>To make a final improvement, consider the largest item (call it L) that is not in its final position. During a downward pass, the algorithm reaches that item (possibly making other swaps beforehand) and swaps it down through the list until it reaches its final position. During the next pass through the array, no item can swap past L because L is in its final position. That means the algorithm can end its pass through the array when it reaches item L.</p>
+<p>More generally, the algorithm can end its pass through the array when it reaches the position of the last swap that it made during the previous pass. If you keep track of the last swaps made during downward and upward passes through the array, you can shorten each pass.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0004">Figure 6.4</a> shows these three improvements. During the first pass down through the array, the algorithm swaps item 7 with items 4, 5, 6, and 3. It holds the value 7 in a temporary variable, so it doesn't need to save it back into the array until it reaches its final position.</p>
+<p><img alt="Illustration of how improvements make bubblesort faster, the final items are shaded to indicate that they don’t need to be checked during later passes." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f004.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0004"><strong>Figure 6.4</strong></a><strong>:</strong> Improvements make bubblesort faster, but it still has <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0058.png" /> performance.</p>
+<p>After placing 7 after 3, the algorithm continues moving through the array and doesn't find any other items to swap, so it knows that item 7 and those that follow are in their final positions and don't need to be examined again. If some item nearer to the top of the array were larger than 7, the first pass would have swapped it down past 7. In the middle image shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0004">Figure 6.4</a>, the final items are shaded to indicate that they don't need to be checked during later passes.</p>
+<p>The algorithm knows that item 7 and the items after it are in their final positions, so it starts its second pass, moving upward through the array at the first item before item 7, which is item 3. It swaps that item with items 6, 5, and 4, this time holding item 3 in a temporary variable until it reaches its final position.</p>
+<p>Now item 3 and those that come before it in the array are in their final positions, so they are shaded in the last image in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0004">Figure 6.4</a>.</p>
+<p>The algorithm makes one final downward pass through the array, starting the pass at value 4 and ending at value 6. No swaps occur during this pass, so the algorithm ends.</p>
+<p>These improvements make bubblesort faster in practice. (In one test sorting 10,000 items, bubblesort took 2.50 seconds without improvements and 0.69 seconds with improvements.) But it still has <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0011.png" /> performance, so there's a limit to the size of the list you can sort with bubblesort.</p>
+<h2 id="algorithms_1"><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0063.png" /> Algorithms</h2>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0019.png" /> algorithms are much faster than <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0052.png" /> algorithms, at least for larger arrays. For example, if N is 1,000, <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0021.png" /> is less than <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0022.png" /> , but <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0023.png" /> is roughly 100 times as big at <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0024.png" /> . That difference in speed makes <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0057.png" /> algorithms more useful in everyday programming, at least for large arrays.</p>
+<h3 id="heapsort">Heapsort</h3>
+<p><em>Heapsort</em> uses a data structure called a <em>heap</em>, which also demonstrates a useful technique for storing a complete binary tree in an array.</p>
+<h4 id="storing-complete-binary-trees"><em>Storing Complete Binary Trees</em></h4>
+<p>A <em>binary tree</em> is a tree where every node is connected to, at most, two children. In a <em>complete tree</em> (binary or otherwise), all of the tree's levels are completely filled, except possibly the last level, where all of the nodes are pushed to the left.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0005">Figure 6.5</a> shows a complete binary tree holding 12 nodes. The tree's first three levels are full. The fourth level contains five nodes pushed to the left side of the tree.</p>
+<p><img alt="Illustration of a complete binary tree that holds 12 nodes." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f005.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0005"><strong>Figure 6.5</strong></a><strong>:</strong> In a complete binary tree, every level is full, except possibly the last.</p>
+<p>One useful feature of complete binary trees is that you can easily store them in an array using a simple formula. Start by placing the root node at index 0. Then, for any node with index <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0026.png" /> , place its children at indices <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0027.png" /> and <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0028.png" />.</p>
+<p>If a node has index <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0029.png" /> , then its parent has index ⌊<img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0030.png" /> ⌋, where ⌊ ⌋ means to truncate the result to the next-smallest integer. In other words, round down. For example, ⌊<img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0031.png" /> ⌋ is 2, and ⌊ ⌋ is also 2.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0006">Figure 6.6</a> shows the tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0005">Figure 6.5</a> stored in an array, with the entries' indices shown on top.</p>
+<p><img alt="Illustration of how you can easily store a complete binary tree in an array." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f006.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0006"><strong>Figure 6.6</strong></a><strong>:</strong> You can easily store a complete binary tree in an array.</p>
+<p>For example, the value 6 is at index 4, so its children should be at indices <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0033.png" /> and <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0034.png" /> 10. Those items have values 5 and 12. If you look at the tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0005">Figure 6.5</a>, you'll see that those are the correct children.</p>
+<p>If the index of either child is greater than the largest index in the array, then the node doesn't have that child in the tree. For example, the value 9 has index 5. Its right child has index <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0035.png" /> , which is beyond the end of the array. If you look at <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0005">Figure 6.5</a>, you'll see that the item with value 9 has no right child.</p>
+<p>For an example of calculating a node's parent, consider the item with value 12 stored at index 10. The index of the parent is ⌊(10 – 1)/2⌋ = ⌊4.5⌋ = 4 . The value at index 4 is 6. If you look at the tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0005">Figure 6.5</a>, you'll see that the node with value 12 does have as its parent the node with value 6.</p>
+<h4 id="defining-heaps"><em>Defining Heaps</em></h4>
+<p>A <em>heap</em>, shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0007">Figure 6.7</a>, is a complete binary tree where every node holds a value that is at least as large as the values in all of its children. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0005">Figure 6.5</a> is not a heap, however, because the root node has a value of 7 and its right child has a value of 10, which is greater.</p>
+<p><img alt="Illustration of a heap, where the value of every node is at least as large as the values of its children." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f007.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0007"><strong>Figure 6.7</strong></a><strong>:</strong> In a heap, the value of every node is at least as large as the values of its children.</p>
+<p>You can build a heap one node at a time. Start with a tree consisting of a single node. Because the single node has no children, it satisfies the heap property.</p>
+<p>Now suppose you have built a heap, and you want to add a new node to it. Add the new node at the end of the tree. There is only one place where you can add this node to keep the tree a complete binary tree—to the right of the nodes already in the bottom level of the tree.</p>
+<p>Now compare the new value to the value of its parent. If the new value is larger than the parent's, swap them. Because the tree was previously a heap, you know that the parent's value was already larger than its other child (if it has one). By swapping it with an even larger value, you know that the heap property is preserved at this point.</p>
+<p>However, you have changed the value of the parent node, so that might break the heap property farther up in the tree. Move up the tree to the parent node and compare its value to the value of its parent, swapping their values if necessary.</p>
+<p>Continue up the tree, swapping values if necessary, until you reach a node where the heap property is satisfied. At that point, the tree is again a heap.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0008">Figure 6.8</a> shows this process when you add the value 12 to the tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0007">Figure 6.7</a>. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0009">Figure 6.9</a> shows the new heap.</p>
+<p><img alt="Illustration of adding a new value to a heap, placing the value at the end of the tree and move it up as needed to restore the heap property." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f008.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0008"><strong>Figure 6.8</strong></a><strong>:</strong> To add a new value to a heap, place the value at the end of the tree and move it up as needed to restore the heap property.</p>
+<p><img alt="Illustration of moving the value up to a node that already satisfies the heap property, the tree is once again a heap." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f009.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0009"><strong>Figure 6.9</strong></a><strong>:</strong> When the value moves up to a node that already satisfies the heap property, the tree is once again a heap.</p>
+<p>Storing the heap in an array makes this process particularly easy because when you need to add a new item to the end of the tree, it's already in the proper position in the array. When you store a complete binary tree in an array, the next item belongs on the right, on the tree's bottom level. In the array, that's the position that comes after the last entry that is already in the tree. This means you don't need to do anything to place the next item in the tree. All you need to do is to swap it up through the tree to restore the heap property.</p>
+<p>The following pseudocode shows the algorithm to turn an array into a heap:</p>
+<pre><code>MakeHeap(Data: values[])
+</code></pre>
+<p>You may recall from <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c05.xhtml">Chapter 5</a>, “Stacks and Queues,” that a <em>priority queue</em> is a queue that returns objects in the order of their priorities. Heaps are useful for creating priority queues because the largest item in the tree is always at the root node. If you use the items' priorities to build the heap, then the item with the highest priority is at the top. To remove an item from the priority queue, you simply use the item at the root.</p>
+<p>Unfortunately, that breaks the heap, so it has no root and is therefore no longer a tree. Fortunately, there's an easy way to fix it: move the last item in the tree to the root.</p>
+<p>Doing that breaks the tree's heap property, but you can fix that by using a method similar to the one you used to build the heap. If the new root value is smaller than one of its child values, swap it with the larger child. That fixes the heap property at this node, but it may have broken it at the child's level, so move down to that node and repeat the process. Continue swapping the node down into the tree until you find a spot where the heap property is already satisfied or you reach the bottom of the tree.</p>
+<p>The following pseudocode shows the algorithm to remove an item from the heap and restore the heap property:</p>
+<pre><code>Data: RemoveTopItem (Data: values[], Integer: count)
+</code></pre>
+<p>This algorithm takes as a parameter the size of the tree, so it can find the location where the heap ends within the array.</p>
+<p>The algorithm starts by saving the value at the root node so that it later can return the highest-priority value. It then moves the last item in the tree to the root node.</p>
+<p>The algorithm sets the variable <code>index</code> to the index of the root node and then enters an infinite <code>While</code> loop.</p>
+<p>Inside the loop, the algorithm calculates the indices of the children of the current node. If either of those indices is off the end of the tree, then it is set to the current node's index. In that case, when the node's values are compared later, the current node's value is compared to itself. Because any value is greater than or equal to itself, that comparison satisfies the heap property, so the missing node does not make the algorithm swap values.</p>
+<p>After the algorithm calculates the child indices, it checks whether the heap property is satisfied at this point. If it is, then the algorithm breaks out of the <code>While</code> loop. (If both child nodes are missing or if one is missing and the other satisfies the heap property, then the <code>While</code> loop also ends.)</p>
+<p>If the heap property is not satisfied, the algorithm sets <code>swap_child</code> to the index of the child that holds the larger value and swaps the parent node's value with that child node's value. It then updates the <code>index</code> variable to move down to the swapped child node and continues down the tree.</p>
+<h4 id="implementing-heapsort"><em>Implementing Heapsort</em></h4>
+<p>Now that you know how to build and maintain a heap, implementing the heapsort algorithm is easy. The algorithm builds a heap. It then repeatedly swaps the first and last items in the heap and rebuilds the heap excluding the last item. During each pass, one item is removed from the heap and added to the end of the array where the items are placed in sorted order.</p>
+<p>The following pseudocode shows how the algorithm works:</p>
+<pre><code>Heapsort(Data: values)
+</code></pre>
+<p>This algorithm starts by turning the array of values into a heap. It then repeatedly removes the top item, which is the largest, and moves it to the end of the heap. It reduces the number of items in the heap by one and restores the heap property, leaving the newly positioned item beyond the end of the heap in its proper sorted order.</p>
+<p>When it is finished, the algorithm has removed the items from the heap in largest-to-smallest order and placed them at the end of the ever-shrinking heap. That leaves the array holding the values in smallest-to-largest order.</p>
+<p>The space required by heapsort is easy to calculate. The algorithm stores all the data inside the original array and uses only a fixed number of extra variables for counting and swapping values. If the array holds N values, the algorithm uses <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0072.png" /> space.</p>
+<p>The run time required by the algorithm is slightly harder to calculate. To build the initial heap, the algorithm adds each item to a growing heap. Each time it adds an item, it places the item at the end of the tree and swaps the item upward until the tree is again a heap. Because the tree is a complete binary tree, it is up to <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0038.png" /> levels tall, so pushing the item up through the tree can take, at most, <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0039.png" /> steps. The algorithm performs this step of adding an item and restoring the heap property N times, so the total time to build the initial heap is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0005.png" />.</p>
+<p>To finish sorting, the algorithm removes each item from the heap and then restores the heap property. It does that by swapping the last item in the heap with the root node and then swapping the new root down through the tree until the heap property is restored. The tree is up to <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0042.png" /> levels tall, so this can take up to <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0053.png" /> time. The algorithm repeats this step N times, so the total number of steps required is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0046.png" />.</p>
+<p>Adding the time needed to build the initial heap and the time to finish sorting gives a total time of <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0044.png" />.</p>
+<p>Heapsort is an elegant “sort-in-place” algorithm that takes no extra storage. It also demonstrates some useful techniques such as heaps and storing a complete binary tree in an array.</p>
+<p>Even though heapsort's <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0007.png" /> run time is asymptotically the fastest possible for an algorithm that sorts by using comparisons, the quicksort algorithm described in the next section usually runs slightly faster.</p>
+<h3 id="quicksort">Quicksort</h3>
+<p>The <em>quicksort algorithm</em> uses a divide-and-conquer strategy. It subdivides an array into two pieces and then calls itself recursively to sort the pieces. The following pseudocode shows the algorithm at a high level:</p>
+<pre><code>Quicksort(Data: values[], Integer: start, Integer: end)
+</code></pre>
+<p>For example, the top of <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0010">Figure 6.10</a> shows an array of values to sort. In this case, I picked the first value, 6, for <code>divider</code>.</p>
+<p><img alt="Illustration of shows an array of values to sort." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f010.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0010"><strong>Figure 6.10</strong></a><strong>:</strong> When the value moves up to a node that already satisfies the heap property, the tree is once again a heap.</p>
+<p>In the middle image, values less than <code>divider</code> have been moved to the beginning of the array, and values greater than or equal to <code>divider</code> have been moved to the end of the array. The divider item is shaded at index 6. Notice that one other item has value 6, and it comes after the <code>divider</code> in the array.</p>
+<p>The algorithm then calls itself recursively to sort the two pieces of the array before and after the <code>divider</code> item. The result is shown at the bottom of <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0010">Figure 6.10</a>.</p>
+<p>Before moving into the implementation details, let's study the algorithm's run-time behavior.</p>
+<h4 id="analyzing-quicksorts-run-time"><em>Analyzing Quicksort's Run Time</em></h4>
+<p>First, consider the special case in which the dividing item divides the part of the array that is of interest into two exactly equal halves at every step. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a> shows the situation.</p>
+<p><img alt="Illustration of the call tree that shows calls to quicksort when the values in the array are perfectly balanced, so the algorithm divides the items into equal halves at every step." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f011.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0011"><strong>Figure 6.11</strong></a><strong>:</strong> If the divider item divides the array into equal halves, the algorithm progresses quickly.</p>
+<p>Each of the “nodes” in the tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a> represents a call to the quicksort algorithm. The thick line in the middle of the node shows how the array was divided into two equal halves. The two arrows out of the node represent the quicksort algorithm calling itself twice to process the two halves.</p>
+<p>The nodes at the bottom of the tree represent calls to sort a single item. Because a list holding a single item is already sorted, those calls simply return without doing anything.</p>
+<p>After the calls work their way to the bottom of the tree, they begin returning to the methods that called them, so control moves back up the tree.</p>
+<p>If the array originally holds N items and the items divide exactly evenly, as shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a>, then the tree of quicksort calls is log N levels tall.</p>
+<p>Each call to quicksort must examine all the items in the piece of the array it is sorting. For example, a call to quicksort represented by a group of four boxes in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a> would need to examine those four boxes to divide its values further.</p>
+<p>All of the items in the original array are present at each level of the tree, so each level of the tree contains N items. If you add up the items that each call to quicksort must examine at any level of the tree, you get N items. That means the calls to quicksort on any level require N steps.</p>
+<p>The tree is log N levels tall, and each level requires N steps, so the algorithm's total run time is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0059.png" />.</p>
+<p>All of this analysis assumes that the quicksort algorithm divides its part of the array into two equal-sized pieces at every step. In practice, that would be extremely unlikely.</p>
+<p>Most of the time, however, the dividing item will belong somewhere more or less in the middle of the items that it is dividing. It won't be in the exact middle, but it won't be near the edges either. For example, in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0010">Figure 6.10</a>, the dividing item 6 ended up close to but not exactly in the middle in the second image. If the dividing item is usually somewhere near the middle of the values that it is dividing, then in the expected case, the quicksort algorithm still has <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0045.png" /> performance.</p>
+<p>In the worst case, suppose the dividing item is less than any of the other items in the part of the array that it is dividing. That happens if the items are already sorted when the algorithm begins. (The worst case also occurs if all of the items in the array have the same value.) In that case, none of the items goes into the left piece of the array, and all of the other items (except the dividing item) go into the right piece of the array. The first recursive call returns immediately because it doesn't need to sort any items, but the second call must process almost all the items. If the first call to quicksort had to sort N items, this recursive call must sort <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0048.png" /> items.</p>
+<p>If the dividing item is always less than the other items in the part of the array being sorted, then the algorithm is called to sort N items, then <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0049.png" /> items, then <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0050.png" /> items, and so on. In that case, the call tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a> is extremely tall and thin, with a height of N.</p>
+<p>The calls to quicksort at level <code>i</code> in the tree must examine N – <code>i</code> items. Adding up the items that all of the calls must examine gives <img alt="equation" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-disp-0003.png" /> which is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0051.png" /> so the algorithm's worst-case behavior is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0062.png" />.</p>
+<p>In addition to examining the algorithm's run-time performance, you should consider the space it needs. This depends partly on the method you use to divide parts of the array into halves, but it also depends on the algorithm's depth of recursion. If the sequence of recursive calls is too deep, the program will exhaust its stack space and crash.</p>
+<p>For the tree shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a>, the quicksort algorithm calls itself recursively to a depth of log N calls. In the expected case, that means the program's call stack will be <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0061.png" /> levels deep. That shouldn't be a problem for most computers. Even if the array holds 1 billion items, log N is only about 30, and the call stack should be able to handle 30 recursive method calls.</p>
+<p>For the tall thin tree created in the worst case, however, the depth of recursion is N. Few programs will be able to build a call stack safely with 1 billion recursive calls.</p>
+<p>You can help avoid the worst-case scenario to make the algorithm run in a reasonable amount of time and with a reasonable depth of recursion by picking the dividing item carefully. The following section describes some strategies for doing that. The sections after that one describe two methods for dividing a section of an array into two halves. The final quicksort section summarizes issues with using quicksort in practice.</p>
+<h4 id="picking-a-dividing-item"><em>Picking a Dividing Item</em></h4>
+<p>One method of picking the dividing item is simply to use the first item in the part of the array being sorted. This is quick, simple, and usually effective. Unfortunately, if the array happens to be initially sorted or sorted in reverse, the result is the worst case. If the items are randomly arranged, this worst-case behavior is extremely unlikely, but it seems reasonable that the array of items might be initially sorted or mostly sorted for some applications.</p>
+<p>One solution is to randomize the array before calling quicksort. If the items are randomly arranged, it is extremely unlikely that this method will pick a bad dividing item every time and result in worst-case behavior. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c02.xhtml">Chapter 2</a>, “Numerical Algorithms,” explains how to randomize an array in <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0060.png" /> time so that this won't add to quicksort's expected <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0064.png" /> run time, at least in Big O notation. In practice, however, it could still take a fair amount of time to randomize a large array, so most programmers don't use this approach.</p>
+<p>Another approach is to examine the first, last, and middle items in the part of the array being sorted and use the value that is between the other two for the dividing item. This doesn't guarantee that the dividing item isn't close to the largest or smallest in this part of the array, but it does make it less likely.</p>
+<p>A final approach is to pick a random index from the part of the array being sorted and then use the value at that index as the dividing item. It would be extremely unlikely that every such random selection would produce a bad dividing value and result in worst-case behavior.</p>
+<h4 id="implementing-quicksort-with-stacks"><em>Implementing Quicksort with Stacks</em></h4>
+<p>After you have picked a dividing item, you must divide the items into two sections to be placed at the front and back of the array. One easy way to do this is to move items into one of two stacks, depending on whether the item you are considering is greater than or less than the dividing item. The following pseudocode shows the algorithm for this step:</p>
+<pre><code>Stack of Data: before = New Stack of Data
+</code></pre>
+<p>At this point, the algorithm is ready to recursively call itself to sort the two pieces of the array on either side of the dividing item.</p>
+<h4 id="implementing-quicksort-in-place"><em>Implementing Quicksort in Place</em></h4>
+<p>Using stacks to split the items in the array into two groups as described in the preceding section is easy, but it requires you to allocate extra space for the stacks. You can save some time if you allocate the stacks at the beginning of the algorithm and then let every call to the algorithm share the same stacks instead of creating their own, but this still requires the stacks to hold <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0083.png" /> memory.</p>
+<p>With a little more work, you can split the items into two groups without using any extra storage. The following high-level pseudocode shows the basic approach:</p>
+<pre><code>&lt;Swap the dividing item to the beginning of the array.&gt;
+</code></pre>
+<p>This code uses the first item as the dividing item. It places that item in a temporary variable and removes it from the array, leaving a hole.</p>
+<p>The algorithm then searches the array from the back to the front until it finds a value that is less than the dividing item. It removes that value from its current location and moves it into the hole. Removing the item from its original location creates a new hole.</p>
+<p>Next, the algorithm searches from the point of the old hole (now filled with the newly moved item) toward the back of the array until it finds an item that is greater than the dividing item. It moves that item to the current hole, creating a new hole where the item was originally.</p>
+<p>The code continues searching back and forth through this section of the array, moving items into the holes left by previously moved items, until the two regions that it is searching meet somewhere in the middle. The algorithm deposits the dividing item in the hole, which is now between the two pieces, and recursively calls itself to sort the two pieces.</p>
+<p>This is a fairly confusing step, but the actual code isn't all that long. If you study it closely, you should be able to figure out how it works.</p>
+<pre><code>&lt;Search the array from back to front to find
+</code></pre>
+<p>The following pseudocode shows the entire quicksort algorithm at a low level:</p>
+<pre><code>// Sort the indicated part of the array.
+</code></pre>
+<p>This algorithm starts by checking whether the section of the array contains one or fewer items. If it does, then it is sorted, so the algorithm simply returns.</p>
+<p>If the section of the array contains at least two items, the algorithm saves the first item as the dividing item. You can use some other dividing item selection method if you like. Just swap the dividing item you pick to the beginning of the section so that the algorithm can find it in the following steps.</p>
+<p>Next the algorithm uses variables <code>lo</code> and <code>hi</code> to hold the highest index in the lower part of the array and the lowest index in the upper part of the array. It uses those variables to keep track of which items it has placed in the two halves. Those variables also alternately track where the hole is left after each step.</p>
+<p>The algorithm then enters an infinite <code>While</code> loop that continues until the lower and upper pieces of the array grow to meet each other.</p>
+<p>Inside the outer <code>While</code> loop, the algorithm starts at index <code>hi</code> and searches the array backward until it finds an item that should be in the lower piece of the array. It moves that item into the hole left behind by the dividing item.</p>
+<p>Next the algorithm starts at index <code>lo</code> and searches the array forward until it finds an item that should be in the upper piece of the array. It moves that item into the hole left behind by the previously moved item.</p>
+<p>The algorithm continues searching backward and then forward through the array until the two pieces meet. At that point, it puts the dividing item between the two pieces and recursively calls itself to sort the pieces.</p>
+<h4 id="using-quicksort"><em>Using Quicksort</em></h4>
+<p>If you divide the items in place instead of by using stacks or queues, quicksort doesn't use any extra storage (beyond a few variables).</p>
+<p>Like heapsort, quicksort has <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0047.png" /> expected performance, although quicksort can have <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0002.png" /> performance in the worst case. Heapsort has <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0065.png" /> performance in all cases, so it is in some sense safer and more elegant. However, in practice, quicksort is usually faster than heapsort, so it is the algorithm of choice for many programmers.</p>
+<p>In addition to greater speed, quicksort has another advantage over heapsort: it is parallelizable. Suppose a computer has more than one processor, which is increasingly the case these days. Each time the algorithm splits a section of the array into two pieces, it can use different processors to sort the two pieces. Theoretically, a highly parallel computer could use <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0037.png" /> processors to sort the list in <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0041.png" /> time. In practice, most computers have a fairly limited number of processors (for example, two or four), so the run time would be divided by the number of processors plus some additional overhead to manage the different threads of execution. That won't change the Big O run time, but it should improve performance in practice.</p>
+<p>Because it has <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0006.png" /> performance in the worst case, the implementation of quicksort provided by a library may be cryptographically insecure. If the algorithm uses a simple dividing item selection strategy, such as picking the first item, an attacker might be able to create an array holding items in an order that gives worst-case performance. The attacker might be able to launch a denial-of-service (DOS) attack by passing your program that array and ruining your performance. Most programmers don't worry about this possibility, but if this is a concern, you can use a randomized dividing item selection strategy.</p>
+<h3 id="mergesort">Mergesort</h3>
+<p>Like quicksort, <em>mergesort</em> uses a divide-and-conquer strategy. Instead of picking a dividing item and splitting the items into two groups holding items that are larger and smaller than the dividing item, mergesort splits the items into two halves holding an equal number of items. It then recursively calls itself to sort the two halves. When the recursive calls to mergesort return, the algorithm merges the two sorted halves into a combined sorted list.</p>
+<p>The following pseudocode shows the algorithm:</p>
+<pre><code>Mergesort(Data: values[], Data: scratch[], Integer: start, Integer: end)
+</code></pre>
+<p>In addition to the array and the start and end indices to sort, the algorithm also takes as a parameter a scratch array that it uses to merge the sorted halves.</p>
+<p>This algorithm starts by checking whether the section of the array contains one or fewer items. If it does, then it is trivially sorted, so the algorithm returns.</p>
+<p>If the section of the array contains at least two items, the algorithm calculates the index of the item in the middle of the section of the array and recursively calls itself to sort the two halves.</p>
+<p>After the recursive calls return, the algorithm merges the two sorted halves. It loops through the halves, copying the smaller item from whichever half holds it into the scratch array. When one-half is empty, the algorithm copies the remaining items from the other half.</p>
+<p>Finally, the algorithm copies the merged items from the scratch array back into the original <code>values</code> array.</p>
+<h3 id="note_1">NOTE</h3>
+<p>It is possible to merge the sorted halves without using a scratch array, but it's more complicated and slower, so most programmers use a scratch array.</p>
+<p>The “call tree,” shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a>, shows calls to quicksort when the values in the array are perfectly balanced, so the algorithm divides the items into equal halves at every step. The mergesort algorithm <em>does</em> divide the items into exactly equal halves at every step, so <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0011">Figure 6.11</a> applies even more to mergesort than it does to quicksort.</p>
+<p>The same run-time analysis shown earlier for quicksort also works for mergesort, so this algorithm also has O(N log N) run time. Like heapsort, mergesort's run time does not depend on the initial arrangement of the items, so it always has O(N log N) run time and doesn't have a disastrous worst case like quicksort does.</p>
+<p>Like quicksort, mergesort is parallelizable. When a call to mergesort calls itself recursively, it can make those calls on different processors. This requires some coordination, however, because the original call must wait until both recursive calls finish before it can merge their results. In contrast, quicksort can simply tell its recursive calls to sort a particular part of the array, and it doesn't need to wait until those calls return.</p>
+<p>Mergesort is particularly useful when all the data to be sorted won't fit in memory at once. For example, suppose a program needs to sort 1 million customer records, each of which occupies 1 MB. Loading all that data into memory at once would require 1018 bytes of memory, or 1,000 TB, which is much more than most computers have.</p>
+<p>Fortunately, the mergesort algorithm doesn't need to load that much memory all at once. The algorithm doesn't even need to look at any of the items in the array until after its recursive calls to itself have returned.</p>
+<p>At that point, the algorithm walks through the two sorted halves in a linear fashion and merges them. Moving through the items linearly reduces the computer's need to page memory to and from disk. When quicksort moves items into the two halves of a section of an array, it jumps from one location in the array to another, increasing paging and greatly slowing down the algorithm.</p>
+<p>Mergesort was even more useful in the days when large data sets were stored on tape drives, which work most efficiently if they keep moving forward with few rewinds. (Sorting data that cannot fit in memory is called <em>external sorting</em>.) Specialized versions of mergesort were even more efficient for tape drives. They're interesting but not commonly used anymore, so they aren't described here.</p>
+<h3 id="note_2">NOTE</h3>
+<p>For some interesting background on external sorting on tape drives, see <code>[https://en.wikipedia.org/wiki/Merge_sort#Use_with_tape_drives](https://en.wikipedia.org/wiki/Merge_sort#Use_with_tape_drives)</code>. For more general information on tape drives, see <code>[https://en.wikipedia.org/wiki/Tape_drive](https://en.wikipedia.org/wiki/Tape_drive)</code>.</p>
+<p>A more common approach to sorting enormous data sets is to sort only the items' keys. For example, a customer record might occupy 1 MB, but the customer's name might occupy only 100 bytes. A program can make a separate index that matches names to record numbers and then sort only the names. Then, even if you have 1 million customers, sorting their names requires only about 100 MB of memory, an amount that a computer could reasonably hold. (<a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c11.xhtml">Chapter 11</a>, “Balanced Trees,” describes B-trees and B+ trees, which are often used by database systems to store and sort record keys in this manner.)</p>
+<h1 id="stable-sorting">STABLE SORTING</h1>
+<p>A <em>stable sorting algorithm</em> is one that maintains the original relative positioning of equivalent values. For example, suppose that a program is sorting <code>Car</code> objects by their <code>Cost</code> properties and that <code>Car</code> objects <code>A</code> and <code>B</code> have the same <code>Cost</code> values. If object <code>A</code> initially comes before object <code>B</code> in the array, then in a stable sorting algorithm, object <code>A</code> still comes before object <code>B</code> in the sorted array.</p>
+<p>If the items you are sorting are value types such as integers, dates, or strings, then two entries with the same values are equivalent, so it doesn't matter if the sort is stable. For example, if the array contains two entries that have value 47, it doesn't matter which 47 comes first in the sorted array.</p>
+<p>In contrast, you might care if <code>Car</code> objects are rearranged unnecessarily. For example, a stable sort lets you arrange the array multiple times to get a result that is sorted on multiple keys (such as <code>Maker</code> and <code>Cost</code> for the <code>Car</code> example).</p>
+<p>Mergesort is easy to implement as a stable sort (the algorithm described earlier is stable). It is also easy to parallelize, so it may be useful on computers that have more than one CPU. See <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c18.xhtml">Chapter 18</a>, “Distributed Algorithms,” for information on implementing mergesort on multiple CPUs.</p>
+<p>Quicksort may often be faster, but mergesort still has some advantages.</p>
+<h2 id="sub-algorithms">Sub <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0018.png" /> Algorithms</h2>
+<p>Earlier in this chapter, I said that the fastest possible algorithm that uses comparisons to sort N items must use at least <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0043.png" /> time. Heapsort and mergesort achieve that bound, and so does quicksort in the expected case, so you might think that's the end of the sorting story. The loophole is in the phrase “that uses comparisons.” If you use a technique other than comparisons to sort, you can beat the <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0068.png" /> bound.</p>
+<p>The following sections describe some algorithms that sort in less than <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0075.png" /> time.</p>
+<h3 id="countingsort">Countingsort</h3>
+<p><em>Countingsort</em> is a specialized algorithm that works well if the values you are sorting are integers that lie in a relatively small range. For example, if you need to sort 1 million integers with values between 0 and 1,000, countingsort can provide amazingly fast performance.</p>
+<p>The basic idea behind countingsort is to count the number of items in the array that have each value. Then it is relatively easy to copy each value, in order, the required number of times back into the array.</p>
+<p>The following pseudocode shows the countingsort algorithm:</p>
+<pre><code>Countingsort(Integer: values[], Integer: max_value)
+</code></pre>
+<p>The <code>max_value</code> parameter gives the largest value in the array. (If you don't pass it in as a parameter, you can modify the algorithm to figure it out by looking through the array.)</p>
+<p>Let M be the number of items in the counts array (so M = <code>max_value</code> + 1) and let N be the number of items in the <code>values</code> array. If your programming language doesn't automatically initialize the <code>counts</code> array so that it contains 0s, the algorithm spends M steps initializing the array. It then takes N steps to count the values in the <code>values</code> array.</p>
+<p>The algorithm finishes by copying the values back into the original array. Each value is copied once, so that part takes N steps. If any of the entries in the <code>counts</code> array is still 0, the program also spends some time skipping over that entry. In the worst case, if all of the values are the same so that the <code>counts</code> array contains mostly 0s, it takes M steps to skip over the 0 entries.</p>
+<p>That makes the total run time <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0067.png" /> . If M is relatively small compared to N, this is much smaller than the <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0066.png" /> performance given by heapsort and the other algorithms described previously.</p>
+<p>In one test, quicksort took 4.29 seconds to sort 1 million items with values between 0 and 1,000, but it took countingsort only 0.03 seconds. Note that this is a bad case for quicksort because the values include many duplicates. With 1 million values between 0 and 1,000, roughly 1,000 items have each value, and quicksort doesn't handle lots of duplication well.</p>
+<p>With similar values, heapsort took roughly 1.02 seconds. This is a big improvement on quicksort, but it is still much slower than countingsort.</p>
+<h3 id="pigeonhole-sort">Pigeonhole Sort</h3>
+<p>Like countingsort, <em>pigeonhole sort</em> works well when the range of possible values is limited. Countingsort counts the number of items with each given value. To do that, it uses the values as indices into the <code>counts</code> array. Unfortunately, that won't work if the items that you are sorting are not integers, so you can't use them as indices.</p>
+<p>Pigeonhole sort works by placing the items in pigeonholes corresponding to their key values. The pigeonhole approach makes it easier to sort more complicated items than simple numeric values. For example, suppose that you want to sort a set of words by their lengths. Countingsort would give you an array holding the number of words with each length, but it's not immediately obvious how you would convert that into the ordered list of words.</p>
+<p>In contrast, pigeonhole sort groups words with the same length in the same pigeonhole, so it is easier to put them in order.</p>
+<p>The following pseudocode shows how pigeonhole sort works. The algorithm assumes that you have defined a <code>Cell</code> class with <code>Value</code> and <code>Next</code> properties that you can use to build a linked list of values in each pigeonhole.</p>
+<pre><code>PigeonholeSort(Integer: values[], Integer: max)
+</code></pre>
+<p>The <code>values</code> parameter gives the values to sort. The <code>max</code> parameter gives the maximum value that the <code>values</code> array could hold. Here I'm assuming the values are integers starting at zero. If they include values between lower and upper bounds, you'll have to adjust the code accordingly. If the values are non-numeric, for example if they are strings, then you'll need to use some sort of algorithm to map each value to its pigeonhole.</p>
+<p>The algorithm first creates a pigeonhole array of pointers to <code>Cell</code> objects and initializes them to <code>null</code>. It then loops through the items and adds each to the top of its pigeonhole's linked list. The code then loops through the pigeonholes and copies the items in each linked list back into the <code>values</code> array.</p>
+<p>To analyze the algorithm's run time, suppose that the <code>values</code> array contains N items that span a range of M possible values. The algorithm uses <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0069.png" /> steps to initialize its pigeonhole linked lists. It then loops through the values and adds them to their pigeonholes in <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0070.png" /> steps.</p>
+<p>The algorithm finishes by looping through the pigeonholes again, this time moving the items back into the values array. It must spend <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0071.png" /> steps examining each linked list whether or not that list is empty. During this stage, it also must move every item back into the <code>values</code> array, and that takes <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0054.png" /> steps, so the total steps to perform this final stage is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0073.png" />.</p>
+<p>That means the total run time for the algorithm is <img alt="equation" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-disp-0004a.png" /> <img alt="equation" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-disp-0004b.png" /></p>
+<p>If the number of values N is roughly the same as the size of the range of values M, then this becomes <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0088.png" /> and that is much faster than <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0055.png" />.</p>
+<h3 id="bucketsort">Bucketsort</h3>
+<p>The countingsort and pigeonhole sort algorithms work well if the values include only a relatively small range. Bucketsort works even if the values span a large range.</p>
+<p>The <em>bucketsort algorithm</em>, which is also called <em>binsort</em>, works by dividing items into buckets. It sorts the buckets either by recursively calling bucketsort or by using some other algorithm. It then concatenates the buckets' contents back into the original array in sorted order. The following pseudocode shows the algorithm at a high level:</p>
+<pre><code>Bucketsort(Data: values[])
+</code></pre>
+<p>If the values in an array holding N items are reasonably uniformly distributed, if you use M buckets, and if the buckets divide the range of values evenly, then you should expect roughly <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0084.png" /> items per bucket.</p>
+<p>For example, consider the array shown at the top of <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0012">Figure 6.12</a>, which contains 10 items with values between 0 and 99. In the distribution step, the algorithm moves the items into the buckets. In this example, each bucket represents 20 values: 0 to 19, 20 to 39, and so on. In the sorting step, the algorithm sorts each bucket. The gathering step concatenates the values in the buckets to build the sorted result.</p>
+<p><img alt="Illustration of Bucketsort that moves items into buckets, sorts the buckets, and then concatenates the buckets to get the sorted result." src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06f012.jpg" /></p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-fig-0012"><strong>Figure 6.12</strong></a><strong>:</strong> Bucketsort moves items into buckets, sorts the buckets, and then concatenates the buckets to get the sorted result.</p>
+<p>The buckets can be stacks, linked lists, queues, arrays, or any other data structure that you find convenient.</p>
+<p>If the original array contains N fairly evenly distributed items, then distributing them into the buckets requires N steps times whatever time it takes to place an item in a bucket. Normally this mapping can be done in constant time. For example, suppose the items are integers between 0 and 99, as in the example shown in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-fig-0012">Figure 6.12</a>. You would place an item with value <code>v</code> in bucket number ⌊<img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0077.png" /> ⌋. You can calculate this number in constant time, so distributing the items takes <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0078.png" /> steps.</p>
+<p>If you use M buckets, sorting each bucket requires an expected <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0079.png" /> steps, where F is the run-time function of the sorting algorithm that you use to sort the buckets. Multiplying this by the number of buckets M, the total time to sort all the buckets is <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0080.png" />.</p>
+<p>After you have sorted the buckets, gathering their values back into the array requires N steps to move all of the values. It could require an additional <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0081.png" /> steps to skip empty buckets if many of the buckets are empty, but if <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0082.png" /> the whole operation requires <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0056.png" /> steps.</p>
+<p>Adding the times needed for the three stages gives a total run time of <img alt="equation" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-disp-0005.png" /></p>
+<p>If M is a fixed fraction of N, then <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0076.png" /> is a constant, so <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0085.png" /> is also a constant, and this simplifies to <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0086.png" /></p>
+<p>In practice, M must be a relatively large fraction of N for the algorithm to perform well. If you are sorting 10 million records and you use only 10 buckets, then you need to sort buckets containing an average of 1 million items each.</p>
+<p>In contrast, if M equals N, then each bucket should hold only a few items and sorting them should take a small constant amount of time. In that case, the algorithm's <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0087.png" /> run time simplifies to <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0074.png" /> and the algorithm runs very quickly.</p>
+<p>Unlike countingsort and pigeonhole sort, bucketsort's performance does not depend on the range of the values. Instead, it depends on the number of buckets that you use.</p>
+<h2 id="summary">Summary</h2>
+<p>The sorting algorithms described in this chapter demonstrate different techniques and have different characteristics. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#c06-tbl-0001">Table 6.1</a> summarizes the algorithms.</p>
+<p><a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c06.xhtml#R_c06-tbl-0001"><strong>Table 6.1</strong></a><strong>:</strong> Algorithm Characteristics</p>
+<p>ALGORITHM</p>
+<p>RUN TIME</p>
+<p>TECHNIQUES</p>
+<p>USEFUL FOR</p>
+<p>Insertionsort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0020.png" /></p>
+<p>Insertion</p>
+<p>Very small arrays</p>
+<p>Selectionsort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0003.png" /></p>
+<p>Selection</p>
+<p>Very small arrays</p>
+<p>Bubblesort/Cocktail Shaker Sort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0016.png" /></p>
+<p>Two-way passes, restricting bounds of interest</p>
+<p>Very small arrays, mostly sorted arrays</p>
+<p>Heapsort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0040.png" /></p>
+<p>Heaps, storing complete trees in an array</p>
+<p>Large arrays with unknown distribution</p>
+<p>Quicksort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0025.png" /> expected, <img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0017.png" /> worst case</p>
+<p>Divide-and-conquer, swapping items into position, randomization to avoid worst-case behavior</p>
+<p>Large arrays without too many duplicates, parallel sorting</p>
+<p>Mergesort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0004.png" /></p>
+<p>Divide-and-conquer, merging, external sorting</p>
+<p>Large arrays with unknown distribution, huge amounts of data, parallel sorting</p>
+<p>Countingsort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0010.png" /></p>
+<p>Counting</p>
+<p>Large arrays of integers with a limited range of values</p>
+<p>Pigeonhole sort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0009.png" /></p>
+<p>Pigeonholes</p>
+<p>Large arrays of possibly noninteger values within a limited range</p>
+<p>Bucketsort</p>
+<p><img alt="images" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781119575993/files/images/c06-i0008.png" /></p>
+<p>Buckets</p>
+<p>Large arrays with reasonably uniform value distribution</p>
+<p>These algorithms demonstrate an assortment of useful techniques and provide good performance for a wide variety of problems, but they're far from the end of the story. There are dozens of other sorting algorithms. Some are minor modifications of these algorithms, and others use radically different approaches. <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/c10.xhtml">Chapter 10</a> discusses trees, which are also extremely useful for sorting data. Search the Internet for other algorithms.</p>
+<p>This chapter explained several ways to sort data, but it didn't explain why you should want to do that. Simply having data sorted often makes it more useful to a user. For example, viewing customer accounts sorted by balance makes it much easier to determine which accounts need special attention.</p>
+<p>Another good reason to sort data is so that you can later find specific items within it. For example, if you sort customers by their names, it's easier to locate a specific customer. The next chapter explains methods that you can use to search a sorted set of data to find a specific value.</p>
+<h2 id="exercises">Exercises</h2>
+<p>You can find the answers to these exercises in <a href="https://learning.oreilly.com/library/view/essential-algorithms-2nd/9781119575993/b02.xhtml">Appendix B</a>. Asterisks indicate particularly difficult problems.</p>
+<ol>
+<li>Write a program that implements insertionsort.</li>
+<li>The <code>For i</code> loop used by the insertionsort algorithm runs from 0 to the array's last index. What happens if it starts at 1 instead of 0? Does that change the algorithm's run time?</li>
+<li>Write a program that implements selectionsort.</li>
+<li>What change to selectionsort could you make that corresponds to the change described in Exercise 2? Would it change the algorithm's run time?</li>
+<li>Write a program that implements bubblesort.</li>
+<li>Add the first and third bubblesort improvements described in the section “Bubblesort” (downward and upward passes and keeping track of the last swap) to the program you built for Exercise 5.</li>
+<li>Write a program that uses an array-based heap to build a priority queue. So that you don't need to resize the array, allocate it at some fixed size, perhaps 100 items, and then keep track of the number of items that are used by the heap. (To make the queue useful, you can't just store priorities. Use two arrays—one to store string values and another to store the corresponding priorities. Order the items by their priorities.) (For more practice, use a class to store items with their priorities and wrap the priority queue in a second class.)</li>
+<li>What is the run time for adding items to and removing items from a heap-based priority queue?</li>
+<li>Write a program that implements heapsort.</li>
+<li>Can you generalize the technique used by heapsort for holding a complete binary tree so that you can store a complete tree of degree d? Given a node's index p, what are its children's indices? What is its parent's index?</li>
+<li>Write a program that implements quicksort with stacks. (You can use the stacks provided by your programming environment or build your own.)</li>
+<li>Write a program that implements quicksort with queues instead of stacks. (You can use the queues provided by your programming environment or build your own.) Is there any advantage or disadvantage to using queues instead of stacks?</li>
+<li>Write a program that implements quicksort with in-place partitioning. Why is this version faster than the version that uses stacks or queues?</li>
+<li>Quicksort can display worst-case behavior if the items are initially sorted, if the items are initially sorted in reverse order, or if the items contain many duplicates. You can avoid the first two problems if you choose random dividing items. How can you avoid the third problem?</li>
+<li>Write a program that implements countingsort.</li>
+<li>If an array's values range from 100,000 to 110,000, allocating a <code>counts</code> array with 110,001 entries with indices 0 through 110,000 would slow down countingsort considerably, particularly if the array holds a relatively small number of items. How could you modify countingsort to give good performance in this situation?</li>
+<li>Write a program that implements pigeonhole sort.</li>
+<li>If an array holds N items that span the range 0 to M – 1, what happens to bucketsort if you use M buckets?</li>
+<li>Write a program that implements bucketsort. Allow the user to specify the number of items, the maximum item value, and the number of buckets.</li>
+<li>Explain the space/time trade-off that you should consider when picking the number of buckets used by bucketsort.</li>
+<li>
+<p>For the following data sets, which sorting algorithms would work well, and which would not?</p>
+<ol>
+<li>10 floating-point values</li>
+<li>1,000 integers</li>
+<li>1,000 names</li>
+<li>100,000 integers with values between 0 and 1,000</li>
+<li>100,000 integers with values between 0 and 1 billion</li>
+<li>100,000 names</li>
+<li>1 million floating-point values</li>
+<li>1 million names</li>
+<li>1 million integers with uniform distribution</li>
+<li>1 million integers with nonuniform distribution</li>
+</ol>
+</li>
+<li>
+<p><a href="https://www.oreilly.com/online-learning/support/">Support</a></p>
+</li>
+<li><a href="https://learning.oreilly.com/accounts/logout/"></a></li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+    
+  </body>
+</html>

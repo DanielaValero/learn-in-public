@@ -1,0 +1,3340 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../hash-tables/">
+      
+      
+        <link rel="next" href="../searching/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>10. Searching and Sorting in JS - Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10-searching-and-sorting-in-js" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Notes" class="md-header__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10. Searching and Sorting in JS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Notes" class="md-nav__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        learn-in-public
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-Learning%20wishlist/" class="md-nav__link">
+        00 Learning wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-book-wishlist/" class="md-nav__link">
+        00 book wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          00 daily notes 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="00 daily notes 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          00 daily notes 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--fleeting-note.md/" class="md-nav__link">
+        00  template  fleeting note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--literature-note.md/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/2023-01-08%20act%20-%20finding%20my%20values/" class="md-nav__link">
+        2023 01 08 act   finding my values
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          01 inbox 📥
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="01 inbox 📥" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          01 inbox 📥
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/00-readme/" class="md-nav__link">
+        00 readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/GOALS%20THEORY/" class="md-nav__link">
+        GOALS THEORY
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Quarterly%20Self%20Review%20-%20Professional/" class="md-nav__link">
+        Quarterly Self Review - Professional Self-Insight
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Self%20analysis/" class="md-nav__link">
+        Self analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Structure%20design--Coupling/" class="md-nav__link">
+        Structure design  Coupling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feedback/" class="md-nav__link">
+        Feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feminism/" class="md-nav__link">
+        Feminism
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/ideas-of-errol-gerson/" class="md-nav__link">
+        Errol Gerson ideas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/notes-on-Programming-as-Theory-Building/" class="md-nav__link">
+        notes on Programming as Theory Building
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/onLabels/" class="md-nav__link">
+        onLabels
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          02 ideas 🗃️
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="02 ideas 🗃️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          02 ideas 🗃️
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/00-%20template--permantent-note.md/" class="md-nav__link">
+        00  template  permantent note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2022-10-20%20-%20moving%20on%20limiting%20beliefs%20for%20diversity%20in%20tech/" class="md-nav__link">
+        2022 10 20   moving on limiting beliefs for diversity in tech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/202208171521%20-%20Italo%20Calvino%20on%20how%20he%20reads/" class="md-nav__link">
+        202208171521   Italo Calvino on how he reads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2023-01-07%20Living%20a%20happier%20life%20-%20Tool%20--%20ACT%20-%20Values%20%26%20goals/" class="md-nav__link">
+        2023 01 07 Living a happier life   Tool    ACT   Values & goals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/after-sentiers-229%20-%20designing%20without%20depletion/" class="md-nav__link">
+        After sentiers 229   designing without depletion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          03 areas 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 areas 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          03 areas 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/lessons-Ive-learned-as-EM/" class="md-nav__link">
+        lessons Ive learned as EM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3" tabindex="0" aria-expanded="false">
+          Microfrontends
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Microfrontends" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Microfrontends
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Chapter%204.%20Discovering%20Micro-Frontend%20Architectures/" class="md-nav__link">
+        Chapter 4. Discovering Micro-Frontend Architectures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%200%20-%20Initial%20ways%20of%20working/" class="md-nav__link">
+        Step 0   Initial ways of working
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%201%20-%20UI%20Concistency/" class="md-nav__link">
+        Step 1   UI Concistency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%202%20-%20Coordination%20among%20teams/" class="md-nav__link">
+        Step 2   Coordination among teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%203%20-%20Strategic%20and%20tatics%20thinking%20-%20Guided%20continous%20improvement/" class="md-nav__link">
+        Step 3   Strategic and tatics thinking   Guided continous improvement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/communication/" class="md-nav__link">
+        Communication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3_7" type="checkbox" id="__nav_7_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3_7" tabindex="0" aria-expanded="false">
+          Quotes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quotes" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Quotes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Quotes/Delivery%20Models/" class="md-nav__link">
+        Delivery Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4" tabindex="0" aria-expanded="false">
+          Burnout
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Burnout" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Burnout
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/burnout-theory-and-notes/" class="md-nav__link">
+        Burnout theory and notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/high%20pressure%20project%20and%20metal%20health/" class="md-nav__link">
+        High pressure project and metal health
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p2%20-%20what%20to%20do%20-%20individual/" class="md-nav__link">
+        P2   what to do   individual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p3%20-%20what%20to%20do%20-%20workplace/" class="md-nav__link">
+        P3   what to do   workplace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5" tabindex="0" aria-expanded="false">
+          Functional programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Functional programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Functional programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20Category%20theory/" class="md-nav__link">
+        2023 01 06 Category theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20FP%20Patterns/" class="md-nav__link">
+        2023 01 06 FP Patterns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Curry%20%26%20Partial%20Application/" class="md-nav__link">
+        Curry & Partial Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Monad/" class="md-nav__link">
+        Monad
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6" type="checkbox" id="__nav_7_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6" tabindex="0" aria-expanded="false">
+          My career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="My career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_6">
+          <span class="md-nav__icon md-icon"></span>
+          My career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1" type="checkbox" id="__nav_7_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1" tabindex="0" aria-expanded="false">
+          Achievements record
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Achievements record" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Achievements record
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1_1" type="checkbox" id="__nav_7_6_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1_1" tabindex="0" aria-expanded="false">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="4">
+        <label class="md-nav__title" for="__nav_7_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/my-career/achievements-record/2021/11/" class="md-nav__link">
+        11
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7" tabindex="0" aria-expanded="false">
+          Research cloud architectures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research cloud architectures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Research cloud architectures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_2" type="checkbox" id="__nav_7_7_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_2" tabindex="0" aria-expanded="false">
+          Cloud storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud storage" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud storage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud%20storage/Data%20management%20and%20Databases/" class="md-nav__link">
+        Data management and Databases
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_3" type="checkbox" id="__nav_7_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_3" tabindex="0" aria-expanded="false">
+          Cloud native
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud native" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud native
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Microservices/" class="md-nav__link">
+        Microservices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Serverless/" class="md-nav__link">
+        Serverless
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_4" type="checkbox" id="__nav_7_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_4" tabindex="0" aria-expanded="false">
+          Communication among microservices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Communication among microservices" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Communication among microservices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Data%20Streaming%20in%20Cloud%20Computing/" class="md-nav__link">
+        Data Streaming in Cloud Computing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Event%20driven%20architecture/" class="md-nav__link">
+        Event driven architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Message%20Brokers/" class="md-nav__link">
+        Message Brokers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_5" type="checkbox" id="__nav_7_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_5" tabindex="0" aria-expanded="false">
+          devOps  Infra
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="devOps  Infra" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          devOps  Infra
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Containerization/" class="md-nav__link">
+        Containerization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Databases/" class="md-nav__link">
+        Databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Infrastructure%20provisioning/" class="md-nav__link">
+        Infrastructure provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8" type="checkbox" id="__nav_7_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8" tabindex="0" aria-expanded="false">
+          Research programming and languages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research programming and languages" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          Research programming and languages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/Trendy%20Languages/" class="md-nav__link">
+        Trendy Languages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8_3" type="checkbox" id="__nav_7_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8_3" tabindex="0" aria-expanded="false">
+          Paradigms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Paradigms" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Paradigms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Functional%20programming/" class="md-nav__link">
+        Functional programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Reactive%20Programming/" class="md-nav__link">
+        Reactive Programming
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_9" type="checkbox" id="__nav_7_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_9" tabindex="0" aria-expanded="false">
+          What's that for
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="What's that for" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_9">
+          <span class="md-nav__icon md-icon"></span>
+          What's that for
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/real-time-app--tech-stack/" class="md-nav__link">
+        Real time app  tech stack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" tabindex="0" aria-expanded="false">
+          03 projects 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 projects 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          03 projects 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" tabindex="0" aria-expanded="false">
+          App in my music
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App in my music" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          App in my music
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-in-my-music/draft-ideas.md/" class="md-nav__link">
+        Draft ideas.md
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3" tabindex="0" aria-expanded="false">
+          App personal finances
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App personal finances" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          App personal finances
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-personal-finances/Draft/" class="md-nav__link">
+        Draft
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4" tabindex="0" aria-expanded="false">
+          Post making sense of the software career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post making sense of the software career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Post making sense of the software career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-making-sense-of-the-software-career/what-is-a-software-engineer/" class="md-nav__link">
+        What is a software engineer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_5" type="checkbox" id="__nav_8_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_5" tabindex="0" aria-expanded="false">
+          Post technical assessments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post technical assessments" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_5">
+          <span class="md-nav__icon md-icon"></span>
+          Post technical assessments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20Take%20home%20challenge/" class="md-nav__link">
+        Tech-Assessments: Take home interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20question%20only%20interview/" class="md-nav__link">
+        Tech-Assessments: Questions-only interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20Live%20coding%20interview/" class="md-nav__link">
+        Tech-Assessments: Live coding interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-12-13%20-%20Tech%20assessments/" class="md-nav__link">
+        2022 12 13   Tech assessments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/interview-questions/" class="md-nav__link">
+        Interview questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/my-guide-to-interviewing/" class="md-nav__link">
+        My guide to interviewing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="true">
+          05 reference system 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="05 reference system 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          05 reference system 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2023-01-04%20-%20Technical%20books%20I%20like/" class="md-nav__link">
+        2023 01 04   Technical books I like
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../peter-natur-programming-as-theory/" class="md-nav__link">
+        Peter natur programming as theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phillip-armour-5-orders-of-ignorance/" class="md-nav__link">
+        Phillip armour 5 orders of ignorance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../readme.md/" class="md-nav__link">
+        Readme.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_5" tabindex="0" aria-expanded="false">
+          06 ebooks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="06 ebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          06 ebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-ebooks/readme/" class="md-nav__link">
+        Playing to win: How strategy really works
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_6" tabindex="0" aria-expanded="true">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Algorithms" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../String%20Algorithms/" class="md-nav__link">
+        CHAPTER 15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hash-tables/" class="md-nav__link">
+        CHAPTER 8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          10. Searching and Sorting in JS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        10. Searching and Sorting in JS
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#searching" class="md-nav__link">
+    Searching
+  </a>
+  
+    <nav class="md-nav" aria-label="Searching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-search" class="md-nav__link">
+    Linear Search
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-search" class="md-nav__link">
+    Binary Search
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sorting" class="md-nav__link">
+    Sorting
+  </a>
+  
+    <nav class="md-nav" aria-label="Sorting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bubble-sort" class="md-nav__link">
+    Bubble Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selection-sort" class="md-nav__link">
+    Selection Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertion-sort" class="md-nav__link">
+    Insertion Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quicksort" class="md-nav__link">
+    Quicksort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quickselect" class="md-nav__link">
+    Quickselect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mergesort" class="md-nav__link">
+    Mergesort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-sort" class="md-nav__link">
+    Count Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascripts-built-in-sort" class="md-nav__link">
+    JavaScript’s Built-in Sort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-the-implement-square-root-function-for-an-integer-without-using-any-math-libraries" class="md-nav__link">
+    USE THE IMPLEMENT SQUARE ROOT FUNCTION FOR AN INTEGER WITHOUT USING ANY MATH LIBRARIES
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-if-two-elements-of-an-array-add-up-to-a-given-number" class="md-nav__link">
+    FIND IF TWO ELEMENTS OF AN ARRAY ADD UP TO A GIVEN NUMBER
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-an-element-within-an-array-that-appears-only-once" class="md-nav__link">
+    FIND AN ELEMENT WITHIN AN ARRAY THAT APPEARS ONLY ONCE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-javascript-sort-comparator-function-that-would-sort-string-by-length" class="md-nav__link">
+    CREATE A JAVASCRIPT SORT COMPARATOR FUNCTION THAT WOULD SORT STRING BY LENGTH
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implement-a-word-counter-list" class="md-nav__link">
+    IMPLEMENT A WORD COUNTER LIST
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searching/" class="md-nav__link">
+        CHAPTER 7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting%20and%20searching/" class="md-nav__link">
+        4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting-algorithms/" class="md-nav__link">
+        Chapter 5. Sorting Without a Hat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/" class="md-nav__link">
+        CHAPTER 6
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_7" tabindex="0" aria-expanded="false">
+          Software architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Software architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_7">
+          <span class="md-nav__icon md-icon"></span>
+          Software architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software%20architecture/2023-01-04%20-%20Archictecture%20trade-off%20analysis/" class="md-nav__link">
+        2023 01 04   Archictecture trade off analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_8" type="checkbox" id="__nav_9_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_8" tabindex="0" aria-expanded="false">
+          tools Difficult situations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="tools Difficult situations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_8">
+          <span class="md-nav__icon md-icon"></span>
+          tools Difficult situations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Difficult%20Conversations/" class="md-nav__link">
+        Difficult Conversations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Questions%20for%20new%20teams/" class="md-nav__link">
+        Questions for new teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Receiving%20challenging%20feedback/" class="md-nav__link">
+        Receiving challenging feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/dealing%20with%20a%20coleric%20person/" class="md-nav__link">
+        Dealing with a coleric person
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/solving%20tech%20conflict/" class="md-nav__link">
+        Solving tech conflict
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#searching" class="md-nav__link">
+    Searching
+  </a>
+  
+    <nav class="md-nav" aria-label="Searching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-search" class="md-nav__link">
+    Linear Search
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binary-search" class="md-nav__link">
+    Binary Search
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sorting" class="md-nav__link">
+    Sorting
+  </a>
+  
+    <nav class="md-nav" aria-label="Sorting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bubble-sort" class="md-nav__link">
+    Bubble Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selection-sort" class="md-nav__link">
+    Selection Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertion-sort" class="md-nav__link">
+    Insertion Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quicksort" class="md-nav__link">
+    Quicksort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quickselect" class="md-nav__link">
+    Quickselect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mergesort" class="md-nav__link">
+    Mergesort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-sort" class="md-nav__link">
+    Count Sort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascripts-built-in-sort" class="md-nav__link">
+    JavaScript’s Built-in Sort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-the-implement-square-root-function-for-an-integer-without-using-any-math-libraries" class="md-nav__link">
+    USE THE IMPLEMENT SQUARE ROOT FUNCTION FOR AN INTEGER WITHOUT USING ANY MATH LIBRARIES
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-if-two-elements-of-an-array-add-up-to-a-given-number" class="md-nav__link">
+    FIND IF TWO ELEMENTS OF AN ARRAY ADD UP TO A GIVEN NUMBER
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-an-element-within-an-array-that-appears-only-once" class="md-nav__link">
+    FIND AN ELEMENT WITHIN AN ARRAY THAT APPEARS ONLY ONCE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-javascript-sort-comparator-function-that-would-sort-string-by-length" class="md-nav__link">
+    CREATE A JAVASCRIPT SORT COMPARATOR FUNCTION THAT WOULD SORT STRING BY LENGTH
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implement-a-word-counter-list" class="md-nav__link">
+    IMPLEMENT A WORD COUNTER LIST
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+
+<h1 id="10-searching-and-sorting-in-js">10. Searching and Sorting in JS</h1>
+<p>Searching data and sorting through data are fundamental algorithms. <em>Searching</em> refers to iterating over the data structure’s elements to retrieve some data. <em>Sorting</em> refers to putting the data structure’s elements in order. The searching and sorting algorithms are different for every data structure. This chapter focuses on searching and sorting for arrays. By the end of this chapter, you will understand how to use common sorting and searching algorithms for arrays.</p>
+<h2 id="searching">Searching</h2>
+<p>As mentioned, searching is the task of looking for a specific element inside a data structure. When searching in an array, there are two main techniques depending on whether the array is sorted. In this section, you’ll learn about linear and binary searching. Linear searches are especially flexible because they can be used with both sorted and unsorted data. Binary searches are specifically used with sorted data. However, a linear search has a higher time complexity than a binary search.</p>
+<h3 id="linear-search">Linear Search</h3>
+<p>A linear search works by going through each element of the array one index after another sequentially. The following code example is an implementation of a linear search that iterates through the entire array of numbers to find out whether 4 and 5 exist within the array.</p>
+<p>1   <em>//iterate through the array and find</em></p>
+<p>2   <strong>function</strong> linearSearch(array,n){</p>
+<p>3       <strong>for</strong>(<strong>var</strong> i=0; i&lt;array.length; i++) {</p>
+<p>4           <strong>if</strong> (array[i]==n) {</p>
+<p>5               <strong>return true</strong>;</p>
+<p>6           }</p>
+<p>7       }</p>
+<p>8       <strong>return false</strong>;</p>
+<p>9   }</p>
+<p>10   console.log(linearSearch([1,2,3,4,5,6,7,8,9], 6)); <em>// true</em></p>
+<p>11   console.log(linearSearch([1,2,3,4,5,6,7,8,9], 10)); <em>// false</em></p>
+<p><strong>Time Complexity:</strong> O(<em>n</em>)</p>
+<p>As shown in Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig1">10-1</a>, when 6 is searched for, it goes through six iterations. When 10 is searched for, it must iterate through all <em>n</em> elements before returning false; therefore, the time complexity is O(<em>n</em>).</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig1_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig1_HTML.jpg" /></p>
+<p>Figure 10-1</p>
+<p>Linear search</p>
+<p>As another example, with an array of [1,2,3,4,5] and a search term of 3, it would take three iterations to complete (1, 2, 3). The reason why this algorithm has a Big-O of O(<em>n</em>) is that, in the worst-case scenario, the entire array needs to be iterated. For example, if the search term is 5, it takes five iterations (1, 2, 3, 4, 5). If 6 is the search term, it goes through the entire array (1, 2, 3, 4, 5) and then returns false because it was not found.</p>
+<p>As noted previously, a linear search algorithm like this is great because it works whether or not the array is sorted. In a linear search algorithm, every element of the array is checked. So, you should use a linear search when the array is not sorted. If the array is sorted, you can do the search faster via a binary search.</p>
+<h3 id="binary-search">Binary Search</h3>
+<p>Binary search is a searching algorithm that works on sorted data. Unlike the linear search algorithm, in which every element of the array is checked, binary searches can check the middle value to see whether the desired value is greater or smaller than it. If the desired value is smaller, this algorithm can search through the smaller parts, or it can search through the bigger parts if the desired value is bigger.</p>
+<p>Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig2">10-2</a> illustrates the process of a binary search. First, the search range is 1 to 9. Since the middle element, 5, is bigger than 3, the search range is restricted to 1 to 4. Finally, 3 is found as the middle element. Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig3">10-3</a> illustrates searching for an item in the right half of the array.</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig2_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig2_HTML.jpg" /></p>
+<p>Figure 10-2</p>
+<p><em>Binary search in the left half of the array</em></p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig3_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig3_HTML.jpg" /></p>
+<p>Figure 10-3</p>
+<p>Binary search in the right half of the array</p>
+<p>The following code implements the binary search algorithm described:</p>
+<p>1   <strong>function</strong> binarySearch(array,n){</p>
+<p>2       <strong>var</strong> lowIndex = 0, highIndex = array1.length-1;</p>
+<p>3</p>
+<p>4       <strong>while</strong>(lowIndex&lt;=highIndex){</p>
+<p>5           <strong>var</strong> midIndex = Math.floor((highIndex+lowIndex) /2);</p>
+<p>6           <strong>if</strong> (array[midIndex]==n) {</p>
+<p>7               <strong>return</strong> midIndex;</p>
+<p>8           } <strong>else if</strong> (n&gt;array[midIndex]) {</p>
+<p>9               lowIndex = midIndex;</p>
+<p>10           } <strong>else</strong> {</p>
+<p>11               highIndex = midIndex;</p>
+<p>12           }</p>
+<p>13       }</p>
+<p>14       <strong>return</strong> -1;</p>
+<p>15   }</p>
+<p>16   console.log(binarySearch([1,2,3,4], 4)); <em>// true</em></p>
+<p>17   console.log(binarySearch([1,2,3,4], 5)); <em>// -1</em></p>
+<p>The binary search algorithm is fast but can be done only if the array is sorted. It checks the middle element if that is the element that is being searched for. If the search element is bigger than the middle element, the lower bound is set to the middle element plus one. If the search element is less than the middle element, the higher bound is set to the middle element minus one.</p>
+<p>This way, the algorithm is continuously dividing the array into two sections: the lower half and the upper half. If the element is smaller than the middle element, it should look for it in the lower half; if the element is bigger than the middle element, it should look for it in the upper half.</p>
+<p>Binary searches are used by humans without them even knowing. An example is a phone directory that is arranged from <em>A</em> to <em>Z</em> by last name.</p>
+<p>If you are given the task of finding someone with the last name of Lezer, one would first go to the L section and open it halfway through. Lizar is on that page; this means that the lower section contains L + [a to i] and the upper section contains L + [i to z] last names. You would then check the middle of the lower section. Laar appears, so you would now check the upper section. This process repeats until Lezer is found.</p>
+<h2 id="sorting">Sorting</h2>
+<p>Sorting is one of the most important topics in computer science; it is faster and easier to locate items in a sorted array than in an unsorted sorted array. You can use sorting algorithms to sort an array in memory for searching later in the program or to write to a file for later retrieval. In this section, different sorting techniques will be explored. We will start with the naive sorting algorithms and then explore efficient sorting algorithms. Efficient sorting algorithms have various trade-offs that should be considered during usage.</p>
+<h3 id="bubble-sort">Bubble Sort</h3>
+<p>Bubble sorting is the simplest sorting algorithm. It simply iterates over the entire array and swaps elements if one is bigger than the other, as shown in Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig4">10-4</a> and Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig5">10-5</a>.</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig4_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig4_HTML.jpg" /></p>
+<p>Figure 10-4</p>
+<p><em>First run of the bubble sort</em></p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig5_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig5_HTML.jpg" /></p>
+<p>Figure 10-5</p>
+<p><em>The rest of the bubble sort runs</em></p>
+<p>swap is a common function used in sorting. It simply switches two array element values and will be used as a helper function for most of the sorting algorithms mentioned.</p>
+<p>1   <strong>function</strong> swap(array, index1, index2) {</p>
+<p>2       <strong>var</strong> temp = array[index1];</p>
+<p>3       array[index1] = array[index2];</p>
+<p>4       array[index2] = temp;</p>
+<p>5   }</p>
+<p>The following bubbleSort code block illustrates the bubble sort algorithm previously described:</p>
+<p>1   <strong>function</strong> bubbleSort(array) {</p>
+<p>2       <strong>for</strong> (<strong>var</strong> i=0, arrayLength = array.length; i&lt;arrayLength; i++) {</p>
+<p>3           <strong>for</strong> (<strong>var</strong> j=0; j&lt;=i; j++) {</p>
+<p>4               <strong>if</strong> (array[i] &lt; array[j]) {</p>
+<p>5                   swap(array, i, j);</p>
+<p>6               }</p>
+<p>7           }</p>
+<p>8       }</p>
+<p>9       <strong>return</strong> array;</p>
+<p>10   }</p>
+<p>11   bubbleSort([6,1,2,3,4,5]); <em>// [1,2,3,4,5,6]</em></p>
+<p><strong>Time Complexity:</strong> O(<em>n__2</em>)</p>
+<p><strong>Space Complexity:</strong> O(1)</p>
+<p>Bubble sort is the worst type of sort because it compares every pair possible, whereas other sorting algorithms take advantage of the presorted parts of the array. Because bubble sort uses nested loops, it has a time complexity of O(<em>n__2</em>).</p>
+<h3 id="selection-sort">Selection Sort</h3>
+<p>Selection sorting works by scanning the elements for the smallest element and inserting it into the current position of the array. This algorithm is marginally better than bubble sort. Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig6">10-6</a> shows this minimum selection process.</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig6_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig6_HTML.jpg" /></p>
+<p>Figure 10-6</p>
+<p>Selection sort</p>
+<p>The following code implements the selection sort. In the code, there is one for loop to iterate through the array and one nested for loop to scan to get the minimum element.</p>
+<p>1   <strong>function</strong> selectionSort(items) {</p>
+<p>2       <strong>var</strong> len = items.length,</p>
+<p>3           min;</p>
+<p>4</p>
+<p>5       <strong>for</strong> (<strong>var</strong> i=0; i &lt; len; i++){</p>
+<p>6           <em>// set minimum to this position</em></p>
+<p>7           min = i;</p>
+<p>8           <em>//check the rest of the array to see if anything is smaller</em></p>
+<p>9           <strong>for</strong> (j=i+1; j &lt; len; j++){</p>
+<p>10               <strong>if</strong> (items[j] &lt; items[min]){</p>
+<p>11                   min = j;</p>
+<p>12               }</p>
+<p>13           }</p>
+<p>14           <em>//if the minimum isn't in the position, swap it</em></p>
+<p>15           <strong>if</strong> (i != min){</p>
+<p>16               swap(items, i, min);</p>
+<p>17           }</p>
+<p>18       }</p>
+<p>19</p>
+<p>20       <strong>return</strong> items;</p>
+<p>21   }</p>
+<p>22   selectionSort([6,1,23,4,2,3]); <em>// [1, 2, 3, 4, 6, 23]</em></p>
+<p><strong>Time Complexity:</strong> O(_n_2)</p>
+<p><strong>Space Complexity:</strong> O(1)</p>
+<ul>
+<li>The time complexity for selection sort is still O(<em>n__2</em>) because of the nested for loop .</li>
+</ul>
+<h3 id="insertion-sort">Insertion Sort</h3>
+<p>Insertion sort works similarly to selection sort by searching the array sequentially and moving the unsorted items into a sorted sublist on the left side of the array. Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig7">10-7</a> shows this process in detail.</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig7_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig7_HTML.jpg" /></p>
+<p>Figure 10-7</p>
+<p>Insertion sort</p>
+<p>The following code implements the insertion sort algorithm. The outer for loop iterates over the array indices, and the inner for loop moves the unsorted items into the sorted sublist on the left side of the array.</p>
+<p>1   <strong>function</strong> insertionSort(items) {</p>
+<p>2       <strong>var</strong> len = items.length, <em>// number of items in the array</em></p>
+<p>3           value,              <em>// the value currently being compared</em></p>
+<p>4           i,                  <em>// index into unsorted section</em></p>
+<p>5           j;                  <em>// index into sorted section</em></p>
+<p>6</p>
+<p>7       <strong>for</strong> (i=0; i &lt; len; i++) {</p>
+<p>8           <em>// store the current value because it may shift later</em></p>
+<p>9           value = items[i];</p>
+<p>10</p>
+<p>11           <em>// Whenever the value in the sorted section is greater than the value</em></p>
+<p>12           <em>// in the unsorted section, shift all items in the sorted section</em></p>
+<p>13           <em>// over by one. This creates space in which to insert the value.</em></p>
+<p>14</p>
+<p>15           <strong>for</strong> (j=i-1; j &gt; -1 &amp;&amp; items[j] &gt; value; j--) {</p>
+<p>16               items[j+1] = items[j];</p>
+<p>17           }</p>
+<p>18           items[j+1] = value;</p>
+<p>19       }</p>
+<p>20       <strong>return</strong> items;</p>
+<p>21   }</p>
+<p>22   insertionSort([6,1,23,4,2,3]); <em>// [1, 2, 3, 4, 6, 23]</em></p>
+<p><strong>Time Complexity:</strong> O(_n_2)</p>
+<p><strong>Space Complexity:</strong> O(1)</p>
+<p>Again, this sorting algorithm has a quadratic time complexity of O(_n_2) like bubble and insertion sort because of the nested for loop.</p>
+<h3 id="quicksort">Quicksort</h3>
+<p>Quicksort works by obtaining a pivot and partitioning the array around it (bigger elements on one side and smaller elements on the other side) until everything is sorted. The ideal pivot is the median of the array since it will partition the array evenly but getting the median of an unsorted array linear time to compute. Hence, a pivot is typically obtained by taking the median value of the first, middle, and last elements in the partition. This sort is a recursive one and uses the divide-and-conquer methodology to break the quadratic complexity barrier and get the time complexity down to O(<em>nlog_2(_n</em>)). However, with a pivot that partitions everything on one side, the time complexity is worse case: O(_n_2).</p>
+<p>Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig8">10-8</a> shows the quicksort process’s partitioning steps in great detail.</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig8_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig8_HTML.jpg" /></p>
+<p>Figure 10-8</p>
+<p>Quicksort</p>
+<p>The following code shows an implementation of the quicksort algorithm:</p>
+<p>1   <strong>function</strong> quickSort(items) {</p>
+<p>2       <strong>return</strong> quickSortHelper(items, 0, items.length-1);</p>
+<p>3   }</p>
+<p>4</p>
+<p>5   <strong>function</strong> quickSortHelper(items, left, right) {</p>
+<p>6       <strong>var</strong> index;</p>
+<p>7       <strong>if</strong> (items.length &gt; 1) {</p>
+<p>8           index = partition(items, left, right);</p>
+<p>9</p>
+<p>10           <strong>if</strong> (left &lt; index - 1) {</p>
+<p>11               quickSortHelper(items, left, index - 1);</p>
+<p>12           }</p>
+<p>13</p>
+<p>14           <strong>if</strong> (index &lt; right) {</p>
+<p>15               quickSortHelper(items, index, right);</p>
+<p>16           }</p>
+<p>17       }</p>
+<p>18       <strong>return</strong> items;</p>
+<p>19   }</p>
+<p>20</p>
+<p>21   <strong>function</strong> partition(array, left, right) {</p>
+<p>22       <strong>var</strong> pivot = array[Math.floor((right + left) / 2)];</p>
+<p>23       <strong>while</strong> (left &lt;= right) {</p>
+<p>24           <strong>while</strong> (pivot &gt; array[left]) {</p>
+<p>25               left++;</p>
+<p>26           }</p>
+<p>27           <strong>while</strong> (pivot &lt; array[right]) {</p>
+<p>28               right--;</p>
+<p>29           }</p>
+<p>30           <strong>if</strong> (left &lt;= right) {</p>
+<p>31               <strong>var</strong> temp = array[left];</p>
+<p>32               array[left] = array[right];</p>
+<p>33               array[right]= temp;</p>
+<p>34               left++;</p>
+<p>35               right--;</p>
+<p>36           }</p>
+<p>37       }</p>
+<p>38       <strong>return</strong> left;</p>
+<p>39   }</p>
+<p>40</p>
+<p>41   quickSort([6,1,23,4,2,3]); <em>// [1, 2, 3, 4, 6, 23]</em></p>
+<p><strong>Time Complexity:</strong> O(<em>nlog_2(_n</em>)) on average, O(n2) for worst case</p>
+<p><strong>Space Complexity:</strong> O(<em>log_2(_n</em>))</p>
+<p>One downside about a quicksort algorithm is that it could potentially be O(<em>n_2) if a bad pivot is always picked . A bad pivot is one that it does not partition the array evenly. The ideal pivot is the median element of the array. In addition, a quicksort algorithm takes a bigger space complexity of O(_log_2(_n</em>)) compared to other sorting algorithms because of the call stack in recursion.</p>
+<p>Use a quicksort algorithm when the average performance should be optimal. This has to do with the fact that quicksort works better for the RAM cache.</p>
+<h3 id="quickselect">Quickselect</h3>
+<p>Quickselect is a selection algorithm to find the <em>k_th smallest element in an unordered list. Quickselect uses the same approach as a quicksort algorithm. A pivot is chosen, and the array is partitioned. Instead of recursing both sides like quicksort, however, it recurses only the side for the element. This reduces the complexity from O(_nlog_2(_n</em>)) to O(<em>n</em>).</p>
+<p>Quickselect is implemented in the following code:</p>
+<p>1   <strong>var</strong> array = [1,3,3,-2,3,14,7,8,1,2,2];</p>
+<p>2   <em>// sorted form: [-2, 1, 1, 2, 2, 3, 3, 3, 7, 8, 14]</em></p>
+<p>3</p>
+<p>4   <strong>function</strong> quickSelectInPlace(A, l, h, k){</p>
+<p>5       <strong>var</strong> p = partition(A, l, h);</p>
+<p>6       <strong>if</strong>(p==(k-1)) {</p>
+<p>7           <strong>return</strong> A[p];</p>
+<p>8       } <strong>else if</strong>(p&gt;(k-1)) {</p>
+<p>9           <strong>return</strong> quickSelectInPlace(A, l, p - 1,k);</p>
+<p>10       } <strong>else</strong> {</p>
+<p>11           <strong>return</strong> quickSelectInPlace(A, p + 1, h,k);</p>
+<p>12       }</p>
+<p>13   }</p>
+<p>14</p>
+<p>15   <strong>function</strong> medianQuickselect(array) {</p>
+<p>16       <strong>return</strong> quickSelectInPlace(array,0,array.length-1, Math.floor(array.length/2));</p>
+<p>17   }</p>
+<p>18</p>
+<p>19   quickSelectInPlace(array,0,array.length-1,5); <em>// 2</em></p>
+<p>20   <em>// 2 - because it's the fifth smallest element</em></p>
+<p>21   quickSelectInPlace(array,0,array.length-1,10); <em>// 7</em></p>
+<p>22   <em>// 7 - because it's the tenth smallest element</em></p>
+<p><strong>Time Complexity:</strong> O(<em>n</em>)</p>
+<h3 id="mergesort">Mergesort</h3>
+<p>Mergesort works by dividing the array into subarrays until each array has one element. Then, each subarray is <em>concatenated</em> (merged) in a sorted order (see Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig9">10-9</a>).</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig9_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig9_HTML.jpg" /></p>
+<p>Figure 10-9</p>
+<p>Mergesort</p>
+<p>The merge function should add all the elements from both arrays in sorted order in a “result array.” To do this, the index of each array can be created to keep track of elements already compared. Once one array exhausts all its elements, the rest can be appended to the result array.</p>
+<p>1   <strong>function</strong> merge(leftA, rightA){</p>
+<p>2       <strong>var</strong> results= [], leftIndex= 0, rightIndex= 0;</p>
+<p>3</p>
+<p>4       <strong>while</strong> (leftIndex &lt; leftA.length &amp;&amp; rightIndex &lt; rightA.length) {</p>
+<p>5           <strong>if</strong>( leftA[leftIndex]&lt;rightA[rightIndex] ){</p>
+<p>6               results.push(leftA[leftIndex++]);</p>
+<p>7           } <strong>else</strong> {</p>
+<p>8               results.push(rightA[rightIndex++]);</p>
+<p>9           }</p>
+<p>10       }</p>
+<p>11       <strong>var</strong> leftRemains = leftA.slice(leftIndex),</p>
+<p>12           rightRemains = rightA.slice(rightIndex);</p>
+<p>13</p>
+<p>14       <em>// add remaining to resultant array</em></p>
+<p>15       <strong>return</strong> results.concat(leftRemains).concat(rightRemains);</p>
+<p>16   }</p>
+<p>The merging function works by taking the two arrays (left and right) and merging them into one resultant array. The elements need to be compared as they get merged to preserve order.</p>
+<p>Now, the mergeSort function has to partition the bigger array into two separate arrays and recursively call merge.</p>
+<p>1   <strong>function</strong> mergeSort(array) {</p>
+<p>2</p>
+<p>3       <strong>if</strong>(array.length&lt;2){</p>
+<p>4           <strong>return</strong> array; <em>// Base case: array is now sorted since it's just 1 element</em></p>
+<p>5       }</p>
+<p>6</p>
+<p>7       <strong>var</strong> midpoint = Math.floor((array.length)/2),</p>
+<p>8           leftArray = array.slice(0, midpoint),</p>
+<p>9           rightArray = array.slice(midpoint);</p>
+<p>10</p>
+<p>11       <strong>return</strong> merge(mergeSort(leftArray), mergeSort(rightArray));</p>
+<p>12   }</p>
+<p>13   mergeSort([6,1,23,4,2,3]); <em>// [1, 2, 3, 4, 6, 23]</em></p>
+<p><strong>Time Complexity:</strong> O(<em>nlog_2(_n</em>))</p>
+<p><strong>Space Complexity:</strong> O(<em>n</em>)</p>
+<p>Mergesort has a large space complexity of O(<em>n</em>) because of the need to create <em>n</em> number of arrays to be merged later. Use mergesort when a stable sort is needed. A stable sort is one that’s guaranteed not to reorder elements with identical keys. Mergesort is guaranteed to be O(<em>nlog__2__(n)</em>). A disadvantage of mergesort is that it uses O(<em>n</em>) in space.</p>
+<h3 id="count-sort">Count Sort</h3>
+<p>Count sort can be done in O(<em>k+n</em>) because it does not compare values. It works only for numbers and given a certain range. Instead of sorting by swapping elements, this count works by counting occurrences of each element in the array. Once occurrences of each element are counted, the new array can be created using those occurrences. This sorts the data without having to swap elements, as shown in Figure <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Fig10">10-10</a>.</p>
+<p><img alt="../images/465726_1_En_10_Chapter/465726_1_En_10_Fig10_HTML.jpg" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781484239889/files/images/465726_1_En_10_Chapter/465726_1_En_10_Fig10_HTML.jpg" /></p>
+<p>Figure 10-10</p>
+<p>Count sort</p>
+<p>Here’s an implementation using a JavaScript object:</p>
+<p>1   <strong>function</strong> countSort(array) {</p>
+<p>2       <strong>var</strong> hash = {}, countArr= [];</p>
+<p>3       <strong>for</strong>(<strong>var</strong> i=0;i&lt;array.length;i++){</p>
+<p>4           <strong>if</strong>(!hash[array[i]]){</p>
+<p>5               hash[array[i]] = 1;</p>
+<p>6           }<strong>else</strong>{</p>
+<p>7               hash[array[i]]++;</p>
+<p>8           }</p>
+<p>9       }</p>
+<p>10</p>
+<p>11       <strong>for</strong>(<strong>var</strong> key <strong>in</strong> hash){</p>
+<p>12           <em>// for any number of _ element, add it to array</em></p>
+<p>13           <strong>for</strong>(<strong>var</strong> i=0;i&lt;hash[key];i++) {</p>
+<p>14               countArr.push(parseInt(key));</p>
+<p>15           }</p>
+<p>16       }</p>
+<p>17</p>
+<p>18       <strong>return</strong> countArr;</p>
+<p>19   }</p>
+<p>20   countSort([6,1,23,2,3,2,1,2,2,3,3,1,123,123,4,2,3]); <em>// [1, 2, 3, 4, 6, 23]</em></p>
+<p><strong>Time Complexity:</strong> O(<em>k</em>+<em>n</em>)</p>
+<p><strong>Space Complexity:</strong> O(<em>k</em>)</p>
+<p>Use count sort when you’re sorting integers with a limited range. This will be the fastest sort for this case.</p>
+<h3 id="javascripts-built-in-sort">JavaScript’s Built-in Sort</h3>
+<p>JavaScript has a built-in sort() method for an array object, which sorts elements by ascending order. To use it, there is an optional parameter that you can pass in a comparator function.</p>
+<p>However, the default comparator function sorts alphabetically, so it will not work for numbers.</p>
+<p>1   <strong>var</strong> array1 = [12,3,4,2,1,34,23];</p>
+<p>2   array1.sort(); <em>// array1: [1, 12, 2, 23, 3, 34, 4]</em></p>
+<p>In the previous example, notice that numbers starting with 1 came first (1, 12), then numbers starting with 2, and so forth. This is because no comparator function was passed and JavaScript converted the elements into a string and sorted it according to the alphabet.</p>
+<p>To sort numbers correctly, use this:</p>
+<p>1   <strong>var</strong> array1 = [12,3,4,2,1,34,23];</p>
+<p>2</p>
+<p>3   <strong>function</strong> comparatorNumber(a,b) {</p>
+<p>4       <strong>return</strong> a-b;</p>
+<p>5   }</p>
+<p>6</p>
+<p>7   array1.sort(comparatorNumber);</p>
+<p>8   <em>// array1: [1, 2, 3, 4, 12, 23, 34]</em></p>
+<p>a-b indicates that it should be from smallest to biggest (ascending). Descending order can be done as follows:</p>
+<p>1   <strong>var</strong> array1 = [12,3,4,2,1,34,23];</p>
+<p>2</p>
+<p>3   <strong>function</strong> comparatorNumber(a,b) {</p>
+<p>4       <strong>return</strong> b-a;</p>
+<p>5   }</p>
+<p>6</p>
+<p>7   array1.sort(comparatorNumber); <em>// array1: [34, 23, 12, 4, 3, 2, 1]</em></p>
+<p>The sort() function can be useful when you need a quick way to sort something without implementing it yourself.</p>
+<h2 id="summary">Summary</h2>
+<p>There are two ways to search inside an array: linear search and binary search. Binary search is faster with O(<em>log_2(_n</em>)) time complexity, while linear search has O(<em>n</em>) time complexity. However, the binary search can be performed only on a sorted array.</p>
+<p>Table <a href="https://learning.oreilly.com/library/view/javascript-data-structures/9781484239889/html/465726_1_En_10_Chapter.xhtml#Tab1">10-1</a> summarizes time and space complexities of different sorting algorithms. The most efficient sorting algorithms are quicksort, mergesort, and count sort. Count sort, while the fastest, is limited to when the range of array’s values are known.</p>
+<p>Table 10-1</p>
+<p>Sorting Summary</p>
+<p>Algorithm</p>
+<p>Time Complexity</p>
+<p>Space Complexity</p>
+<p>Quicksort</p>
+<p>O(<em>nlog_2(_n</em>))</p>
+<p>O(<em>nlog_2(_n</em>))</p>
+<p>Mergesort</p>
+<p>O(<em>nlog_2(_n</em>))</p>
+<p>O(<em>nlog_2(_n</em>))</p>
+<p>Bubble sort</p>
+<p>O(_n_2)</p>
+<p>O(_n_2)</p>
+<p>Insertion sort</p>
+<p>O(_n_2)</p>
+<p>O(_n_2)</p>
+<p>Selection sort</p>
+<p>O(_n_2)</p>
+<p>O(_n_2)</p>
+<p>Count sort</p>
+<p>O(<em>k</em> + <em>n</em>)</p>
+<p>O(<em>k</em>)</p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="use-the-implement-square-root-function-for-an-integer-without-using-any-math-libraries">USE THE IMPLEMENT SQUARE ROOT FUNCTION FOR AN INTEGER WITHOUT USING ANY MATH LIBRARIES</h3>
+<p>The first solution that may come to mind is trying every possibility from 1 to the number, as follows:</p>
+<p>1   <strong>function</strong> sqrtIntNaive(number){</p>
+<p>2       <strong>if</strong>(number == 0 || number == 1)</p>
+<p>3           <strong>return</strong> number;</p>
+<p>4</p>
+<p>5       <strong>var</strong> index = 1, square = 1;</p>
+<p>6</p>
+<p>7       <strong>while</strong>(square &lt; number){</p>
+<p>8           <strong>if</strong> (square == number){</p>
+<p>9               <strong>return</strong> square;</p>
+<p>10           }</p>
+<p>11</p>
+<p>12           index++;</p>
+<p>13           square = index*index;</p>
+<p>14       }</p>
+<p>15       <strong>return</strong> index;</p>
+<p>16   }</p>
+<p>17   sqrtIntNaive(9);</p>
+<p><strong>Time Complexity:</strong> O(<em>n</em>)</p>
+<p>This is essentially a linear search since it has to linearly check one by one the value for the square root.</p>
+<p>The binary search algorithm can be applied to this problem. Instead of going up 1 by 1, partition the range into upper half and lower half between 1 and the given number as follows:</p>
+<p>1   <strong>function</strong> sqrtInt(number) {</p>
+<p>2       <strong>if</strong>(number == 0 || number == 1) <strong>return</strong> number;</p>
+<p>3</p>
+<p>4       <strong>var</strong> start = 1, end = number, ans;</p>
+<p>5</p>
+<p>6       <strong>while</strong>(start &lt;= end) {</p>
+<p>7           <strong>let</strong> mid = parseInt((start+end)/2);</p>
+<p>8</p>
+<p>9           <strong>if</strong> (mid*mid == number)</p>
+<p>10               <strong>return</strong> mid;</p>
+<p>11</p>
+<p>12           <strong>if</strong>(mid*mid&lt;number){</p>
+<p>13               start = mid+1; <em>// use the upper section</em></p>
+<p>14               ans = mid;</p>
+<p>15           }<strong>else</strong>{</p>
+<p>16               end = mid-1; <em>// use the lower section</em></p>
+<p>17           }</p>
+<p>18       }</p>
+<p>19       <strong>return</strong> ans;</p>
+<p>20   }</p>
+<p>21   sqrtInt(9);</p>
+<p><strong>Time Complexity:</strong> O(<em>log_2(_n</em>))</p>
+<p><strong>Bonus: Find a Square Root of a Float</strong></p>
+<p>For this exercise, the only difference is using a threshold value to calculate accuracy to because the square root of a double will have decimals. Hence, the time complexity also stays the same.</p>
+<p>1   <strong>function</strong> sqrtDouble(number) {</p>
+<p>2       <strong>var</strong> threshold = 0.1;</p>
+<p>3       <em>//9 try middle,</em></p>
+<p>4       <strong>var</strong> upper = number;</p>
+<p>5       <strong>var</strong> lower = 0;</p>
+<p>6       <strong>var</strong> middle;</p>
+<p>7       <strong>while</strong>(upper-lower&gt;threshold){</p>
+<p>8           middle = (upper+lower)/2;</p>
+<p>9           <strong>if</strong>(middle*middle&gt;number){</p>
+<p>10               upper = middle;</p>
+<p>11           }<strong>else</strong>{</p>
+<p>12               lower = middle;</p>
+<p>13           }</p>
+<p>14       }</p>
+<p>15       <strong>return</strong> middle</p>
+<p>16   }</p>
+<p>17   sqrtDouble(9); <em>// 3.0234375</em></p>
+<h3 id="find-if-two-elements-of-an-array-add-up-to-a-given-number">FIND IF TWO ELEMENTS OF AN ARRAY ADD UP TO A GIVEN NUMBER</h3>
+<p>The simple approach to this problem is to check every other element for each element in the array.</p>
+<p>1   <strong>function</strong> findTwoSum(array, sum) {</p>
+<p>2</p>
+<p>3       <strong>for</strong>(<strong>var</strong> i=0, arrayLength = array.length; i&lt;arrayLength;i++){</p>
+<p>4           <strong>for</strong>(<strong>var</strong> j=i+1;j&lt;arrayLength;j++){</p>
+<p>5               <strong>if</strong>(array[j]+array[i] == sum){</p>
+<p>6                   <strong>return true</strong>;</p>
+<p>7               }</p>
+<p>8           }</p>
+<p>9       }</p>
+<p>10       <strong>return false</strong>;</p>
+<p>11   }</p>
+<p><strong>Time Complexity:</strong> O(_n_2)</p>
+<p><strong>Space Complexity:</strong> O(1)</p>
+<p>There is a lot of checking, and hence it takes quadratic time.</p>
+<p>A better approach is to store the already visited numbers and check against them. This way, it can be done in linear time.</p>
+<p>1   <strong>function</strong> findTwoSum(array, sum){</p>
+<p>2       <strong>var</strong> store = {};</p>
+<p>3</p>
+<p>4       <strong>for</strong>(<strong>var</strong> i=0, arrayLength = array.length; i&lt;arrayLength;i++){</p>
+<p>5           <strong>if</strong>(store[array[i]]){</p>
+<p>6               <strong>return true</strong>;</p>
+<p>7           }<strong>else</strong>{</p>
+<p>8               store[sum-array[i]] = array[i];</p>
+<p>9           }</p>
+<p>10       }</p>
+<p>11       <strong>return false</strong>;</p>
+<p>12   }</p>
+<p><strong>Time Complexity:</strong> O(<em>n</em>)</p>
+<p><strong>Space Complexity:</strong> O(<em>n</em>)</p>
+<p>This algorithm cuts the time complexity to O(<em>n</em>) but takes O(<em>n</em>) space as well to store items into the store object.</p>
+<h3 id="find-an-element-within-an-array-that-appears-only-once">FIND AN ELEMENT WITHIN AN ARRAY THAT APPEARS ONLY ONCE</h3>
+<p>Given a sorted array in which all elements appear twice (one after one) and one element appears only once, find that element in O(l_og__2__n_) complexity. This can be done by modifying the binary search algorithm and checking the addition indices.</p>
+<p>Input:   arr = [1, 1, 3, 3, 4, 5, 5, 7, 7, 8, 8]      Output:  4</p>
+<p>Input:   arr = [1, 1, 3, 3, 4, 4, 5, 5, 7, 7, 8]      Output:  8</p>
+<p>1   <strong>function</strong> findOnlyOnce(arr, low, high) {</p>
+<p>2       <strong>if</strong> (low &gt; high) {</p>
+<p>3           <strong>return null</strong>;</p>
+<p>4       }</p>
+<p>5       <strong>if</strong> (low == high) {</p>
+<p>6           <strong>return</strong> arr[low];</p>
+<p>7       }</p>
+<p>8</p>
+<p>9       <strong>var</strong> mid = Math.floor((high+low)/2);</p>
+<p>10</p>
+<p>11       <strong>if</strong> (mid%2 == 0) {</p>
+<p>12           <strong>if</strong> (arr[mid] == arr[mid+1]) {</p>
+<p>13               <strong>return</strong> findOnlyOnce(arr, mid+2, high);</p>
+<p>14           } <strong>else</strong> {</p>
+<p>15               <strong>return</strong> findOnlyOnce(arr, low, mid);</p>
+<p>16           }</p>
+<p>17       } <strong>else</strong> {</p>
+<p>18           <strong>if</strong> (arr[mid] == arr[mid-1]) {</p>
+<p>19               <strong>return</strong> findOnlyOnce(arr, mid+1, high);</p>
+<p>20           } <strong>else</strong> {</p>
+<p>21               <strong>return</strong> findOnlyOnce(arr, low, mid-1);</p>
+<p>22           }</p>
+<p>23       }</p>
+<p>24   }</p>
+<p>25   <strong>function</strong> findOnlyOnceHelper(arr) {</p>
+<p>26       <strong>return</strong> findOnlyOnce(arr, 0, arr.length);</p>
+<p>27   }</p>
+<p>28   findOnlyOnceHelper([ 1, 1, 2, 4, 4, 5, 5, 6, 6 ]);</p>
+<p><strong>Time Complexity:</strong> O(log2_n_)</p>
+<p><strong>Space Complexity:</strong> O(1)</p>
+<h3 id="create-a-javascript-sort-comparator-function-that-would-sort-string-by-length">CREATE A JAVASCRIPT SORT COMPARATOR FUNCTION THAT WOULD SORT STRING BY LENGTH</h3>
+<p>This is fairly simple. If it is an array of strings, strings all have a property of length, which can be used to sort the array.</p>
+<p>1   <strong>var</strong> mythical = ['dragon', 'slayer','magic','wizard of oz', 'ned stark'];</p>
+<p>2</p>
+<p>3   <strong>function</strong> sortComparator(a,b){</p>
+<p>4       <strong>return</strong> a.length - b.length;</p>
+<p>5   }</p>
+<p>6   mythical.sort(sortComparator);</p>
+<p>7   // ["magic", "dragon", "slayer", "ned stark", "wizard of of"]</p>
+<p><strong>Examples</strong></p>
+<p>Sort string elements, putting strings with a first, as shown here:</p>
+<p>1   <strong>var</strong> mythical = ['dragon', 'slayer','magic','wizard of oz', 'ned tark'];</p>
+<p>2</p>
+<p>3   <strong>function</strong> sortComparator(a,b){</p>
+<p>4       <strong>return</strong> a.indexOf("a") - b.indexOf("a");</p>
+<p>5   }</p>
+<p>6</p>
+<p>7   mythical.sort(sortComparator);</p>
+<p>8   // ["magic", "dragon", "slayer", "wizard of oz", "ned stark"]</p>
+<p>Sort object elements by the number of properties, as shown here:</p>
+<p>1   <strong>var</strong> mythical=[{prop1:", prop2:"},{prop1:", prop2:", prop3:"},{prop1:", prop2:"}];</p>
+<p>2</p>
+<p>3   <strong>function</strong> sortComparator(a,b){</p>
+<p>4       <strong>return</strong> Object.keys(a).length - Object.keys(b).length;</p>
+<p>5   }</p>
+<p>6</p>
+<p>7   mythical.sort(sortComparator);</p>
+<p>// [{prop1:", prop2:"},{prop1:", prop2:"},{prop1:", prop2:", prop3:"}]</p>
+<p>As shown, there’s a lot of flexibility with these comparators, and they can be used for sorting without needing to implement a sort yourself.</p>
+<h3 id="implement-a-word-counter-list">IMPLEMENT A WORD COUNTER LIST</h3>
+<p>Create a function that generates an object of words (as keys) and the number of times the words occur in a string ordered by highest to lowest occurrences.</p>
+<p>Here’s some example input: <strong>practice makes perfect. get perfect by practice. just practice</strong>.</p>
+<p>Here’s the example output: { practice: 3, perfect: 2, makes: 1, get: 1, by: 1, just: 1 }.</p>
+<p>1   <strong>function</strong> wordCount(sentence) {</p>
+<p>2       <em>// period with nothing so it doesn't count as word</em></p>
+<p>3       <strong>var</strong> wordsArray = sentence.replace(/[.]/g,"").split(" "),</p>
+<p>4           occurenceList = {}, answerList = {};</p>
+<p>5</p>
+<p>6       <strong>for</strong> (<strong>var</strong> i=0, wordsLength=wordsArray.length; i&lt;wordsLength;  i++) {</p>
+<p>7           <strong>var</strong> currentWord = wordsArray[i];</p>
+<p>8           // doesn't exist, set as 1st occurrence</p>
+<p>9           <strong>if</strong> (!occurenceList[currentWord]) {</p>
+<p>10               occurenceList[currentWord] = 1;</p>
+<p>11           } <strong>else</strong> {</p>
+<p>12               occurenceList[currentWord]++; <em>// add occurrences</em></p>
+<p>13           }</p>
+<p>14       }</p>
+<p>15</p>
+<p>16       <strong>var</strong> arrayTemp = [];</p>
+<p>17       // push the value and key as fixed array</p>
+<p>18       <strong>for</strong> (<strong>var</strong> prop <strong>in</strong> occurenceList) {</p>
+<p>19           arrayTemp.push([occurenceList[prop], prop]);</p>
+<p>20       }</p>
+<p>21</p>
+<p>22       <strong>function</strong> sortcomp(a, b) {</p>
+<p>23           <strong>return</strong> b[0] - a[0]; <em>// compare the first element of the array</em></p>
+<p>24       }</p>
+<p>25</p>
+<p>26       arrayTemp.sort(sortcomp); <em>//sort</em></p>
+<p>27</p>
+<p>28       <strong>for</strong> (<strong>var</strong> i = 0, arrlength = arrayTemp.length; i &lt; arrlength; i++) {</p>
+<p>29           <strong>var</strong> current = arrayTemp[i];</p>
+<p>30           answerList[current[1]] = current[0]; <em>// key value pairs</em></p>
+<p>31       }</p>
+<p>32       <strong>return</strong> answerList;</p>
+<p>33   }</p>
+<p>34   wordCount("practice makes perfect. get perfect by practice. just practice");</p>
+<p><strong>Time Complexity:</strong> O(<em>nlog_2(_n</em>))</p>
+<p><strong>Space Complexity:</strong> O(<em>n</em>)</p>
+<p>Time complexity is limited by the sorting algorithm that the JavaScript engine uses. Most use either mergesort or quicksort, which are both O(<em>nlog_2(_n</em>)).</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+    
+  </body>
+</html>

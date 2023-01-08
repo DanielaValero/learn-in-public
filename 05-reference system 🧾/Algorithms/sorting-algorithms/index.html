@@ -1,0 +1,2912 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sorting%20and%20searching/">
+      
+      
+        <link rel="next" href="../sorting/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.3">
+    
+    
+      
+        <title>Chapter 5. Sorting Without a Hat - Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6b71719e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-5-sorting-without-a-hat" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Notes" class="md-header__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 5. Sorting Without a Hat
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Notes" class="md-nav__button md-logo" aria-label="Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        learn-in-public
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-Learning%20wishlist/" class="md-nav__link">
+        00 Learning wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-book-wishlist/" class="md-nav__link">
+        00 book wishlist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          00 daily notes 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="00 daily notes 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          00 daily notes 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--fleeting-note.md/" class="md-nav__link">
+        00  template  fleeting note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/00-%20template--literature-note.md/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-daily-notes%20%F0%9F%93%85/2023-01-08%20act%20-%20finding%20my%20values/" class="md-nav__link">
+        2023 01 08 act   finding my values
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          01 inbox 📥
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="01 inbox 📥" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          01 inbox 📥
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/00-readme/" class="md-nav__link">
+        00 readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/GOALS%20THEORY/" class="md-nav__link">
+        GOALS THEORY
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Quarterly%20Self%20Review%20-%20Professional/" class="md-nav__link">
+        Quarterly Self Review - Professional Self-Insight
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Self%20analysis/" class="md-nav__link">
+        Self analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/Structure%20design--Coupling/" class="md-nav__link">
+        Structure design  Coupling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feedback/" class="md-nav__link">
+        Feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/feminism/" class="md-nav__link">
+        Feminism
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/ideas-of-errol-gerson/" class="md-nav__link">
+        Errol Gerson ideas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/notes-on-Programming-as-Theory-Building/" class="md-nav__link">
+        notes on Programming as Theory Building
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-inbox%20%F0%9F%93%A5/onLabels/" class="md-nav__link">
+        onLabels
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          02 ideas 🗃️
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="02 ideas 🗃️" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          02 ideas 🗃️
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/00-%20template--permantent-note.md/" class="md-nav__link">
+        00  template  permantent note.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2022-10-20%20-%20moving%20on%20limiting%20beliefs%20for%20diversity%20in%20tech/" class="md-nav__link">
+        2022 10 20   moving on limiting beliefs for diversity in tech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/202208171521%20-%20Italo%20Calvino%20on%20how%20he%20reads/" class="md-nav__link">
+        202208171521   Italo Calvino on how he reads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/2023-01-07%20Living%20a%20happier%20life%20-%20Tool%20--%20ACT%20-%20Values%20%26%20goals/" class="md-nav__link">
+        2023 01 07 Living a happier life   Tool    ACT   Values & goals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/after-sentiers-229%20-%20designing%20without%20depletion/" class="md-nav__link">
+        After sentiers 229   designing without depletion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-ideas%20%F0%9F%97%83%EF%B8%8F/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          03 areas 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 areas 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          03 areas 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/lessons-Ive-learned-as-EM/" class="md-nav__link">
+        lessons Ive learned as EM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3" tabindex="0" aria-expanded="false">
+          Microfrontends
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Microfrontends" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Microfrontends
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Chapter%204.%20Discovering%20Micro-Frontend%20Architectures/" class="md-nav__link">
+        Chapter 4. Discovering Micro-Frontend Architectures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%200%20-%20Initial%20ways%20of%20working/" class="md-nav__link">
+        Step 0   Initial ways of working
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%201%20-%20UI%20Concistency/" class="md-nav__link">
+        Step 1   UI Concistency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%202%20-%20Coordination%20among%20teams/" class="md-nav__link">
+        Step 2   Coordination among teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Step%203%20-%20Strategic%20and%20tatics%20thinking%20-%20Guided%20continous%20improvement/" class="md-nav__link">
+        Step 3   Strategic and tatics thinking   Guided continous improvement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/communication/" class="md-nav__link">
+        Communication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_3_7" type="checkbox" id="__nav_7_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_3_7" tabindex="0" aria-expanded="false">
+          Quotes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quotes" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Quotes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/Microfrontends/Quotes/Delivery%20Models/" class="md-nav__link">
+        Delivery Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4" tabindex="0" aria-expanded="false">
+          Burnout
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Burnout" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Burnout
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/burnout-theory-and-notes/" class="md-nav__link">
+        Burnout theory and notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/high%20pressure%20project%20and%20metal%20health/" class="md-nav__link">
+        High pressure project and metal health
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p2%20-%20what%20to%20do%20-%20individual/" class="md-nav__link">
+        P2   what to do   individual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/burnout/p3%20-%20what%20to%20do%20-%20workplace/" class="md-nav__link">
+        P3   what to do   workplace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_5" tabindex="0" aria-expanded="false">
+          Functional programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Functional programming" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Functional programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20Category%20theory/" class="md-nav__link">
+        2023 01 06 Category theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/2023-01-06%20FP%20Patterns/" class="md-nav__link">
+        2023 01 06 FP Patterns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Curry%20%26%20Partial%20Application/" class="md-nav__link">
+        Curry & Partial Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/functional-programming/Monad/" class="md-nav__link">
+        Monad
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6" type="checkbox" id="__nav_7_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6" tabindex="0" aria-expanded="false">
+          My career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="My career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_6">
+          <span class="md-nav__icon md-icon"></span>
+          My career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1" type="checkbox" id="__nav_7_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1" tabindex="0" aria-expanded="false">
+          Achievements record
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Achievements record" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Achievements record
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_6_1_1" type="checkbox" id="__nav_7_6_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_6_1_1" tabindex="0" aria-expanded="false">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="4">
+        <label class="md-nav__title" for="__nav_7_6_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/my-career/achievements-record/2021/11/" class="md-nav__link">
+        11
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7" tabindex="0" aria-expanded="false">
+          Research cloud architectures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research cloud architectures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Research cloud architectures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_2" type="checkbox" id="__nav_7_7_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_2" tabindex="0" aria-expanded="false">
+          Cloud storage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud storage" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud storage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud%20storage/Data%20management%20and%20Databases/" class="md-nav__link">
+        Data management and Databases
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_3" type="checkbox" id="__nav_7_7_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_3" tabindex="0" aria-expanded="false">
+          Cloud native
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Cloud native" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Cloud native
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Microservices/" class="md-nav__link">
+        Microservices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/cloud-native/Serverless/" class="md-nav__link">
+        Serverless
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_4" type="checkbox" id="__nav_7_7_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_4" tabindex="0" aria-expanded="false">
+          Communication among microservices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Communication among microservices" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Communication among microservices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Data%20Streaming%20in%20Cloud%20Computing/" class="md-nav__link">
+        Data Streaming in Cloud Computing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Event%20driven%20architecture/" class="md-nav__link">
+        Event driven architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/communication-among-microservices/Message%20Brokers/" class="md-nav__link">
+        Message Brokers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_7_5" type="checkbox" id="__nav_7_7_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_7_5" tabindex="0" aria-expanded="false">
+          devOps  Infra
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="devOps  Infra" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          devOps  Infra
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Containerization/" class="md-nav__link">
+        Containerization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Databases/" class="md-nav__link">
+        Databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-cloud-architectures/devOps--Infra/Infrastructure%20provisioning/" class="md-nav__link">
+        Infrastructure provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8" type="checkbox" id="__nav_7_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8" tabindex="0" aria-expanded="false">
+          Research programming and languages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Research programming and languages" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_8">
+          <span class="md-nav__icon md-icon"></span>
+          Research programming and languages
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/00-Readme/" class="md-nav__link">
+        00 Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/Trendy%20Languages/" class="md-nav__link">
+        Trendy Languages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_8_3" type="checkbox" id="__nav_7_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_8_3" tabindex="0" aria-expanded="false">
+          Paradigms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Paradigms" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Paradigms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Functional%20programming/" class="md-nav__link">
+        Functional programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/research-programming-and-languages/paradigms/Reactive%20Programming/" class="md-nav__link">
+        Reactive Programming
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_9" type="checkbox" id="__nav_7_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_9" tabindex="0" aria-expanded="false">
+          What's that for
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="What's that for" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_9">
+          <span class="md-nav__icon md-icon"></span>
+          What's that for
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-areas%20%F0%9F%A7%BE/what%27s-that-for/real-time-app--tech-stack/" class="md-nav__link">
+        Real time app  tech stack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" tabindex="0" aria-expanded="false">
+          03 projects 📅
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="03 projects 📅" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          03 projects 📅
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/readme/" class="md-nav__link">
+        Readme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" tabindex="0" aria-expanded="false">
+          App in my music
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App in my music" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          App in my music
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-in-my-music/draft-ideas.md/" class="md-nav__link">
+        Draft ideas.md
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_3" tabindex="0" aria-expanded="false">
+          App personal finances
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="App personal finances" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          App personal finances
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/app-personal-finances/Draft/" class="md-nav__link">
+        Draft
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_4" tabindex="0" aria-expanded="false">
+          Post making sense of the software career
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post making sense of the software career" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          Post making sense of the software career
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-making-sense-of-the-software-career/what-is-a-software-engineer/" class="md-nav__link">
+        What is a software engineer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8_5" type="checkbox" id="__nav_8_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_5" tabindex="0" aria-expanded="false">
+          Post technical assessments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Post technical assessments" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_5">
+          <span class="md-nav__icon md-icon"></span>
+          Post technical assessments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20Take%20home%20challenge/" class="md-nav__link">
+        Tech-Assessments: Take home interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20-%20question%20only%20interview/" class="md-nav__link">
+        Tech-Assessments: Questions-only interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-10-27%20Live%20coding%20interview/" class="md-nav__link">
+        Tech-Assessments: Live coding interview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/2022-12-13%20-%20Tech%20assessments/" class="md-nav__link">
+        2022 12 13   Tech assessments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/interview-questions/" class="md-nav__link">
+        Interview questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-projects%20%F0%9F%93%85/post-technical-assessments/my-guide-to-interviewing/" class="md-nav__link">
+        My guide to interviewing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="true">
+          05 reference system 🧾
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="05 reference system 🧾" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          05 reference system 🧾
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2023-01-04%20-%20Technical%20books%20I%20like/" class="md-nav__link">
+        2023 01 04   Technical books I like
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../peter-natur-programming-as-theory/" class="md-nav__link">
+        Peter natur programming as theory
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../phillip-armour-5-orders-of-ignorance/" class="md-nav__link">
+        Phillip armour 5 orders of ignorance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../readme.md/" class="md-nav__link">
+        Readme.md
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_5" tabindex="0" aria-expanded="false">
+          06 ebooks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="06 ebooks" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          06 ebooks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-ebooks/readme/" class="md-nav__link">
+        Playing to win: How strategy really works
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_6" tabindex="0" aria-expanded="true">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Algorithms" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../String%20Algorithms/" class="md-nav__link">
+        CHAPTER 15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hash-tables/" class="md-nav__link">
+        CHAPTER 8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searching-sorting-js/" class="md-nav__link">
+        10. Searching and Sorting in JS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../searching/" class="md-nav__link">
+        CHAPTER 7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting%20and%20searching/" class="md-nav__link">
+        4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Chapter 5. Sorting Without a Hat
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sorting/" class="md-nav__link">
+        CHAPTER 6
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_7" tabindex="0" aria-expanded="false">
+          Software architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Software architecture" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_7">
+          <span class="md-nav__icon md-icon"></span>
+          Software architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software%20architecture/2023-01-04%20-%20Archictecture%20trade-off%20analysis/" class="md-nav__link">
+        2023 01 04   Archictecture trade off analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_8" type="checkbox" id="__nav_9_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9_8" tabindex="0" aria-expanded="false">
+          tools Difficult situations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="tools Difficult situations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_8">
+          <span class="md-nav__icon md-icon"></span>
+          tools Difficult situations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Difficult%20Conversations/" class="md-nav__link">
+        Difficult Conversations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Questions%20for%20new%20teams/" class="md-nav__link">
+        Questions for new teams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/Receiving%20challenging%20feedback/" class="md-nav__link">
+        Receiving challenging feedback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/dealing%20with%20a%20coleric%20person/" class="md-nav__link">
+        Dealing with a coleric person
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools-Difficult%20situations/solving%20tech%20conflict/" class="md-nav__link">
+        Solving tech conflict
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+
+<h1 id="chapter-5-sorting-without-a-hat">Chapter 5. Sorting Without a Hat</h1>
+<p>In this chapter, you will learn:</p>
+<ul>
+<li>
+<p>How comparison-based sorting algorithms require two fundamental operations:</p>
+<ul>
+<li>
+<p><code>less(i,j)</code> determines whether <code>A[i]</code> &lt; <code>A[j]</code>.</p>
+</li>
+<li>
+<p><code>swap(i,j)</code> swaps the contents of <code>A[i]</code> and <code>A[j]</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>How to provide a comparator function when sorting; for example, you can sort integers or string values in descending order. The comparator function can also sort complex data structures with no default ordering; for example, it is not clear how to sort a collection of two-dimensional (x, y) points.</p>
+</li>
+<li>
+<p>How to identify inefficient O(N2) sorting algorithms, such as Insertion Sort and Selection Sort, from the structure of their code.</p>
+</li>
+<li>
+<p><em>Recursion</em>, where a function can call itself. This fundamental computer science concept forms the basis of a <em>divide-and-conquer</em> strategy for solving problems.</p>
+</li>
+<li>
+<p>How Merge Sort and Quicksort can sort an array of N values in O(N <code>log</code> N) using divide and conquer. How Heap Sort also guarantees O(N <code>log</code> N).</p>
+</li>
+<li>
+<p>How Tim Sort combines Insertion Sort and functionality from Merge Sort to implement Python’s default sorting algorithm in guaranteed O(N <code>log</code> N).</p>
+</li>
+</ul>
+<p>In this chapter, I present algorithms that rearrange the N values in an array so they are in ascending order. Organizing a collection of values in sorted order is an essential first step to improve the efficiency of many programs. Sorting is also necessary for many real-world applications, such as printing staff directories for a company with the names and phone numbers of employees, or displaying flight departure times on an airport display.</p>
+<p>With an unordered array, searching for a value, in the <em>worst case</em>, is O(N). When the array is sorted, Binary Array Search, in the <em>worst case</em>, can locate a target value in O(<code>log</code> N) performance.</p>
+<h1 id="sorting-by-swapping">Sorting by Swapping</h1>
+<p>Try sorting the values in the array, <code>A</code>, at the top of <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-to-sort">Figure 5-1</a>. Use a pencil to copy the values from <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-to-sort">Figure 5-1</a> onto a piece of paper (or bring out a pen and just write on these pages!). I challenge you to sort these values in ascending order <em>by repeatedly swapping the location of two values in the array</em>. What is the fewest number of swaps that you need? Also, count the number of times you compare two values together. I have sorted these values with five swaps. Is it possible to use fewer?<a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914779104">1</a></p>
+<p><img alt="Sort these values" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0501.png" /></p>
+<h6 id="figure-5-1-sample-array-a-to-sort">Figure 5-1. Sample array, <code>A</code>, to sort</h6>
+<p>While it’s important to count the number of swaps, you also need to count the <em>number of comparisons between two values</em>. To start, you can determine that 2 is the smallest value in <code>A</code>, with just seven comparisons, something I showed in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch01.html#chap-1">Chapter 1</a>. The smallest value is found at <code>A[3]</code>, so it is swapped with <code>A[0]</code>. This moves the smallest value to the front of the array where it belongs. In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-to-sort">Figure 5-1</a>, I highlight values when they are swapped. I use bold borders to mark the values that are guaranteed to be in their final location; these will not be swapped again. All values outside of the bolded borders remain to be sorted.</p>
+<p>I scan the remaining values to find the largest value, 24, (using six comparisons) and swap <code>A[5]</code> and <code>A[7]</code> to move the largest value to the end of the array. I then locate the smallest remaining value, 5, (using five comparisons) and swap <code>A[1]</code> and <code>A[6]</code> to move 5 into its proper place. It looks like 21 is in its right spot, which takes four comparisons to validate; no need for a swap here!</p>
+<p>With three comparisons, I find that 15 is the smallest remaining value, and I choose to swap the second occurrence of 15, <code>A[4]</code>, with <code>A[2]</code>. With two comparisons, you can validate that 15 belongs in index position 3, which leaves just one more comparison to swap <code>A[4]</code> and <code>A[5]</code>, moving 19 into its proper spot. In the final step shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-to-sort">Figure 5-1</a>, the value 20 is in the right location, since it is larger than or equal to all values to its left <em>and</em> is smaller than or equal to all values to its right. With five exchanges and 28 comparisons, I have sorted this array.</p>
+<p>I didn’t follow a specific algorithm to sort this small group of values; sometimes I looked for the smallest value, while other times I looked for the largest. The number of comparisons is reduced after each swap, and there are far more comparisons than swaps. I now define a sorting algorithm that works on any array of N values and evaluate its runtime performance.</p>
+<h1 id="selection-sort">Selection Sort</h1>
+<p>Selection Sort is named because it incrementally sorts an array from left to right, <em>repeatedly selecting the smallest value remaining</em> and swapping it into its proper location. To sort N values, find the smallest value and swap it with <code>A[0]</code>. Now only N – 1 values remain to be sorted, since <code>A[0]</code> is in its final spot. Find the location of the smallest remaining value and swap it with <code>A[1]</code>, which leaves N – 2 values to sort. Repeat this process until all values are in place.</p>
+<h6 id="tip">Tip</h6>
+<p>What happens when the smallest remaining value is already in its proper place, that is, when <code>i</code> is equal to <code>min_index</code> when the <code>for</code> loop over <code>j</code> completes? The code will attempt to swap <code>A[i]</code> with <code>A[min_index]</code>, and nothing in the array will change. You might think to add an <code>if</code> statement to only swap when <code>i</code> and <code>min_index</code> are different, but it will not noticeably improve performance.</p>
+<p>In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-selection-sort">Listing 5-1</a>, there is an outer <code>for</code> loop over <code>i</code> that iterates through nearly every index position in the array, from 0 to N – 2. The inner <code>for</code> loop over <code>j</code> iterates through the remaining index positions in the array, from <code>i+1</code> up to N – 1 to find the smallest remaining value. At the end of the <code>for</code> loop over <code>i</code>, the value at index position <code>i</code> is swapped with the smallest value found at index position <code>min_index</code>.</p>
+<h5 id="listing-5-1-selection-sort">Listing 5-1. Selection Sort</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO1-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Before each pass through the <code>i</code> <code>for</code> loop, you know <code>A[0 .. i-1]</code> is sorted.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO1-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p><code>min_index</code> is the index location of the smallest value in <code>A[i .. N-1]</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO1-3"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>If any <code>A[j]</code> &lt; <code>A[min_index]</code>, then update <code>min_index</code> to remember index location for this newly discovered smallest value.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO1-4"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p>Swap <code>A[i]</code> with <code>A[min_index]</code> to ensure that <code>A[0 .. i]</code> is sorted.</p>
+<p>At a high level, Selection Sort starts with a problem of size N and reduces it one step at a time, first to a problem of size N – 1, then to a problem of size N – 2, until the whole array is sorted. As shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-selection-sort">Figure 5-2</a>, <em>it takes</em> N – 1 <em>swaps to sort an array</em>.</p>
+<p>After these swaps have properly placed N – 1 values into their final location, the value at <code>A[N–1]</code> is the largest remaining unsorted value, which means it is already in its final location. Counting the number of comparisons is more complicated. In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-selection-sort">Figure 5-2</a>, it was 28, which is the sum of the numbers from 1 through 7.</p>
+<p>Mathematically, the sum of the numbers from 1 to K is equal to K × (K + 1)/2; <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-triangle-numbers">Figure 5-3</a> shows a visualization to provide the intuition behind this formula. Number 28 is called a <em>triangle number</em>, from the shape formed by the arrangement of cells.</p>
+<p>If you make a second triangle equal in size to the first and rotate it 180 degrees, the two triangles combine to form a K by K + 1 rectangle. The count of the squares in each triangle is half the number of squares in the 7 x 8 rectangle. In this figure, K = 7. When sorting N values, K = N – 1 since that is the number of comparisons in the first step to find the smallest value: the total number of comparisons is (N – 1) × N/2 or ½ × N2 – ½ × N.</p>
+<p><img alt="Selection Sort on Array" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0502.png" /></p>
+<h6 id="figure-5-2-sorting-sample-array-using-selection-sort">Figure 5-2. Sorting sample array using Selection Sort</h6>
+<p><img alt="Selection Sort on Array" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0503.png" /></p>
+<h6 id="figure-5-3-visualizing-the-formula-for-triangle-numbers-sum-of-1-through-7-is-28">Figure 5-3. Visualizing the formula for triangle numbers: sum of 1 through 7 is 28</h6>
+<h1 id="anatomy-of-a-quadratic-sorting-algorithm">Anatomy of a Quadratic Sorting Algorithm</h1>
+<p>The analysis for Selection Sort shows that the number of comparisons is dominated by the N2 term, which means its performance will be O(N2) since that is the dominant operation. To explain why, look at how Selection Sort has N – 1 distinct steps when sorting N values. In the first step, it finds the smallest value in N – 1 comparisons, and only one value is moved into its proper location. In each of the subsequent N – 2 steps, the number of comparisons will (ever so slowly) decrease until there is no work done in the final step. Can something be done to reduce the number of comparisons?</p>
+<p>Insertion Sort is a different sorting algorithm that also uses N – 1 distinct steps to sort an array from left to right. It starts by assuming that <code>A[0]</code> is in its proper location (hey, it could be the smallest value in the array, right?). In its first step, it checks if <code>A[1]</code> is smaller than <code>A[0]</code> and swaps these two values as needed to sort in ascending order. In the second step, it tries to <em>insert</em> the <code>A[2]</code> value into its proper sorted location when just considering the first three values. There are three possibilities: either <code>A[2]</code> is in its proper spot, or it should be inserted between <code>A[0]</code> and <code>A[1]</code>, or it should be inserted before <code>A[0]</code>. However, since you cannot insert a value between two array positions, you must <em>repeatedly swap values</em> to make room for the value to be inserted.</p>
+<p>At the end of each step, as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-insertion-sort">Figure 5-4</a>, Insertion Sort repeatedly swaps neighboring out-of-order values.</p>
+<p><img alt="Insertion Sort on Array" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0504.png" /></p>
+<h6 id="figure-5-4-sorting-sample-array-using-insertion-sort">Figure 5-4. Sorting sample array using Insertion Sort</h6>
+<p>All swapped values are highlighted, and bold borders identify the sorted values in the array. Unlike Selection Sort, values within the bold borders may continue to be swapped, as you can see in the figure. At times (like when the value 5 is inserted) there is a sequence of cascading swaps to move that value into its proper place because the value to insert is smaller than most of the already sorted values. At other times (like when 21 or 24 is inserted), no swaps are needed because the value to insert is larger than all of the already-sorted values. In this example, there are 20 comparisons and 14 swaps. For Insertion Sort, the number of comparisons will always be greater than or equal to the number of swaps. On this problem instance, Insertion Sort uses fewer comparisons than Selection Sort but more swaps. Its implementation, in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-insertion-sort">Listing 5-2</a>, is surprisingly brief.</p>
+<h5 id="listing-5-2-insertion-sort">Listing 5-2. Insertion Sort</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO2-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Before each pass through the <code>i</code> <code>for</code> loop, you know <code>A[0 .. i-1]</code> is sorted.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO2-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Decrement <code>j</code> from index location <code>i</code> back to 0 but not including 0.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO2-3"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>If <code>A[j-1]</code> ≤ <code>A[j]</code>, then <code>A[j]</code> has found its proper spot, so stop.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO2-4"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p>Otherwise, swap these out-of-order values.</p>
+<p>Insertion Sort works the hardest when each value to be inserted is smaller than all already-sorted values. The <em>worst case</em> for Insertion Sort occurs when the values are in descending order. In each successive step, the number of comparisons (and swaps) increases by one, summing in total to the triangle numbers mentioned earlier.</p>
+<h1 id="analyze-performance-of-insertion-sort-and-selection-sort">Analyze Performance of Insertion Sort and Selection Sort</h1>
+<p>Selection Sort will always have ½ × N2 – ½ × N comparisons and N – 1 swaps when sorting N values. Counting the operations for Insertion Sort is more complicated because its performance depends on the order of the values themselves. On average, Insertion Sort should outperform Selection Sort. In the <em>worst case</em> for Insertion Sort, the values appear in descending order, and the number of comparisons and swaps is ½ × N2 – ½ × N. No matter what you do, both Insertion Sort and Selection Sort require on the order of N2 comparisons, which leads to the runtime performance visualized in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-timing-graph-is-ss">Figure 5-5</a>. Another way to explain this poor behavior is to observe that the problem instance size 524,288 is 512 times as large as 1,024, yet the runtime performance for both Selection Sort and Insertion Sort takes about 275,000 times longer.<a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914421136">2</a> Sorting 524,288 values takes about two hours for Insertion Sort and nearly four hours for Selection Sort. To solve larger problems, you would need to measure the completion times in days or weeks. This is what a quadratic, or O(N2), algorithm will do to you, and it is simply unacceptable performance.</p>
+<p><img alt="Performance of Insertion and Selection Sort" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0505.png" /></p>
+<h6 id="figure-5-5-timing-results-of-insertion-sort-and-selection-sort">Figure 5-5. Timing results of Insertion Sort and Selection Sort</h6>
+<p>What if you wanted to sort an array in descending order? Or what if the values have a complex structure and there is no default <em>less-than</em> operation defined? Each of the sorting algorithms in this chapter can be extended with a parameter for a comparator function to determine how values are to be ordered, as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-insertion-sort-comparator">Listing 5-3</a>. For simplicity, the implementations of the remaining algorithms assume the values are sorted in ascending order.</p>
+<h5 id="listing-5-3-providing-a-comparator-function-to-a-sorting-algorithm">Listing 5-3. Providing a comparator function to a sorting algorithm</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO3-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Determine sorting order using a provided comparator function, <code>less</code>. If <code>less(A[x],A[y])</code> is <code>True</code>, then <code>A[x]</code> should appear before <code>A[y]</code>.</p>
+<p>Both Selection Sort and Insertion Sort use N – 1 steps to sort an array of N values, where each step reduces the problem size by just one. A different strategy, known as <em>divide and conquer</em>, breaks a problem up into two sub-problems to be solved.</p>
+<h1 id="recursion-and-divide-and-conquer">Recursion and Divide and Conquer</h1>
+<p>The concept of <em>recursion</em> has existed in mathematics for centuries—it occurs when a function calls itself.</p>
+<h6 id="tip_1">Tip</h6>
+<p>The <em>Fibonacci series</em> starts with two integers, 0 and 1. The next integer in the series is the sum of the two prior numbers. The next few integers in the series are 1, 2, 3, 5, 8, 13, and so on. The recursive formula for the nth integer in the series is F(n) = F(n–1) + F(n–2). As you can see, F(n) is defined by calling itself twice.</p>
+<p>The factorial of an integer, N, is the product of all positive integers less than or equal to N. It is written as “N!”; thus 5! = 5 × 4 × 3 × 2 × 1 = 120. Another way to represent this operation is to state that N! = N × (N – 1)! For example, 120 = 5 × 4!, where 4! = 24. A recursive implementation is shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-factorial">Listing 5-4</a>.</p>
+<h5 id="listing-5-4-recursive-implementation-of-factorial">Listing 5-4. Recursive implementation of factorial</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO4-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Base case: return 1 for <code>fact(1)</code> or any <code>N</code> ≤ 1.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO4-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Recursive case: recursively compute <code>fact(N–1)</code> and multiply its result by <code>N</code>.</p>
+<p>It may seem odd to see a function calling itself—how can you be sure that it will not do so forever? Each recursive function has a <em>base case</em> that prevents this infinite behavior. <code>fact(1)</code> will return <code>1</code> and not call itself.<a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914194976">3</a> In the <em>recursive case</em>, <code>fact(N)</code> calls itself with an argument of N – 1 and multiplies the returned computation by N to produce its final result.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-factorial">Figure 5-6</a> visualizes the execution of the statement <code>y = fact(3)</code> as time advances downward. Each box represents an invocation of <code>fact()</code> with the given argument (whether 3, 2, or 1). Invoking <code>fact(3)</code> recursively calls <code>fact(2)</code>. When that happens, the original <code>fact(3)</code> function will be “paused” (grayed out in the figure) until the value of <code>fact(2)</code> is known. When <code>fact(2)</code> is invoked, it also must recursively call <code>fact(1)</code>, so it is paused (and grayed out in the figure) until the value of <code>fact(1)</code> is known. Finally at this point, the base case stops the recursion, and <code>fact(1)</code> returns 1 as its value, shown inside a dashed circle; this resumes the paused execution of <code>fact(2)</code>, which returns 2 × 1 = 2 as its value. Finally, the original <code>fact(3)</code> resumes, returning 3 × 2 = 6, which sets the value of <code>y</code> to 6.</p>
+<p>During recursion, any number of <code>fact(N)</code> invocations can be paused until the base case is reached.<a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914185584">4</a> Then, the recursion “unwinds” one function call at a time until the original invocation is complete.</p>
+<p>In reviewing this algorithm, it still solves a problem of size N by reducing it into a smaller problem of size N – 1. What if the problem of size N could be divided into two problems of, more or less, N/2? It might seem like this computation could go on forever, since each of these two sub-problems are further subdivided into four sub-problems of size N/4. Fortunately the base case will ensure that—at some point—the computations will complete.</p>
+<p>Consider a familiar problem, trying to find the largest value in an unordered array of N values. In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-recursive-max">Listing 5-5</a>, <code>find_max(A)</code> invokes a recursive helper function,<a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914180880">5</a> <code>rmax(0,len(A)–1)</code>, to properly set up the initial values for <code>lo</code> = 0 and <code>hi</code> = N – 1, where N is the length of <code>A</code>. The base case in <code>rmax()</code> stops the recursion once <code>lo = hi</code> because this represents looking for the largest value in a range containing just a single value. Once the largest values are determined for the left and right sub-problems, <code>rmax()</code> returns the larger of these two values as the largest value in <code>A[lo .. hi]</code>.</p>
+<p><img alt="Visualizing recursive fact(3)" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0506.png" /></p>
+<h6 id="figure-5-6-visualizing-the-recursive-invocation-of-fact3">Figure 5-6. Visualizing the recursive invocation of <code>fact(3)</code></h6>
+<h5 id="listing-5-5-recursive-algorithm-to-find-largest-value-in-unordered-list">Listing 5-5. Recursive algorithm to find largest value in unordered list</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO5-6"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Invoke the initial recursive call with proper arguments for <code>lo</code> and <code>hi</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO5-1"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Base case: when <code>lo</code> == <code>hi</code>, the range <code>A[lo .. hi]</code> contains a single value; return it as the largest value.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO5-2"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>Find midpoint index location in the range <code>A[lo .. hi]</code>. Use integer division <code>//</code> in case range has odd number of values.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO5-3"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p><code>L</code> is the largest value in the range <code>A[lo .. mid]</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO5-4"><img alt="5" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/5.png" /></a></p>
+<p><code>R</code> is the largest value in the range <code>A[mid+1 .. hi]</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO5-5"><img alt="6" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/6.png" /></a></p>
+<p>The largest value in <code>A[lo .. hi]</code> is the maximum of <code>L</code> and <code>R</code>.</p>
+<p>The function <code>rmax(lo, hi)</code> solves this problem recursively by dividing a problem of size N into two problems of half the size. <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-example-recursive-max-one">Figure 5-7</a> visualizes the execution of <code>rmax(0,3)</code> on the given array, <code>A</code>, with four values. To solve this problem, it solves two sub-problems: <code>rmax(0,1)</code> finds the largest value in the left-hand side of <code>A</code>, and <code>rmax(2,3)</code> finds the largest value in the right-hand side of <code>A</code>. Since <code>rmax()</code> makes two recursive calls within its function, I introduce a new visualization to describe <em>where</em>, in <code>rmax()</code>, the execution is paused. I still use a gray background to show that <code>rmax()</code> is paused when it makes a recursive call: in addition, the lines highlighted with a black background will execute <em>once the recursive call returns</em>.</p>
+<p>In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-example-recursive-max-one">Figure 5-7</a>, I only have space to show the three recursive calls that complete to determine that 21 is the largest value in the left-hand side of <code>A</code>. As you can see, the final two lines in the invocation box for <code>rmax(0,3)</code> are highlighted in black to remind you that the rest of the computation will resume with the recursive call to <code>rmax(2,3)</code>. A similar sequence of three additional recursive calls would complete the right-hand sub-problem, ultimately allowing the original recursive invocation <code>rmax(0,3)</code> to return <code>max(21,20)</code> as its answer.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-example-recursive-max-two">Figure 5-8</a> visualizes the full recursive behavior of <code>rmax(0,7)</code>. Similar to my explanation for <code>fact()</code>, this figure shows how the invocation of <code>rmax(0,3)</code> is paused while it recursively computes the first sub-problem, <code>rmax(0,1)</code>. The original problem is repeatedly subdivided until <code>rmax()</code> is invoked where its parameters <code>lo</code> and <code>hi</code> are equal; this will happen eight different times in the figure, since there are N = 8 values. Each of these eight cases represents a base case, which stops the recursion. As you can see in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-example-recursive-max-two">Figure 5-8</a>, the maximum value is 24, and I have highlighted the <code>rmax()</code> recursive calls that return this value.</p>
+<p><img alt="1st recursive step for rmax" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0507.png" /></p>
+<h6 id="figure-5-7-recursive-invocation-when-calling-rmax03-on-a-1521202">Figure 5-7. Recursive invocation when calling <code>rmax(0,3)</code> on <code>A = [15,21,20,2]</code></h6>
+<p><img alt="Complete recursive invocation of rmax" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0508.png" /></p>
+<h6 id="figure-5-8-complete-recursive-invocation-of-rmax07">Figure 5-8. Complete recursive invocation of <code>rmax(0,7)</code></h6>
+<h1 id="merge-sort">Merge Sort</h1>
+<p>Inspired by these examples, we can now ask, “Is there a recursive divide-and-conquer approach to sort an array?” <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-intuition-sort">Listing 5-6</a> contains the gist of an idea: to sort an array, recursively sort its left half, and recursively sort its right half; then somehow <em>merge the partial results</em> to ensure the whole array is sorted.</p>
+<h5 id="listing-5-6-idea-for-sorting-recursively">Listing 5-6. Idea for sorting recursively</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO6-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Recursive helper method to sort <code>A[lo .. hi]</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO6-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Base case: a range with one or fewer values is already in sorted order.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO6-3"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>Recursive case: sort the left half of <code>A</code> and the right half of <code>A</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO6-4"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p>Merge both sorted halves of the array in place.</p>
+<p>The structure of <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-intuition-sort">Listing 5-6</a> is identical to the <code>find_max(A)</code> function described in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-recursive-max">Listing 5-5</a>. Completing this implementation leads to Merge Sort, an in-place recursive sorting algorithm that requires extra storage but provides the breakthrough we were looking for, namely an O(N <code>log</code> N) sorting algorithm.</p>
+<p>The key to Merge Sort is the <code>merge</code> function that merges <em>in place</em> the sorted left half of an array with the sorted right half of an array. The mechanics of <code>merge()</code> might be familiar if you’ve ever had two sorted stacks of paper that you want to merge into one final sorted stack, as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-merge-example-one">Figure 5-9</a>.</p>
+<p><img alt="Merge example" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0509.png" /></p>
+<h6 id="figure-5-9-merging-two-stacks-into-one">Figure 5-9. Merging two stacks into one</h6>
+<p>To merge these two stacks into one stack, look at the topmost remaining value in each stack and choose the smallest one. In the first two steps, 2 is removed from the left stack, and then 5 is removed from the right. When faced with two values that are the same, arbitrarily take the value from the left stack, first removing 15 from the left stack, then removing 15 from the right stack. Repeat this process until one of the stacks is exhausted (which happens in the final eighth step). When only one stack remains, just take all those values as a group, since they are already sorted.</p>
+<p>The merge process sketched in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-merge-example-one">Figure 5-9</a> works because of the extra storage into which the values are placed. The most efficient way to implement Merge Sort is to initially allocate extra storage equal to the size of the original array being sorted, as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-merge-sort">Listing 5-7</a>.</p>
+<h5 id="listing-5-7-recursive-merge-sort-implementation">Listing 5-7. Recursive Merge Sort implementation</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Allocate auxiliary storage equal in size to original array.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Base case: with 1 or fewer values, there is nothing to sort.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-3"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>Recursive case: sort left and right sub-arrays and then merge.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-4"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p>Copy sorted sub-arrays from <code>A</code> into <code>aux</code> to prepare for merge.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-5"><img alt="5" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/5.png" /></a></p>
+<p>Set <code>left</code> and <code>right</code> to be the starting index positions of the corresponding sub-arrays.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-6"><img alt="6" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/6.png" /></a></p>
+<p>When left sub-array is exhausted, take value from right sub-array.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-7"><img alt="7" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/7.png" /></a></p>
+<p>When right sub-array is exhausted, take value from left sub-array.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-8"><img alt="8" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/8.png" /></a></p>
+<p>When right value is smaller than left value, take value from right sub-array.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-9"><img alt="9" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/9.png" /></a></p>
+<p>When left value is smaller than or equal to right value, take value from left sub-array.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO7-10"><img alt="10" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/10.png" /></a></p>
+<p>Invoke the initial recursive call.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-merge-example-two">Figure 5-10</a> visualizes the dynamic behavior of <code>merge()</code>. The first step of <code>merge(lo,mid,hi)</code> is to copy the elements from <code>A[lo .. hi]</code> into <code>aux[lo .. hi]</code> since this is the sub-problem range being sorted.</p>
+<p>The <code>for</code> loop over <code>i</code> will execute 8 times, because that is the total size of the two sub-problems being merged. Starting in the third row of <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-merge-example-two">Figure 5-10</a>, the variables <code>left</code>, <code>right</code>, and <code>i</code> each keep track of specific locations:</p>
+<ul>
+<li>
+<p><code>left</code> is the index position of the next value in the left sub-array to be merged.</p>
+</li>
+<li>
+<p><code>right</code> is the index position of the next value in the right sub-array to be merged.</p>
+</li>
+<li>
+<p><code>i</code> is the index position in <code>A</code> where successively larger values are copied until, by the last step, all values in <code>A[lo .. hi]</code> are in sorted order.</p>
+</li>
+</ul>
+<p>Within the <code>for</code> loop, up to two values in <code>aux</code> (highlighted in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-merge-example-two">Figure 5-10</a>) are compared to find the lower value, which is then copied into <code>A[i]</code>. With each step, <code>i</code> is incremented, while <code>left</code> and <code>right</code> advance only when the value at <code>aux[left]</code> or <code>aux[right]</code> is found to be the next smallest one to be copied into <code>A</code>. The time to complete <code>merge()</code> is directly proportional to the combined size of the sub-problems (or <code>hi – lo + 1</code>).</p>
+<p>Merge Sort is a great example of a divide-and-conquer algorithm that guarantees O(N <code>log</code> N) performance. If you have a problem that satisfies the following checklist, then an O(N <code>log</code> N) algorithm exists:</p>
+<ul>
+<li>
+<p>If you can subdivide a problem of size N into two independent sub-problems of size N/2; it is perfectly fine for one sub-problem to be slightly larger than the other.</p>
+</li>
+<li>
+<p>If you have a base case that either does nothing (like with Merge Sort) or performs some operations in constant time.</p>
+</li>
+<li>
+<p>If you have a processing step (either before the problem is subdivided or afterward as a post-processing step) that requires time directly proportional to the number of values in the sub-problem. For example, the <code>for</code> loop in <code>merge()</code> repeats a number of times equal to the size of the sub-problem being solved.</p>
+</li>
+</ul>
+<p><img alt="Step by step merge" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0510.png" /></p>
+<h6 id="figure-5-10-step-by-step-merge-of-two-sorted-sub-arrays-of-size-4">Figure 5-10. Step-by-step merge of two sorted sub-arrays of size 4</h6>
+<h1 id="quicksort">Quicksort</h1>
+<p>Another sorting algorithm that follows divide-and-conquer is Quicksort, one of the most heavily studied and efficient sorting algorithms ever designed.<a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239913448288">6</a> It recursively sorts an array by selecting an element in <code>A</code> to use as a pivot value, <code>p</code>, and then <em>it inserts <code>p</code> into its proper location in the final sorted array</em>. To do this, it rearranges the contents of <code>A[lo .. hi]</code> such that there is a left sub-array with values that are ≤ <code>p</code>, and a right sub-array with values that are ≥ <code>p</code>. You can confirm in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-quicksort-pivot">Figure 5-11</a> that the partitioned array has this property.</p>
+<p><img alt="Partitioning array using 15 as pivot" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0511.png" /></p>
+<h6 id="figure-5-11-results-of-partitiona070-using-a0-as-pivot">Figure 5-11. Results of <code>partition(A,0,7,0)</code> using <code>A[0]</code> as pivot</h6>
+<p>This amazing feat may at first seem impossible—how do you know where <code>p</code> exists in the final sorted array without actually sorting the entire array? It turns out that partitioning doesn’t sort all elements in <code>A</code> but rearranges just a few based on <code>p</code>. In the challenge exercises found in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch01.html#chap-1">Chapter 1</a>, you can find the implementation of <code>partition()</code>. After <code>partition()</code> completes in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-quicksort-pivot">Figure 5-11</a>, the left sub-array to be sorted contains two values, while the right sub-array contains five values. Each of these sub-arrays is recursively sorted using Quicksort, as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-quick-sort">Listing 5-8</a>.</p>
+<h5 id="listing-5-8-recursive-quicksort-implementation">Listing 5-8. Recursive Quicksort implementation</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO8-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Base case: with 1 or fewer values, there is nothing to sort.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO8-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Choose <code>A[lo]</code> as the pivot value, <code>p</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO8-3"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>Return <code>location</code> in <code>A</code> such that:</p>
+<ul>
+<li>
+<p><code>A[location] = p</code></p>
+</li>
+<li>
+<p>All values in left sub-array <code>A[lo .. location–1]</code> are all ≤ <code>p</code></p>
+</li>
+<li>
+<p>All values in right sub-array <code>A[location+1 .. hi]</code> are all ≥ <code>p</code></p>
+</li>
+</ul>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO8-4"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p>Recursive case: sort <em>in place</em> left and right sub-arrays, since <code>p</code> is already in its proper sorted location, <code>A[location]</code>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO8-5"><img alt="5" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/5.png" /></a></p>
+<p>Invoke the initial recursive call.</p>
+<p>Quicksort presents an elegant recursive solution whose success depends on the partitioning function. For example, if <code>partition()</code> is invoked on a sub-array <code>A[lo .. hi]</code> containing N values and the smallest value in that sub-array is used as the pivot, then the resulting left sub-array is empty, whereas the right sub-array contains N – 1 values. Reducing a sub-problem by 1 is exactly how Insertion Sort and Selection Sort performed, leading to inefficient O(N2) sorting. The top of <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-quicksort-full">Figure 5-12</a> summarizes the key steps of Quicksort applied to the array from <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-quicksort-pivot">Figure 5-11</a>. The bottom of <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-quicksort-full">Figure 5-12</a> shows the full recursive execution. On the right side of the figure, you can see <code>A</code>, the array being sorted, and how its values change in response to the recursive execution. For each partition of a range <code>A[lo .. hi]</code>, the selected pivot is always <code>A[lo]</code>, which is why each box reads <code>partition(lo,hi,lo)</code>. As time moves vertically down the figure, you can see how each <code>partition()</code> invocation leads to 1 or 2 recursive calls to <code>qsort()</code>. For example, <code>partition(0,7,0)</code> on <code>A</code> places 15 into its final index location (which is why it is grayed out on the right), leading to two subsequent recursive invocations: <code>qsort(0,1)</code> on the left sub-array and <code>qsort(3,7)</code> on the right sub-array. The invocation of <code>qsort(3,7)</code> does not start until <code>qsort(0,1)</code> has completed its work.</p>
+<p>Each time <code>partition</code> is invoked, a different value is placed into its proper index location and grayed out. When <code>qsort(lo,hi)</code> is invoked on a range where <code>lo = hi</code>, that value is in its proper location, and it is also grayed out.</p>
+<p>When a <code>partition(lo,hi,lo)</code> produces only a single recursive call to <code>qsort()</code>, it is because the pivot value is placed in either <code>A[lo]</code> or <code>A[hi]</code>, thus reducing the problem size by just 1. For example, given the implementation in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-quick-sort">Listing 5-8</a>, Quicksort will degrade its performance to O(N2) when called on an array of already-sorted values! To avoid this behavior, Quicksort is often modified to choose the pivot value randomly from within the range <code>A[lo .. hi]</code> by replacing <code>pivot_idx = lo</code> in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-quick-sort">Listing 5-8</a> with <code>pivot_idx = random.randint(lo, hi)</code>. Decades of research have confirmed that there is always a theoretical possibility that in the <em>worst case</em>, Quicksort will have a runtime performance of O(N2). Despite this weakness, Quicksort is often the sorting algorithm of choice because, unlike Merge Sort, it does not require any extra storage. In reviewing the structure for Quicksort, you can see that it conforms to the checklist for O(N <code>log</code> N) algorithms.</p>
+<p><img alt="Quicksort on example" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0512.png" /></p>
+<h6 id="figure-5-12-full-recursive-invocation-of-quicksort">Figure 5-12. Full recursive invocation of Quicksort</h6>
+<p>Another way to achieve O(N <code>log</code> N) is to have N steps where the runtime performance of each step is O(<code>log</code> N). Using the heap data structure introduced in the last chapter, I now present Heap Sort, whose runtime performance is O(N <code>log</code> N).</p>
+<h1 id="heap-sort">Heap Sort</h1>
+<p>To see why a max binary heap can help sort an array, consider <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heap-consider-sort">Figure 5-13</a> that presents the array storage for the heap from <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch04.html#figure-heap-in-array">Figure 4-17</a>. The largest value in <code>A</code> is found in <code>A[1]</code>. When this max value is dequeued, the underlying array storage is updated to reflect the modified max binary heap containing one less value. More importantly, the index position <code>A[18]</code> is not only unused, it is <em>exactly the index position that should contain the maximum value</em> if the array were sorted. Simply place the dequeued value there. Perform another dequeue, and this value (the second-largest value in the heap) can be placed in index position <code>A[17]</code>, which is now unused.</p>
+<p><img alt="Consider heap as being helpful to sort" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0513.png" /></p>
+<h6 id="figure-5-13-intuition-behind-how-a-max-binary-heap-can-be-used-for-sorting">Figure 5-13. Intuition behind how a max binary heap can be used for sorting</h6>
+<p>To make this promising approach work, I need to address the following issues:</p>
+<ul>
+<li>
+<p>The heap data structure ignores the value in index position 0 to simplify its computations using an array of size N + 1 to store N values.</p>
+</li>
+<li>
+<p>The heap is initially empty, and new values are enqueued one at a time. When starting with N values to sort initially, there needs to be an efficient way to “bulk upload” all values.</p>
+</li>
+</ul>
+<p>Let’s fix how index positions are calculated. The original heap with 18 elements (as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heap-consider-sort">Figure 5-13</a>) was stored in an array with 19 elements. Any reference to <code>A[i]</code> uses 1-based indexing, meaning that <code>A[1]</code> stored the first value in the heap, and <code>A[N–1]</code> stored the last. In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-heapsort">Listing 5-9</a>, the <code>less(i,j)</code> and <code>swap(i,j)</code> functions all subtract 1 from <code>i</code> and <code>j</code> whenever accessing <code>A[i]</code> or <code>A[j]</code>. This allows 1-based indexing to work with 0-based array storage. The largest value in the heap is now in <code>A[0]</code>. When <code>swap(1, N)</code> appears in the <code>sort()</code> function, it actually swaps the values in <code>A[0]</code> and <code>A[N–1]</code>. With this small adjustment, the <code>sink()</code> method remains the same. Note that Heap Sort never uses <code>swim()</code>.</p>
+<h5 id="listing-5-9-heap-sort-implementation">Listing 5-9. Heap Sort implementation</h5>
+<pre><code>class
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO9-6"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>To ensure that <code>i</code> // 2 computes the parent index location for <code>i</code>, both <code>less()</code> and <code>swap()</code> subtract 1 from <code>i</code> and <code>j</code>, as if they were using 1-based indexing.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO9-1"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Convert array to be sorted, <code>A</code>, into a max binary heap in bottom-up fashion, starting at <code>N</code>//2, the highest index position that has at least one child.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO9-2"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>The <code>while</code> loop continues as long as there are values to sort.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO9-3"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p>Dequeue maximum value by swapping with last value in heap.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO9-4"><img alt="5" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/5.png" /></a></p>
+<p>Reduce size of heap by one for upcoming <code>sink()</code> to work.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO9-5"><img alt="6" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/6.png" /></a></p>
+<p>Sink the newly swapped value into its proper location, which reestablishes the heap-ordered property.</p>
+<p>The most important step in Heap Sort is constructing the initial max binary heap from the original array to be sorted. The <code>for</code> loop in <code>HeapSort</code> completes this task, and the result is shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heapify">Figure 5-14</a>, which required only 23 total comparisons and 5 swaps. This <code>for</code> loop constructs a heap from the bottom to the top by starting at index position <code>N</code>//2, the highest index position <em>that has at least one child</em>. In reverse order, the <code>for</code> loop calls <code>sink()</code> on the kth index position to ultimately ensure that all values in the array satisfy the heap-ordered property. These index positions are drawn with a bold border in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heapify">Figure 5-14</a>.</p>
+<p>Through a rather unexpected theoretical analysis, the total number of comparisons required to convert an arbitrary array into a max binary heap is no more than 2N in the <em>worst case</em>. The intuition behind this result can be seen in the running total of comparisons in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heapify">Figure 5-14</a>, which shows a steady, but slow, growth rate. I continue to alternatively shade the index positions within <code>A</code> by the computed level of the max binary heap to show how values are swapped between levels.</p>
+<p><img alt="Converting array into max binary heap" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0514.png" /></p>
+<h6 id="figure-5-14-converting-array-into-a-max-binary-heap">Figure 5-14. Converting array into a max binary heap</h6>
+<p>The final row in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heapify">Figure 5-14</a> represents a max binary heap—in fact, the exact same one depicted in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch04.html#figure-delete-5">Figure 4-16</a>, now offset by one index position to use all N index positions. The <code>sort()</code> function in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-heapsort">Listing 5-9</a> now repeatedly swaps the largest value in the heap with the last value in the heap (using the trick hinted at in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-heap-consider-sort">Figure 5-13</a>), which has the effect of placing that value in exactly its proper location in the final sorted array. <code>sort()</code> then reduces the size of the heap by one, and <code>sink()</code> properly re-establishes the heap-ordered property with runtime performance of O(<code>log</code> N), as described in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch04.html#chap-4">Chapter 4</a>.</p>
+<h1 id="performance-comparison-of-on-log-n-algorithms">Performance Comparison of O(N log N) Algorithms</h1>
+<p>How does the runtime performance of these different sorting algorithms—all classified as O(N <code>log</code> N)—compare with each other? Let’s start with some empirical results, as shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#table-nlogn-sorting">Table 5-1</a>. Reading the numbers down in a column reports the timing results of an algorithm as the problem size doubles; you can see that each timing value is a bit more than twice as large as its previous value. This relative performance is the signature behavior of an O(N <code>log</code> N) algorithm.</p>
+<p>Table 5-1. Runtime performance (in seconds) for different sorting algorithms</p>
+<p>N</p>
+<p>Merge Sort</p>
+<p>Quicksort</p>
+<p>Heap Sort</p>
+<p>Tim Sort</p>
+<p>Python Sort</p>
+<p>1,024</p>
+<p><code>0.002</code></p>
+<p><code>0.002</code></p>
+<p><code>0.006</code></p>
+<p><code>0.002</code></p>
+<p><code>0.000</code></p>
+<p>2,048</p>
+<p><code>0.004</code></p>
+<p><code>0.004</code></p>
+<p><code>0.014</code></p>
+<p><code>0.005</code></p>
+<p><code>0.000</code></p>
+<p>4,096</p>
+<p><code>0.009</code></p>
+<p><code>0.008</code></p>
+<p><code>0.032</code></p>
+<p><code>0.011</code></p>
+<p><code>0.000</code></p>
+<p>8,192</p>
+<p><code>0.020</code></p>
+<p><code>0.017</code></p>
+<p><code>0.073</code></p>
+<p><code>0.023</code></p>
+<p><code>0.001</code></p>
+<p>16,384</p>
+<p><code>0.042</code></p>
+<p><code>0.037</code></p>
+<p><code>0.160</code></p>
+<p><code>0.049</code></p>
+<p><code>0.002</code></p>
+<p>32,768</p>
+<p><code>0.090</code></p>
+<p><code>0.080</code></p>
+<p><code>0.344</code></p>
+<p><code>0.103</code></p>
+<p><code>0.004</code></p>
+<p>65,536</p>
+<p><code>0.190</code></p>
+<p><code>0.166</code></p>
+<p><code>0.751</code></p>
+<p><code>0.219</code></p>
+<p><code>0.008</code></p>
+<p>131,072</p>
+<p><code>0.402</code></p>
+<p><code>0.358</code></p>
+<p><code>1.624</code></p>
+<p><code>0.458</code></p>
+<p><code>0.017</code></p>
+<p>262,144</p>
+<p><code>0.854</code></p>
+<p><code>0.746</code></p>
+<p><code>3.486</code></p>
+<p><code>0.970</code></p>
+<p><code>0.039</code></p>
+<p>524,288</p>
+<p><code>1.864</code></p>
+<p><code>1.659</code></p>
+<p><code>8.144</code></p>
+<p><code>2.105</code></p>
+<p><code>0.096</code></p>
+<p>1,048,576</p>
+<p><code>3.920</code></p>
+<p><code>3.330</code></p>
+<p><code>16.121</code></p>
+<p><code>4.564</code></p>
+<p><code>0.243</code></p>
+<p>Now in each row, the absolute runtime performance of each algorithm is different. In <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch02.html#chap-2">Chapter 2</a>, I discussed how different behaviors within a classification can vary by a multiplicative constant. This table provides evidence of this observation. Once the problem size is large enough, Quicksort is about 15% faster than Merge Sort, while Heap Sort is more than four times slower.</p>
+<p>The last two columns in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#table-nlogn-sorting">Table 5-1</a> report on the performance of a new sorting algorithm, Tim Sort, invented by Tim Peters for Python in 2002. This algorithm is quickly becoming the standard sorting algorithm used by major programming languages, such as Java, Python, and Swift. Column “Tim Sort” represents the runtime performance for a simplified Tim Sort implementation, which also exhibits O(N <code>log</code> N) behavior. The final column, labeled “Python Sort,” represents the runtime performance using the built-in <code>sort()</code> method in the <code>list</code> data type. Because it is implemented internally, it will naturally be the most efficient—as you can see, it is around 15 times faster than Quicksort. It is worthwhile to investigate Tim Sort because it mixes together two different sorting algorithms to achieve its outstanding performance.</p>
+<h1 id="tim-sort">Tim Sort</h1>
+<p>Tim Sort combines Insertion Sort and the <code>merge()</code> helper function from Merge Sort in a novel way to provide a fast sorting algorithm that outperforms other sorting algorithms on real-world data. In particular, Tim Sort dynamically takes advantage of long sequences of partially sorted data to deliver truly outstanding results.</p>
+<p>As shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#listing-timsort">Listing 5-10</a>, Tim Sort first partially sorts N/<code>size</code> sub-arrays of a computed <code>size</code>, based on <code>compute_min_run()</code>. <code>size</code> will typically be an integer between 32 and 64, which means we can treat this number as a constant that is independent of N. This stage ensures there are sequences of partially sorted data, which improves the behavior of <code>merge()</code>, the helper function from Merge Sort that merges two sorted sub-arrays into one.</p>
+<h5 id="listing-5-10-basic-tim-sort-implementation">Listing 5-10. Basic Tim Sort implementation</h5>
+<pre><code>def
+</code></pre>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-1"><img alt="1" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/1.png" /></a></p>
+<p>Small arrays are sorted instead using Insertion Sort.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-2"><img alt="2" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/2.png" /></a></p>
+<p>Compute <code>size</code>—a value typically between 32 and 64—to use for the length of the sub-arrays to be sorted.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-3"><img alt="3" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/3.png" /></a></p>
+<p>Use Insertion Sort to sort each sub-array <code>A[lo .. lo+size–1]</code>, handling special case when final sub-array is smaller.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-4"><img alt="4" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/4.png" /></a></p>
+<p><code>merge()</code> uses extra storage equal in size to the original array.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-5"><img alt="5" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/5.png" /></a></p>
+<p>Compute index positions for two sub-arrays to be merged, <code>A[lo .. mid]</code> and <code>A[mid+1 .. hi]</code>. Take special care with partial sub-arrays.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-6"><img alt="6" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/6.png" /></a></p>
+<p>Merge sub-arrays together to sort <code>A[lo .. hi]</code> using <code>aux</code> for auxiliary storage.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#co_sorting_without_a_hat_CO10-7"><img alt="7" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/7.png" /></a></p>
+<p>Once all sub-arrays of length <code>size</code> are merged with another, prepare for next iteration through <code>while</code> loop to merge sub-arrays twice as large.</p>
+<p>The auxiliary storage, <code>aux</code>, is allocated once and used by each invocation of <code>merge()</code>. The actual implementation of Tim Sort has more complicated logic that looks for ascending or strictly descending sub-arrays; it also has a more sophisticated merge function that can merge groups of values “all at once,” where the <code>merge()</code> function I’ve shown operates one value at a time. The simplified implementation whose behavior is shown in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-timsort">Figure 5-15</a> contains the essential structure. Given the extensive study of sorting algorithms, it is rather amazing that a new sorting algorithm—discovered this century—has proven to be so effective when working with real-world data sets.</p>
+<p><img alt="Applying Tim Sort to array" src="https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781492091059/files/assets/lalg_0515.png" /></p>
+<h6 id="figure-5-15-changes-to-array-when-applying-tim-sort-with-initial-size-of-4">Figure 5-15. Changes to array when applying Tim Sort with initial size of 4</h6>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-timsort">Figure 5-15</a> demonstrates how Tim Sort works, using a <code>min_run</code> of 4 just to make it easier to visualize. In the first step, four sub-arrays of size 4 are sorted using Insertion Sort; the final two values containing 2 and 8 are contained in a partial sub-array of length 2. These sorted sub-arrays are visualized using alternating bands of shaded and non-shaded regions. There will be N/<code>size</code> sorted sub-arrays (possibly one more, if the length of the original array is not divisible by <code>size</code>). I showed earlier that the runtime performance of sorting <code>size</code> values is directly proportional to <code>size</code> × (<code>size</code> – 1)/2—since this occurs N/<code>size</code> times, the total runtime performance is directly proportional to N × (<code>size</code> – 1)/2. Because <code>size</code> can be considered a constant, this initial phase is classified as O(N).</p>
+<p>In the second phase, pairs of neighboring runs are merged together. The total accumulated time for the <code>merge()</code> invocations is proportional to N (as I explained earlier in Merge Sort). After the first pass through the <code>while</code> loop, the size of the sorted sub-arrays has doubled to 8, as you can see by the shaded regions in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-timsort">Figure 5-15</a>. In this example, there are three iterations, as <code>size</code> repeatedly doubles from 4 to 32 (which is greater than N). In general, starting with sorted sub-arrays of size <code>size</code>, the <code>while</code> loop iterates <code>k</code> times until <code>size</code> × <code>2``k</code> &gt; N; rewrite this computation as 2<code>k</code> &gt; N/<code>size</code>.</p>
+<p>To find <code>k</code>, take the logarithm of both sides, which reveals that <code>k</code> &gt; <code>log</code>(N/<code>size</code>). Because <code>log</code>(<code>a</code>/<code>b</code>) = <code>log</code>(<code>a</code>) – <code>log</code>(<code>b</code>), I can say that <code>k</code> &gt; <code>log</code>(N) – <code>log</code>(<code>size</code>); since <code>size</code> is a constant, I only need to focus on the fact that <code>k</code> is equal to the smallest integer greater than or equal to <code>log</code>(N) minus a small constant value.</p>
+<p>To summarize, the first phase of Tim Sort—which applies Insertion Sort—can be classified as O(N), and the second phase—which performs repeated <code>merge()</code> requests— is O(<code>k</code> × N), where <code>k</code> is no greater than <code>log</code>(N), resulting in a total overall performance of O(N <code>log</code> N).</p>
+<h1 id="summary">Summary</h1>
+<p>Sorting is a fundamental problem in computer science and has been extensively studied. An array containing primitive values can be sorted because these values can be compared with each other by default. More complex data types (such as strings or two-dimensional points) can be sorted using custom ordering functions to allow the same sorting algorithms to work.</p>
+<p>In this chapter, you learned:</p>
+<ul>
+<li>
+<p>How some basic sorting algorithms have O(N2) performance, making them completely unsuitable for sorting large data sets.</p>
+</li>
+<li>
+<p>The concept of recursion as a key strategy to solve problems by dividing them into smaller sub-problems.</p>
+</li>
+<li>
+<p>That Merge Sort and Heap Sort, in different ways, achieve O(N <code>log</code> N) performance.</p>
+</li>
+<li>
+<p>That Quicksort achieves O(N <code>log</code> N) performance without requiring additional storage, as Merge Sort does.</p>
+</li>
+<li>
+<p>Tim Sort, the default sorting algorithm used by Python and an increasing number of other programming languages.</p>
+</li>
+</ul>
+<h1 id="challenge-exercises">Challenge Exercises</h1>
+<ol>
+<li>
+<p>Write a recursive method <code>count(A,t)</code> that returns the number of times that the value <code>t</code> appears within <code>A</code>. Your implementation must have a recursive structure, similar to <code>find_max(A)</code>.</p>
+</li>
+<li>
+<p>You are given an array containing a permutation of the N distinct integers from 0 to N – 1. Determine the fewest number of swaps needed to sort the values in ascending order. Write a function, <code>num_swaps(A)</code>, that takes such an array as input and returns an integer value. Note that you do not actually have to sort the array; just determine the number of swaps.</p>
+<p>Extend the problem to work with an array of N distinct values, using the symbol table from <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch03.html#chap-3">Chapter 3</a>, and confirm that five swaps are needed for <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#figure-to-sort">Figure 5-1</a>.</p>
+</li>
+<li>
+<p>What is the total number of comparisons needed for the recursive <code>find_max(A)</code> to determine the largest value in an unordered array of N values? Is this total less than (or greater than) the total number of comparisons used by <code>largest(A)</code> presented in <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch01.html#chap-1">Chapter 1</a>?</p>
+</li>
+<li>
+<p>In the <code>merge()</code> step in Merge Sort, it can happen that one side (left or right) is exhausted. Currently, the <code>merge()</code> function continues to iterate one step at a time. Replace this logic using Python’s ability to copy entire slices of an array, like was done in <code>aux[lo:hi+1] = A[lo:hi+1]</code>. Replace the logic in the first two cases of <code>merge()</code> using slice assignment. Conduct empirical trials to try to measure the performance improvement, if any.</p>
+</li>
+<li>
+<p>Complete a recursive implementation, <code>recursive_two(A)</code>, that returns the two largest values in <code>A</code>. Compare its runtime performance against the other approaches from <a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch01.html#chap-1">Chapter 1</a>; also compare the number of times less-than is invoked.</p>
+</li>
+<li>
+<p>The Fibonacci series is defined using the recursive formula FN = FN – 1 + FN – 2, with base cases of F0 = 0 and F1 = 1. A related series, <em>Lucas Numbers</em>, is defined as LN = LN – 1 + LN – 2, with base cases of L0 = 2 and L1 = 1. Implement <code>fibonacci(n)</code> and <code>lucas(n)</code> using a standard recursive approach and measure the time it takes to compute both FN and LN up to N = 40; depending on the speed of your computer, you might have to increase or decrease N to allow the code to terminate. Now implement a new <code>fib_with_lucas(n)</code> method that takes advantage of the following two identities:</p>
+<ul>
+<li>
+<p><code>fib_with_lucas(n)</code>: If you set i = n//2 and j = n-i, then Fi + j = (Fi + Lj) × (Fj + Li)/2</p>
+</li>
+<li>
+<p><code>lucas_with_fib(n)</code>: LN = FN – 1 + FN + 1  </p>
+</li>
+</ul>
+<p>Compare timing results of <code>fibonacci()</code> with <code>fib_with_lucas()</code>.</p>
+</li>
+</ol>
+<h5 id="interactive-practice">Interactive Practice</h5>
+<p>Get more hands-on training and test your understanding of the concepts by working through our <a href="https://learning.oreilly.com/playlists/a1276c1f-f54d-4a08-84be-34b492d9e5ff">playlist of interactive scenarios</a>. Each step of the scenario must be completed correctly before you can move to the next step. If you get stuck, you can view the solution and learn how to complete the step.</p>
+<p>The following scenarios cover material from this chapter:</p>
+<ul>
+<li>
+<p><a href="https://learning.oreilly.com/scenarios/sorting-algorithms-insertion/9781098114138/">Sorting Algorithms: Insertion Sort</a></p>
+</li>
+<li>
+<p><a href="https://learning.oreilly.com/scenarios/sorting-algorithms-merge/9781098114145/">Sorting Algorithms: Merge Sort</a></p>
+</li>
+<li>
+<p><a href="https://learning.oreilly.com/scenarios/sorting-algorithms-quicksort/9781098114152/">Sorting Algorithms: Quicksort Variations</a></p>
+</li>
+</ul>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914779104-marker">1</a> No. See the challenge exercises at the end of the chapter.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914421136-marker">2</a> 275,000 is about 512 squared.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914194976-marker">3</a> To avoid crashing the Python interpreter because of infinite recursion, this code returns 1 when given any integer less than or equal to 1.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914185584-marker">4</a> In Python, the recursion limit is technically less than 1,000 to prevent crashing the Python interpreter.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239914180880-marker">5</a> <code>rmax</code> stands for <em>recursive max</em>.</p>
+<p><a href="https://learning.oreilly.com/library/view/learning-algorithms/9781492091059/ch05.html#idm45239913448288-marker">6</a> Invented by Tony Hoare in 1959, Quicksort is well over 50 years old!</p>
+<ul>
+<li><a href="https://www.oreilly.com/online-learning/support/">Support</a></li>
+<li><a href="https://learning.oreilly.com/accounts/logout/"></a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+    
+  </body>
+</html>
